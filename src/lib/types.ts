@@ -116,3 +116,21 @@ export interface Calf {
   readonly briefMarkdown?: string
   readonly snapshotId: string
 }
+
+// Webhook payload types (stubs -- will be used when real API routes are added)
+export interface TrendAlertPayload {
+  readonly source: string
+  readonly timestamp: string
+  readonly trendId: string
+  readonly category: string
+  readonly velocity: number
+  readonly score: number
+}
+
+export interface AdIntelPayload {
+  readonly source: string
+  readonly timestamp: string
+  readonly competitorId: string
+  readonly adPatterns: Record<string, unknown>
+  readonly spend: number
+}
