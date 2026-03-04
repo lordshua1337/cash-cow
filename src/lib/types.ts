@@ -117,6 +117,56 @@ export interface Calf {
   readonly snapshotId: string
 }
 
+// Revenue forecasting
+export interface MonthlyForecast {
+  readonly month: number
+  readonly label: string
+  readonly mrr: number
+  readonly best: number
+  readonly worst: number
+}
+
+export interface RevenueForecast {
+  readonly calfId: string
+  readonly months: readonly MonthlyForecast[]
+  readonly assumptions: readonly string[]
+  readonly breakEvenMonth: number | null
+}
+
+// Build playbook
+export interface PlaybookTask {
+  readonly task: string
+  readonly details: string
+}
+
+export interface PlaybookWeek {
+  readonly week: number
+  readonly title: string
+  readonly tasks: readonly PlaybookTask[]
+  readonly deliverables: readonly string[]
+  readonly techStack: readonly string[]
+}
+
+export interface BuildPlaybook {
+  readonly calfId: string
+  readonly variationLevel: 'micro' | 'standard' | 'premium'
+  readonly totalWeeks: number
+  readonly weeks: readonly PlaybookWeek[]
+  readonly keyMilestones: readonly string[]
+}
+
+// AI recommendations
+export type RecommendationAction = 'focus' | 'pivot' | 'explore' | 'abandon'
+
+export interface Recommendation {
+  readonly action: RecommendationAction
+  readonly calfId?: string
+  readonly calfName?: string
+  readonly reasoning: string
+  readonly suggestedNiche?: string
+  readonly priority: number
+}
+
 // Webhook payload types (stubs -- will be used when real API routes are added)
 export interface TrendAlertPayload {
   readonly source: string

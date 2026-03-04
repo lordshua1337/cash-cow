@@ -469,6 +469,14 @@ DocPilot automatically writes and maintains your technical documentation by read
 - **Enterprise:** $249/mo -- unlimited repos, SSO, custom themes, audit logs`,
 }
 
+export function getExampleSnapshots(): readonly MarketSnapshot[] {
+  return EXAMPLE_SNAPSHOTS
+}
+
+export function getExampleCalves(): readonly Calf[] {
+  return MOCK_CALVES
+}
+
 export function getSnapshotById(id: string): MarketSnapshot | undefined {
   return EXAMPLE_SNAPSHOTS.find((s) => s.id === id)
 }

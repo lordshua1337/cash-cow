@@ -1,4 +1,4 @@
-import type { CalfStatus } from './types'
+import type { CalfStatus, Calf, MarketSnapshot } from './types'
 
 const STORAGE_KEY = 'cash-cow-state'
 
@@ -11,12 +11,16 @@ export interface CalfOverride {
 export interface AppState {
   readonly overrides: Record<string, CalfOverride>
   readonly savedNiches: readonly string[]
+  readonly snapshots: readonly MarketSnapshot[]
+  readonly calves: readonly Calf[]
 }
 
 function getDefaultState(): AppState {
   return {
     overrides: {},
     savedNiches: [],
+    snapshots: [],
+    calves: [],
   }
 }
 
@@ -25,7 +29,13 @@ export function loadState(): AppState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return getDefaultState()
-    return JSON.parse(raw) as AppState
+    const parsed = JSON.parse(raw) as Partial<AppState>
+    return {
+      overrides: parsed.overrides ?? {},
+      savedNiches: parsed.savedNiches ?? [],
+      snapshots: parsed.snapshots ?? [],
+      calves: parsed.calves ?? [],
+    }
   } catch {
     return getDefaultState()
   }
@@ -92,4 +102,35 @@ export function addSavedNiche(niche: string): AppState {
 export function getCalfOverride(calfId: string): CalfOverride | undefined {
   const state = loadState()
   return state.overrides[calfId]
+}
+
+export function saveSnapshot(snapshot: MarketSnapshot): AppState {
+  const state = loadState()
+  const existing = state.snapshots.filter((s) => s.id !== snapshot.id)
+  const newState: AppState = {
+    ...state,
+    snapshots: [...existing, snapshot],
+  }
+  saveState(newState)
+  return newState
+}
+
+export function saveCalves(newCalves: readonly Calf[]): AppState {
+  const state = loadState()
+  const existingIds = new Set(newCalves.map((c) => c.id))
+  const kept = state.calves.filter((c) => !existingIds.has(c.id))
+  const newState: AppState = {
+    ...state,
+    calves: [...kept, ...newCalves],
+  }
+  saveState(newState)
+  return newState
+}
+
+export function getSnapshots(): readonly MarketSnapshot[] {
+  return loadState().snapshots
+}
+
+export function getCalves(): readonly Calf[] {
+  return loadState().calves
 }

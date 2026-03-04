@@ -1,30 +1,95 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Search, TrendingUp, Users, AlertTriangle, Zap, ArrowRight, Star, ExternalLink, Shield } from 'lucide-react'
+import { Search, TrendingUp, Users, AlertTriangle, Zap, ArrowRight, Star, Shield, Loader, Bell, Check } from 'lucide-react'
 import { EXAMPLE_SNAPSHOTS, getCalvesBySnapshot } from '@/lib/mock-data'
+import { saveSnapshot, saveCalves, getSnapshots, getCalves } from '@/lib/state'
 import type { MarketSnapshot, Calf } from '@/lib/types'
+
+type SearchPhase = 'idle' | 'analyzing' | 'scoring' | 'done' | 'error'
 
 export default function PasturePage() {
   const [selectedSnapshot, setSelectedSnapshot] = useState<MarketSnapshot | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
-  const [isSearching, setIsSearching] = useState(false)
+  const [searchPhase, setSearchPhase] = useState<SearchPhase>('idle')
+  const [searchError, setSearchError] = useState<string | null>(null)
+  const [generatedCalves, setGeneratedCalves] = useState<readonly Calf[]>([])
+  const [userSnapshots, setUserSnapshots] = useState<readonly MarketSnapshot[]>([])
+  const [userCalves, setUserCalves] = useState<readonly Calf[]>([])
+  const [watchedNiche, setWatchedNiche] = useState(false)
+  const [watchLoading, setWatchLoading] = useState(false)
 
-  const handleSearch = () => {
+  useEffect(() => {
+    setUserSnapshots(getSnapshots())
+    setUserCalves(getCalves())
+  }, [])
+
+  const handleSearch = async () => {
     if (!searchQuery.trim()) return
-    setIsSearching(true)
-    // Simulate search delay then show matching or first example
-    setTimeout(() => {
-      const match = EXAMPLE_SNAPSHOTS.find(
-        (s) => s.niche.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-      setSelectedSnapshot(match ?? EXAMPLE_SNAPSHOTS[0])
-      setIsSearching(false)
-    }, 1200)
+    setSearchPhase('analyzing')
+    setSearchError(null)
+    setSelectedSnapshot(null)
+    setGeneratedCalves([])
+
+    try {
+      const res = await fetch('/api/research', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ niche: searchQuery.trim() }),
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || `Research failed (${res.status})`)
+      }
+
+      setSearchPhase('scoring')
+      const { snapshot, calves } = await res.json() as { snapshot: MarketSnapshot; calves: Calf[] }
+
+      saveSnapshot(snapshot)
+      saveCalves(calves)
+
+      setSelectedSnapshot(snapshot)
+      setGeneratedCalves(calves)
+      setUserSnapshots(getSnapshots())
+      setUserCalves(getCalves())
+      setSearchPhase('done')
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Research failed'
+      setSearchError(message)
+      setSearchPhase('error')
+    }
   }
 
-  const calves = selectedSnapshot ? getCalvesBySnapshot(selectedSnapshot.id) : []
+  const isSearching = searchPhase === 'analyzing' || searchPhase === 'scoring'
+
+  const handleWatchNiche = async () => {
+    if (!selectedSnapshot) return
+    setWatchLoading(true)
+    try {
+      const res = await fetch('/api/watchlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ niche: selectedSnapshot.niche }),
+      })
+      if (res.ok) {
+        setWatchedNiche(true)
+      }
+    } catch {
+      // Watchlist requires auth -- fail silently
+    } finally {
+      setWatchLoading(false)
+    }
+  }
+
+  const calvesForSnapshot = selectedSnapshot
+    ? [
+        ...generatedCalves.filter((c) => c.snapshotId === selectedSnapshot.id),
+        ...userCalves.filter((c) => c.snapshotId === selectedSnapshot.id && !generatedCalves.some((g) => g.id === c.id)),
+        ...getCalvesBySnapshot(selectedSnapshot.id),
+      ].filter((calf, index, arr) => arr.findIndex((c) => c.id === calf.id) === index)
+    : []
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8">
@@ -53,7 +118,7 @@ export default function PasturePage() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+            onKeyDown={(e) => e.key === 'Enter' && !isSearching && handleSearch()}
             placeholder="Enter a niche (e.g., AI Writing Tools, Meal Planning, Email Marketing...)"
             className="w-full pl-10 pr-4 py-3 rounded-lg text-sm"
             style={{
@@ -62,6 +127,7 @@ export default function PasturePage() {
               color: 'var(--text)',
               outline: 'none',
             }}
+            disabled={isSearching}
           />
         </div>
         <button
@@ -74,16 +140,82 @@ export default function PasturePage() {
         </button>
       </div>
 
-      {/* Example snapshots (shown when nothing selected) */}
-      {!selectedSnapshot && (
+      {/* Loading state */}
+      {isSearching && (
+        <div
+          className="flex flex-col items-center gap-4 py-16 mb-8 rounded-xl"
+          style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+        >
+          <Loader size={32} className="animate-spin" style={{ color: 'var(--amber)' }} />
+          <div className="text-center">
+            <p className="text-lg font-bold" style={{ color: 'var(--text)' }}>
+              {searchPhase === 'analyzing' ? 'Analyzing market...' : 'Scoring opportunities...'}
+            </p>
+            <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
+              {searchPhase === 'analyzing'
+                ? 'Researching trending products, competitors, and user complaints'
+                : 'Generating product ideas and calculating scores'}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Error state */}
+      {searchPhase === 'error' && searchError && (
+        <div
+          className="flex items-center gap-2 px-4 py-3 rounded-lg mb-8"
+          style={{ background: 'var(--red-soft)', border: '1px solid rgba(220, 38, 38, 0.2)' }}
+        >
+          <AlertTriangle size={14} style={{ color: 'var(--red)' }} />
+          <p className="text-sm" style={{ color: 'var(--red)' }}>{searchError}</p>
+        </div>
+      )}
+
+      {/* Example + user snapshots (shown when nothing selected and not searching) */}
+      {!selectedSnapshot && !isSearching && (
         <div>
+          {/* User's previous research */}
+          {userSnapshots.length > 0 && (
+            <div className="mb-8">
+              <h2 className="text-xl font-bold mb-4">Your Research</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {userSnapshots.map((snapshot) => (
+                  <button
+                    key={snapshot.id}
+                    onClick={() => {
+                      setSelectedSnapshot(snapshot)
+                      setGeneratedCalves([])
+                      setSearchPhase('done')
+                    }}
+                    className="text-left p-5 rounded-xl transition-all hover:scale-[1.01]"
+                    style={{
+                      background: 'var(--surface)',
+                      border: '1px solid var(--border)',
+                      borderLeft: '3px solid var(--amber)',
+                    }}
+                  >
+                    <h3 className="font-bold text-base mb-1">{snapshot.niche}</h3>
+                    <div className="flex items-center gap-4 text-xs" style={{ color: 'var(--text-secondary)' }}>
+                      <span>{snapshot.trendingProducts.length} products</span>
+                      <span>{snapshot.competitorLandscape.length} competitors</span>
+                      <span>{snapshot.reviewComplaintClusters.length} complaint clusters</span>
+                    </div>
+                    <p className="text-[10px] mt-1" style={{ color: 'var(--text-muted)' }}>
+                      {new Date(snapshot.createdAt).toLocaleDateString()}
+                    </p>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div
             className="flex items-center gap-2 px-4 py-3 rounded-lg mb-6"
             style={{ background: 'var(--blue-soft)', border: '1px solid rgba(37, 99, 235, 0.2)' }}
           >
             <Shield size={14} style={{ color: 'var(--blue)' }} />
             <p className="text-sm" style={{ color: 'var(--blue)' }}>
-              These are example market snapshots. Search your own niche above to get started.
+              These are example market snapshots. Search your own niche above to get real AI-powered research.
             </p>
           </div>
 
@@ -92,7 +224,11 @@ export default function PasturePage() {
             {EXAMPLE_SNAPSHOTS.map((snapshot) => (
               <button
                 key={snapshot.id}
-                onClick={() => setSelectedSnapshot(snapshot)}
+                onClick={() => {
+                  setSelectedSnapshot(snapshot)
+                  setGeneratedCalves([])
+                  setSearchPhase('idle')
+                }}
                 className="text-left p-5 rounded-xl transition-all hover:scale-[1.01]"
                 style={{
                   background: 'var(--surface)',
@@ -112,22 +248,50 @@ export default function PasturePage() {
       )}
 
       {/* Snapshot detail */}
-      {selectedSnapshot && (
+      {selectedSnapshot && !isSearching && (
         <div>
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-2xl font-black">{selectedSnapshot.niche}</h2>
               <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                 Market snapshot from {new Date(selectedSnapshot.createdAt).toLocaleDateString()}
+                {!selectedSnapshot.isExample && !EXAMPLE_SNAPSHOTS.some((e) => e.id === selectedSnapshot.id) && (
+                  <span
+                    className="ml-2 px-2 py-0.5 rounded text-[10px] font-bold"
+                    style={{ background: 'var(--amber-soft)', color: 'var(--amber)' }}
+                  >
+                    AI GENERATED
+                  </span>
+                )}
               </p>
             </div>
-            <button
-              onClick={() => setSelectedSnapshot(null)}
-              className="text-sm px-4 py-2 rounded-lg"
-              style={{ background: 'var(--bg-alt)', color: 'var(--text-secondary)' }}
-            >
-              Back to Markets
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleWatchNiche}
+                disabled={watchLoading || watchedNiche}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all disabled:opacity-50"
+                style={{
+                  background: watchedNiche ? 'var(--green-soft)' : 'var(--amber-soft)',
+                  color: watchedNiche ? 'var(--green)' : 'var(--amber)',
+                  border: `1px solid ${watchedNiche ? 'rgba(5,150,105,0.2)' : 'rgba(217,119,6,0.2)'}`,
+                }}
+              >
+                {watchedNiche ? <Check size={12} /> : <Bell size={12} />}
+                {watchedNiche ? 'Watching' : 'Watch Niche'}
+              </button>
+              <button
+                onClick={() => {
+                  setSelectedSnapshot(null)
+                  setGeneratedCalves([])
+                  setSearchPhase('idle')
+                  setWatchedNiche(false)
+                }}
+                className="text-sm px-4 py-2 rounded-lg"
+                style={{ background: 'var(--bg-alt)', color: 'var(--text-secondary)' }}
+              >
+                Back to Markets
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -167,6 +331,14 @@ export default function PasturePage() {
                           style={{ background: 'var(--green-soft)', color: 'var(--green)' }}
                         >
                           VERIFIED
+                        </span>
+                      )}
+                      {product.dataSource === 'ai_estimated' && (
+                        <span
+                          className="px-2 py-0.5 rounded text-[10px] font-bold"
+                          style={{ background: 'var(--orange-soft)', color: 'var(--orange)' }}
+                        >
+                          AI EST.
                         </span>
                       )}
                     </div>
@@ -290,14 +462,14 @@ export default function PasturePage() {
           </div>
 
           {/* Generated ideas from this niche */}
-          {calves.length > 0 && (
+          {calvesForSnapshot.length > 0 && (
             <div className="mb-8">
               <div className="flex items-center gap-2 mb-4">
                 <Zap size={18} style={{ color: 'var(--amber)' }} />
                 <h3 className="font-bold">Product Ideas from This Niche</h3>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {calves.map((calf) => (
+                {calvesForSnapshot.map((calf) => (
                   <Link
                     key={calf.id}
                     href={`/dashboard/herd/${calf.id}`}
