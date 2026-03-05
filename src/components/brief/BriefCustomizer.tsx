@@ -74,7 +74,7 @@ export function BriefCustomizer({ onGenerate, onClose, isLoading }: BriefCustomi
               className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm text-left transition-all"
               style={{
                 background: enabledSections[section.id] ? 'var(--amber-soft)' : 'var(--bg)',
-                border: `1px solid ${enabledSections[section.id] ? 'rgba(217,119,6,0.3)' : 'var(--border)'}`,
+                border: `1px solid ${enabledSections[section.id] ? 'rgba(34,197,94,0.3)' : 'var(--border)'}`,
               }}
             >
               <div

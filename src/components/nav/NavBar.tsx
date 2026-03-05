@@ -20,7 +20,7 @@ export default function NavBar() {
       <Link href="/" className="flex items-center gap-2 group">
         <div
           className="flex items-center justify-center w-8 h-8 rounded-lg transition-all group-hover:scale-105"
-          style={{ background: 'var(--amber-soft)', border: '1px solid rgba(217, 119, 6, 0.3)' }}
+          style={{ background: 'var(--amber-soft)', border: '1px solid rgba(34, 197, 94, 0.3)' }}
         >
           <Beef size={18} style={{ color: 'var(--amber)' }} />
         </div>

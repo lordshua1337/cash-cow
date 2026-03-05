@@ -183,7 +183,7 @@ export default function HerdPage() {
             <button
               onClick={handleGetRecommendations}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
-              style={{ background: 'var(--amber-soft)', color: 'var(--amber)', border: '1px solid rgba(217,119,6,0.2)' }}
+              style={{ background: 'var(--amber-soft)', color: 'var(--amber)', border: '1px solid rgba(34,197,94,0.2)' }}
             >
               <Lightbulb size={12} />
               Get Recommendations

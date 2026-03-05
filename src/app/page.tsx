@@ -12,7 +12,7 @@ export default function LandingPage() {
         <div className="flex items-center gap-2">
           <div
             className="flex items-center justify-center w-8 h-8 rounded-lg"
-            style={{ background: 'var(--amber-soft)', border: '1px solid rgba(217, 119, 6, 0.3)' }}
+            style={{ background: 'var(--amber-soft)', border: '1px solid rgba(34, 197, 94, 0.3)' }}
           >
             <Beef size={18} style={{ color: 'var(--amber)' }} />
           </div>
@@ -28,13 +28,13 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-24 text-center">
+      <div className="cow-spots flex-1 flex flex-col items-center justify-center px-6 py-24 text-center">
         <div
           className="flex items-center justify-center w-20 h-20 rounded-2xl mb-8"
           style={{
             background: 'var(--amber-soft)',
-            border: '1px solid rgba(217, 119, 6, 0.3)',
-            boxShadow: '0 0 40px rgba(217, 119, 6, 0.15)',
+            border: '1px solid rgba(34, 197, 94, 0.3)',
+            boxShadow: '0 0 40px rgba(34, 197, 94, 0.15)',
           }}
         >
           <Beef size={40} style={{ color: 'var(--amber)' }} />
@@ -56,7 +56,7 @@ export default function LandingPage() {
           style={{
             background: 'var(--amber)',
             color: '#FFFFFF',
-            boxShadow: '0 0 30px rgba(217, 119, 6, 0.3)',
+            boxShadow: '0 0 30px rgba(34, 197, 94, 0.3)',
           }}
         >
           <Target size={18} />
@@ -120,7 +120,7 @@ export default function LandingPage() {
                 <div className="flex items-center gap-3">
                   <div
                     className="flex items-center justify-center w-10 h-10 rounded-lg"
-                    style={{ background: 'var(--amber-soft)', border: '1px solid rgba(217, 119, 6, 0.2)' }}
+                    style={{ background: 'var(--amber-soft)', border: '1px solid rgba(34, 197, 94, 0.2)' }}
                   >
                     <Icon size={20} style={{ color: 'var(--amber)' }} />
                   </div>
@@ -148,7 +148,7 @@ export default function LandingPage() {
 
           <div
             className="rounded-xl p-6 flex flex-col gap-4"
-            style={{ background: 'var(--surface)', border: '1px solid rgba(217, 119, 6, 0.3)', boxShadow: '0 0 30px rgba(217, 119, 6, 0.08)' }}
+            style={{ background: 'var(--surface)', border: '1px solid rgba(34, 197, 94, 0.3)', boxShadow: '0 0 30px rgba(34, 197, 94, 0.08)' }}
           >
             <div className="flex items-center justify-between">
               <div>
@@ -221,7 +221,7 @@ export default function LandingPage() {
           style={{
             background: 'var(--amber)',
             color: '#FFFFFF',
-            boxShadow: '0 0 30px rgba(217, 119, 6, 0.3)',
+            boxShadow: '0 0 30px rgba(34, 197, 94, 0.3)',
           }}
         >
           <Beef size={18} />

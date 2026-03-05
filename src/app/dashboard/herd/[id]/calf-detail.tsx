@@ -266,7 +266,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
         className="flex items-center gap-2 px-4 py-3 rounded-lg mb-6"
         style={{
           background: calf.confidenceLevel === 'high' ? 'var(--green-soft)' : calf.confidenceLevel === 'medium' ? 'var(--amber-soft)' : 'var(--red-soft)',
-          border: `1px solid ${calf.confidenceLevel === 'high' ? 'rgba(5,150,105,0.2)' : calf.confidenceLevel === 'medium' ? 'rgba(217,119,6,0.2)' : 'rgba(220,38,38,0.2)'}`,
+          border: `1px solid ${calf.confidenceLevel === 'high' ? 'rgba(5,150,105,0.2)' : calf.confidenceLevel === 'medium' ? 'rgba(34,197,94,0.2)' : 'rgba(220,38,38,0.2)'}`,
         }}
       >
         <Shield size={14} style={{ color: calf.confidenceLevel === 'high' ? 'var(--green)' : calf.confidenceLevel === 'medium' ? 'var(--amber)' : 'var(--red)' }} />
@@ -561,7 +561,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
           <button
             onClick={() => handleGeneratePlaybook(selectedVariation)}
             className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-bold transition-all hover:scale-[1.01]"
-            style={{ background: 'var(--amber-soft)', color: 'var(--amber)', border: '1px solid rgba(217,119,6,0.2)' }}
+            style={{ background: 'var(--amber-soft)', color: 'var(--amber)', border: '1px solid rgba(34,197,94,0.2)' }}
           >
             <Calendar size={16} />
             Generate Build Playbook ({selectedVariation})
@@ -795,7 +795,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
               <button
                 onClick={handleDownloadPDF}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
-                style={{ background: 'var(--amber-soft)', border: '1px solid rgba(217,119,6,0.2)', color: 'var(--amber)' }}
+                style={{ background: 'var(--amber-soft)', border: '1px solid rgba(34,197,94,0.2)', color: 'var(--amber)' }}
               >
                 <FileText size={12} />
                 PDF
@@ -809,7 +809,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
           <button
             onClick={handleGenerateBrief}
             className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-bold transition-all hover:scale-[1.01]"
-            style={{ background: 'var(--amber)', color: '#FFFFFF', boxShadow: '0 0 20px rgba(217, 119, 6, 0.2)' }}
+            style={{ background: 'var(--amber)', color: '#FFFFFF', boxShadow: '0 0 20px rgba(34, 197, 94, 0.2)' }}
           >
             <Zap size={18} />
             Generate Build Brief

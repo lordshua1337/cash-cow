@@ -1,34 +1,34 @@
 @import 'tailwindcss';
 
 :root {
-  --bg: #FFF8F0;
-  --bg-alt: #FFF3E6;
-  --surface: #FFFFFF;
-  --surface-hover: #FFFAF5;
-  --border: #F5E6D3;
-  --border-strong: #E8D5BF;
+  --bg: #0A0A0A;
+  --bg-alt: #111111;
+  --surface: #1A1A1A;
+  --surface-hover: #222222;
+  --border: #2A2A2A;
+  --border-strong: #3A3A3A;
 
-  --text: #3D2B1F;
-  --text-secondary: #8B7355;
-  --text-muted: #B8A089;
+  --text: #FAFAFA;
+  --text-secondary: #A0A0A0;
+  --text-muted: #666666;
 
-  --amber: #D97706;
-  --amber-light: #F59E0B;
-  --amber-soft: rgba(217, 119, 6, 0.08);
-  --amber-glow: rgba(217, 119, 6, 0.15);
+  --amber: #22C55E;
+  --amber-light: #4ADE80;
+  --amber-soft: rgba(34, 197, 94, 0.08);
+  --amber-glow: rgba(34, 197, 94, 0.15);
 
-  --green: #059669;
-  --green-light: #10B981;
-  --green-soft: rgba(5, 150, 105, 0.08);
+  --green: #22C55E;
+  --green-light: #4ADE80;
+  --green-soft: rgba(34, 197, 94, 0.08);
 
-  --orange: #EA580C;
-  --orange-soft: rgba(234, 88, 12, 0.08);
+  --orange: #F97316;
+  --orange-soft: rgba(249, 115, 22, 0.08);
 
-  --red: #DC2626;
-  --red-soft: rgba(220, 38, 38, 0.08);
+  --red: #EF4444;
+  --red-soft: rgba(239, 68, 68, 0.08);
 
-  --blue: #2563EB;
-  --blue-soft: rgba(37, 99, 235, 0.08);
+  --blue: #3B82F6;
+  --blue-soft: rgba(59, 130, 246, 0.08);
 }
 
 @theme inline {
@@ -51,4 +51,46 @@ body {
 ::selection {
   background: var(--amber-glow);
   color: var(--text);
+}
+
+/* Cow spot pattern for hero sections */
+.cow-spots {
+  position: relative;
+  overflow: hidden;
+}
+
+.cow-spots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image:
+    radial-gradient(ellipse 120px 80px at 15% 25%, #FFFFFF 0%, transparent 100%),
+    radial-gradient(ellipse 90px 130px at 75% 15%, #FFFFFF 0%, transparent 100%),
+    radial-gradient(ellipse 150px 100px at 45% 70%, #FFFFFF 0%, transparent 100%),
+    radial-gradient(ellipse 80px 110px at 85% 60%, #FFFFFF 0%, transparent 100%),
+    radial-gradient(ellipse 110px 70px at 25% 85%, #FFFFFF 0%, transparent 100%),
+    radial-gradient(ellipse 100px 90px at 60% 40%, #FFFFFF 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cow-spots > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }

@@ -273,7 +273,7 @@ export default function PasturePage() {
                 style={{
                   background: watchedNiche ? 'var(--green-soft)' : 'var(--amber-soft)',
                   color: watchedNiche ? 'var(--green)' : 'var(--amber)',
-                  border: `1px solid ${watchedNiche ? 'rgba(5,150,105,0.2)' : 'rgba(217,119,6,0.2)'}`,
+                  border: `1px solid ${watchedNiche ? 'rgba(5,150,105,0.2)' : 'rgba(34,197,94,0.2)'}`,
                 }}
               >
                 {watchedNiche ? <Check size={12} /> : <Bell size={12} />}
@@ -511,7 +511,7 @@ export default function PasturePage() {
               style={{
                 background: 'var(--amber)',
                 color: '#FFFFFF',
-                boxShadow: '0 0 30px rgba(217, 119, 6, 0.3)',
+                boxShadow: '0 0 30px rgba(34, 197, 94, 0.3)',
               }}
             >
               <Zap size={18} />
