@@ -23,7 +23,7 @@ export default function LandingPage() {
           className="text-sm font-medium px-4 py-2 rounded-lg transition-all"
           style={{ background: 'var(--amber)', color: '#FFFFFF' }}
         >
-          Start Grazing
+          Sign In
         </Link>
       </nav>
 
