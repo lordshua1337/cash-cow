@@ -134,7 +134,7 @@ export default function PasturePage() {
           onClick={handleSearch}
           disabled={isSearching || !searchQuery.trim()}
           className="px-6 py-3 rounded-lg text-sm font-bold transition-all disabled:opacity-50"
-          style={{ background: 'var(--amber)', color: '#FFFFFF' }}
+          style={{ background: 'var(--cash)', color: '#FFFFFF' }}
         >
           {isSearching ? 'Researching...' : 'Research Niche'}
         </button>
@@ -146,7 +146,7 @@ export default function PasturePage() {
           className="flex flex-col items-center gap-4 py-16 mb-8 rounded-xl"
           style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
         >
-          <Loader size={32} className="animate-spin" style={{ color: 'var(--amber)' }} />
+          <Loader size={32} className="animate-spin" style={{ color: 'var(--cash)' }} />
           <div className="text-center">
             <p className="text-lg font-bold" style={{ color: 'var(--text)' }}>
               {searchPhase === 'analyzing' ? 'Analyzing market...' : 'Scoring opportunities...'}
@@ -191,7 +191,7 @@ export default function PasturePage() {
                     style={{
                       background: 'var(--surface)',
                       border: '1px solid var(--border)',
-                      borderLeft: '3px solid var(--amber)',
+                      borderLeft: '3px solid var(--cash)',
                     }}
                   >
                     <h3 className="font-bold text-base mb-1">{snapshot.niche}</h3>
@@ -258,7 +258,7 @@ export default function PasturePage() {
                 {!selectedSnapshot.isExample && !EXAMPLE_SNAPSHOTS.some((e) => e.id === selectedSnapshot.id) && (
                   <span
                     className="ml-2 px-2 py-0.5 rounded text-[10px] font-bold"
-                    style={{ background: 'var(--amber-soft)', color: 'var(--amber)' }}
+                    style={{ background: 'var(--cash-soft)', color: 'var(--cash)' }}
                   >
                     AI GENERATED
                   </span>
@@ -271,8 +271,8 @@ export default function PasturePage() {
                 disabled={watchLoading || watchedNiche}
                 className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all disabled:opacity-50"
                 style={{
-                  background: watchedNiche ? 'var(--green-soft)' : 'var(--amber-soft)',
-                  color: watchedNiche ? 'var(--green)' : 'var(--amber)',
+                  background: watchedNiche ? 'var(--green-soft)' : 'var(--cash-soft)',
+                  color: watchedNiche ? 'var(--green)' : 'var(--cash)',
                   border: `1px solid ${watchedNiche ? 'rgba(5,150,105,0.2)' : 'rgba(34,197,94,0.2)'}`,
                 }}
               >
@@ -301,7 +301,7 @@ export default function PasturePage() {
               style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
             >
               <div className="flex items-center gap-2 mb-4">
-                <TrendingUp size={18} style={{ color: 'var(--amber)' }} />
+                <TrendingUp size={18} style={{ color: 'var(--cash)' }} />
                 <h3 className="font-bold">Trending Products</h3>
               </div>
               <div className="space-y-3">
@@ -319,7 +319,7 @@ export default function PasturePage() {
                     </div>
                     <div className="flex items-center gap-3 text-xs">
                       <span className="flex items-center gap-1">
-                        <Star size={12} style={{ color: 'var(--amber-light)' }} />
+                        <Star size={12} style={{ color: 'var(--cash-light)' }} />
                         {product.rating}
                       </span>
                       <span style={{ color: 'var(--text-secondary)' }}>
@@ -365,7 +365,7 @@ export default function PasturePage() {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <p className="text-sm font-bold">{comp.company}</p>
-                      <span className="text-xs font-medium" style={{ color: 'var(--amber)' }}>
+                      <span className="text-xs font-medium" style={{ color: 'var(--cash)' }}>
                         {comp.pricing}
                       </span>
                     </div>
@@ -374,7 +374,7 @@ export default function PasturePage() {
                         <span
                           key={j}
                           className="px-2 py-0.5 rounded text-[10px]"
-                          style={{ background: 'var(--amber-soft)', color: 'var(--text-secondary)' }}
+                          style={{ background: 'var(--cash-soft)', color: 'var(--text-secondary)' }}
                         >
                           {f}
                         </span>
@@ -465,7 +465,7 @@ export default function PasturePage() {
           {calvesForSnapshot.length > 0 && (
             <div className="mb-8">
               <div className="flex items-center gap-2 mb-4">
-                <Zap size={18} style={{ color: 'var(--amber)' }} />
+                <Zap size={18} style={{ color: 'var(--cash)' }} />
                 <h3 className="font-bold">Product Ideas from This Niche</h3>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -478,7 +478,7 @@ export default function PasturePage() {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="font-bold">{calf.productName}</h4>
-                      <span className="text-lg font-black" style={{ color: 'var(--amber)' }}>
+                      <span className="text-lg font-black" style={{ color: 'var(--cash)' }}>
                         {calf.overallScore}
                       </span>
                     </div>
@@ -493,8 +493,8 @@ export default function PasturePage() {
                         Revenue: <span style={{ color: 'var(--green)' }}>${(calf.revenuePotentialMin / 1000).toFixed(0)}K-${(calf.revenuePotentialMax / 1000).toFixed(0)}K/mo</span>
                       </span>
                       <span className="flex items-center gap-1">
-                        <ArrowRight size={12} style={{ color: 'var(--amber)' }} />
-                        <span style={{ color: 'var(--amber)' }}>View Brief</span>
+                        <ArrowRight size={12} style={{ color: 'var(--cash)' }} />
+                        <span style={{ color: 'var(--cash)' }}>View Brief</span>
                       </span>
                     </div>
                   </Link>
@@ -509,7 +509,7 @@ export default function PasturePage() {
               href="/dashboard/herd"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-bold transition-all hover:scale-105"
               style={{
-                background: 'var(--amber)',
+                background: 'var(--cash)',
                 color: '#FFFFFF',
                 boxShadow: '0 0 30px rgba(34, 197, 94, 0.3)',
               }}

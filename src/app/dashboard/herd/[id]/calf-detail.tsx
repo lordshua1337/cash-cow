@@ -15,7 +15,7 @@ import type { Calf, CalfStatus, MarketSnapshot, RevenueForecast, BuildPlaybook }
 
 const STATUS_CONFIG: Record<CalfStatus, { label: string; icon: typeof TrendingUp; color: string; bg: string }> = {
   grazing: { label: 'Grazing', icon: TrendingUp, color: 'var(--blue)', bg: 'var(--blue-soft)' },
-  building: { label: 'Building', icon: Hammer, color: 'var(--amber)', bg: 'var(--amber-soft)' },
+  building: { label: 'Building', icon: Hammer, color: 'var(--cash)', bg: 'var(--cash-soft)' },
   milking: { label: 'Milking', icon: DollarSign, color: 'var(--green)', bg: 'var(--green-soft)' },
   dried_up: { label: 'Dried Up', icon: Skull, color: 'var(--text-muted)', bg: 'var(--bg-alt)' },
 }
@@ -75,7 +75,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
     return (
       <div className="max-w-4xl mx-auto px-6 py-16 text-center">
         <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>Calf not found.</p>
-        <Link href="/dashboard/herd" className="text-sm mt-2 inline-block" style={{ color: 'var(--amber)' }}>
+        <Link href="/dashboard/herd" className="text-sm mt-2 inline-block" style={{ color: 'var(--cash)' }}>
           Back to The Herd
         </Link>
       </div>
@@ -256,7 +256,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
           </p>
         </div>
         <div className="text-right">
-          <p className="text-4xl font-black" style={{ color: 'var(--amber)' }}>{calf.overallScore}</p>
+          <p className="text-4xl font-black" style={{ color: 'var(--cash)' }}>{calf.overallScore}</p>
           <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Overall Score</p>
         </div>
       </div>
@@ -265,12 +265,12 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
       <div
         className="flex items-center gap-2 px-4 py-3 rounded-lg mb-6"
         style={{
-          background: calf.confidenceLevel === 'high' ? 'var(--green-soft)' : calf.confidenceLevel === 'medium' ? 'var(--amber-soft)' : 'var(--red-soft)',
+          background: calf.confidenceLevel === 'high' ? 'var(--green-soft)' : calf.confidenceLevel === 'medium' ? 'var(--cash-soft)' : 'var(--red-soft)',
           border: `1px solid ${calf.confidenceLevel === 'high' ? 'rgba(5,150,105,0.2)' : calf.confidenceLevel === 'medium' ? 'rgba(34,197,94,0.2)' : 'rgba(220,38,38,0.2)'}`,
         }}
       >
-        <Shield size={14} style={{ color: calf.confidenceLevel === 'high' ? 'var(--green)' : calf.confidenceLevel === 'medium' ? 'var(--amber)' : 'var(--red)' }} />
-        <span className="text-sm font-bold" style={{ color: calf.confidenceLevel === 'high' ? 'var(--green)' : calf.confidenceLevel === 'medium' ? 'var(--amber)' : 'var(--red)' }}>
+        <Shield size={14} style={{ color: calf.confidenceLevel === 'high' ? 'var(--green)' : calf.confidenceLevel === 'medium' ? 'var(--cash)' : 'var(--red)' }} />
+        <span className="text-sm font-bold" style={{ color: calf.confidenceLevel === 'high' ? 'var(--green)' : calf.confidenceLevel === 'medium' ? 'var(--cash)' : 'var(--red)' }}>
           {calf.verificationPercentage}% data verified
         </span>
         <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>
@@ -284,10 +284,10 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
         style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
       >
         {[
-          { label: 'Market Demand', value: calf.marketDemandScore, verified: calf.marketDemandScoreVerified, color: 'var(--amber)' },
+          { label: 'Market Demand', value: calf.marketDemandScore, verified: calf.marketDemandScoreVerified, color: 'var(--cash)' },
           { label: 'Competition', value: calf.competitionDensityScore, color: calf.competitionDensityScore <= 40 ? 'var(--green)' : 'var(--orange)' },
           { label: 'Complexity', value: calf.buildComplexityScore, color: calf.buildComplexityScore <= 40 ? 'var(--green)' : 'var(--orange)' },
-          { label: 'Revenue', value: calf.revenuePotentialScore, verified: calf.revenuePotentialScoreVerified, color: 'var(--amber)' },
+          { label: 'Revenue', value: calf.revenuePotentialScore, verified: calf.revenuePotentialScoreVerified, color: 'var(--cash)' },
           { label: 'AI Buildability', value: calf.aiBuildabilityScore, color: 'var(--blue)' },
         ].map((s) => (
           <div key={s.label} className="text-center">
@@ -449,7 +449,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
               </div>
               <div className="p-3 rounded-lg" style={{ background: 'var(--bg)' }}>
                 <p className="text-[10px]" style={{ color: 'var(--text-secondary)' }}>Break Even</p>
-                <p className="text-lg font-black" style={{ color: 'var(--amber)' }}>
+                <p className="text-lg font-black" style={{ color: 'var(--cash)' }}>
                   {forecast.breakEvenMonth ? `Month ${forecast.breakEvenMonth}` : 'N/A'}
                 </p>
               </div>
@@ -482,10 +482,10 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
               <tr style={{ borderBottom: '1px solid var(--border)' }}>
                 <th className="text-left py-2 pr-4" style={{ color: 'var(--text-secondary)' }}>Feature</th>
                 {(['micro', 'standard', 'premium'] as const).map((level) => (
-                  <th key={level} className="text-center py-2 px-2" style={{ color: level === bestVariation ? 'var(--amber)' : 'var(--text-secondary)' }}>
+                  <th key={level} className="text-center py-2 px-2" style={{ color: level === bestVariation ? 'var(--cash)' : 'var(--text-secondary)' }}>
                     {level.charAt(0).toUpperCase() + level.slice(1)}
                     {level === bestVariation && (
-                      <span className="block text-[9px] font-normal" style={{ color: 'var(--amber)' }}>Recommended</span>
+                      <span className="block text-[9px] font-normal" style={{ color: 'var(--cash)' }}>Recommended</span>
                     )}
                   </th>
                 ))}
@@ -525,8 +525,8 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
                 onClick={() => setSelectedVariation(level)}
                 className="p-4 rounded-lg text-left transition-all"
                 style={{
-                  background: isSelected ? 'var(--amber-soft)' : 'var(--bg)',
-                  border: `2px solid ${isSelected ? 'var(--amber)' : 'var(--border)'}`,
+                  background: isSelected ? 'var(--cash-soft)' : 'var(--bg)',
+                  border: `2px solid ${isSelected ? 'var(--cash)' : 'var(--border)'}`,
                 }}
               >
                 <div className="flex items-center gap-2 mb-1">
@@ -534,7 +534,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
                     {level}
                   </p>
                   {level === bestVariation && (
-                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold" style={{ background: 'var(--amber-soft)', color: 'var(--amber)' }}>
+                    <span className="px-1.5 py-0.5 rounded text-[9px] font-bold" style={{ background: 'var(--cash-soft)', color: 'var(--cash)' }}>
                       BEST VALUE
                     </span>
                   )}
@@ -561,7 +561,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
           <button
             onClick={() => handleGeneratePlaybook(selectedVariation)}
             className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-bold transition-all hover:scale-[1.01]"
-            style={{ background: 'var(--amber-soft)', color: 'var(--amber)', border: '1px solid rgba(34,197,94,0.2)' }}
+            style={{ background: 'var(--cash-soft)', color: 'var(--cash)', border: '1px solid rgba(34,197,94,0.2)' }}
           >
             <Calendar size={16} />
             Generate Build Playbook ({selectedVariation})
@@ -570,7 +570,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
 
         {playbookLoading && (
           <div className="text-center py-6">
-            <Loader size={20} className="animate-spin mx-auto mb-2" style={{ color: 'var(--amber)' }} />
+            <Loader size={20} className="animate-spin mx-auto mb-2" style={{ color: 'var(--cash)' }} />
             <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Generating build playbook...</p>
           </div>
         )}
@@ -587,7 +587,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
           <div className="mt-4">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <Calendar size={16} style={{ color: 'var(--amber)' }} />
+                <Calendar size={16} style={{ color: 'var(--cash)' }} />
                 <h4 className="text-sm font-bold">
                   Build Playbook -- {playbook.variationLevel} ({playbook.totalWeeks} weeks)
                 </h4>
@@ -607,7 +607,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
             {/* Key milestones */}
             <div className="flex flex-wrap gap-2 mb-4">
               {playbook.keyMilestones.map((m, i) => (
-                <span key={i} className="px-2 py-1 rounded text-[10px] font-medium" style={{ background: 'var(--amber-soft)', color: 'var(--amber)' }}>
+                <span key={i} className="px-2 py-1 rounded text-[10px] font-medium" style={{ background: 'var(--cash-soft)', color: 'var(--cash)' }}>
                   {m}
                 </span>
               ))}
@@ -620,7 +620,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
                   <div className="flex items-center gap-2 mb-2">
                     <span
                       className="flex items-center justify-center w-6 h-6 rounded-full text-[10px] font-black"
-                      style={{ background: 'var(--amber)', color: '#fff' }}
+                      style={{ background: 'var(--cash)', color: '#fff' }}
                     >
                       {week.week}
                     </span>
@@ -795,7 +795,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
               <button
                 onClick={handleDownloadPDF}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
-                style={{ background: 'var(--amber-soft)', border: '1px solid rgba(34,197,94,0.2)', color: 'var(--amber)' }}
+                style={{ background: 'var(--cash-soft)', border: '1px solid rgba(34,197,94,0.2)', color: 'var(--cash)' }}
               >
                 <FileText size={12} />
                 PDF
@@ -809,14 +809,14 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
           <button
             onClick={handleGenerateBrief}
             className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-bold transition-all hover:scale-[1.01]"
-            style={{ background: 'var(--amber)', color: '#FFFFFF', boxShadow: '0 0 20px rgba(34, 197, 94, 0.2)' }}
+            style={{ background: 'var(--cash)', color: '#FFFFFF', boxShadow: '0 0 20px rgba(34, 197, 94, 0.2)' }}
           >
             <Zap size={18} />
             Generate Build Brief
           </button>
         ) : briefLoading ? (
           <div className="text-center py-8">
-            <Loader size={24} className="animate-spin mx-auto mb-3" style={{ color: 'var(--amber)' }} />
+            <Loader size={24} className="animate-spin mx-auto mb-3" style={{ color: 'var(--cash)' }} />
             <p style={{ color: 'var(--text-secondary)' }}>
               {isExampleCalf ? 'Loading brief...' : 'Generating your product brief with AI...'}
             </p>
@@ -838,7 +838,7 @@ export function CalfDetail({ calfId }: { readonly calfId: string }) {
                 if (line.startsWith('**') && line.endsWith('**')) return <p key={i} className="text-sm font-bold mt-2">{line.slice(2, -2)}</p>
                 if (line.startsWith('- ')) return (
                   <div key={i} className="flex items-start gap-2 ml-4 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                    <span style={{ color: 'var(--amber)' }}>-</span>
+                    <span style={{ color: 'var(--cash)' }}>-</span>
                     <span>{line.slice(2)}</span>
                   </div>
                 )

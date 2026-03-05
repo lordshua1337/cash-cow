@@ -12,16 +12,16 @@ export default function LandingPage() {
         <div className="flex items-center gap-2">
           <div
             className="flex items-center justify-center w-8 h-8 rounded-lg"
-            style={{ background: 'var(--amber-soft)', border: '1px solid rgba(34, 197, 94, 0.3)' }}
+            style={{ background: 'var(--cash-soft)', border: '1px solid rgba(34, 197, 94, 0.3)' }}
           >
-            <Beef size={18} style={{ color: 'var(--amber)' }} />
+            <Beef size={18} style={{ color: 'var(--cash)' }} />
           </div>
           <span className="text-lg font-bold tracking-tight">Cash Cow</span>
         </div>
         <Link
-          href="/dashboard/pasture"
+          href="/auth"
           className="text-sm font-medium px-4 py-2 rounded-lg transition-all"
-          style={{ background: 'var(--amber)', color: '#FFFFFF' }}
+          style={{ background: 'var(--cash)', color: '#FFFFFF' }}
         >
           Sign In
         </Link>
@@ -32,18 +32,18 @@ export default function LandingPage() {
         <div
           className="flex items-center justify-center w-20 h-20 rounded-2xl mb-8"
           style={{
-            background: 'var(--amber-soft)',
+            background: 'var(--cash-soft)',
             border: '1px solid rgba(34, 197, 94, 0.3)',
             boxShadow: '0 0 40px rgba(34, 197, 94, 0.15)',
           }}
         >
-          <Beef size={40} style={{ color: 'var(--amber)' }} />
+          <Beef size={40} style={{ color: 'var(--cash)' }} />
         </div>
 
         <h1 className="text-5xl sm:text-6xl font-black tracking-tight mb-6 max-w-3xl leading-none">
           <span style={{ color: 'var(--text)' }}>Milk trending niches</span>
           <br />
-          <span style={{ color: 'var(--amber)' }}>for product gold.</span>
+          <span style={{ color: 'var(--cash)' }}>for product gold.</span>
         </h1>
 
         <p className="text-lg sm:text-xl max-w-xl leading-relaxed mb-10" style={{ color: 'var(--text-secondary)' }}>
@@ -54,7 +54,7 @@ export default function LandingPage() {
           href="/dashboard/pasture"
           className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-bold transition-all hover:scale-105"
           style={{
-            background: 'var(--amber)',
+            background: 'var(--cash)',
             color: '#FFFFFF',
             boxShadow: '0 0 30px rgba(34, 197, 94, 0.3)',
           }}
@@ -72,7 +72,7 @@ export default function LandingPage() {
             { label: 'Build briefs ready', value: '5' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-3xl font-black mb-1" style={{ color: 'var(--amber)' }}>
+              <div className="text-3xl font-black mb-1" style={{ color: 'var(--cash)' }}>
                 {stat.value}
               </div>
               <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>
@@ -120,9 +120,9 @@ export default function LandingPage() {
                 <div className="flex items-center gap-3">
                   <div
                     className="flex items-center justify-center w-10 h-10 rounded-lg"
-                    style={{ background: 'var(--amber-soft)', border: '1px solid rgba(34, 197, 94, 0.2)' }}
+                    style={{ background: 'var(--cash-soft)', border: '1px solid rgba(34, 197, 94, 0.2)' }}
                   >
-                    <Icon size={20} style={{ color: 'var(--amber)' }} />
+                    <Icon size={20} style={{ color: 'var(--cash)' }} />
                   </div>
                   <span className="text-xs font-bold" style={{ color: 'var(--text-secondary)' }}>
                     {step}
@@ -159,7 +159,7 @@ export default function LandingPage() {
                 <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>AI Writing Tools</span>
               </div>
               <div className="text-right">
-                <div className="text-3xl font-black" style={{ color: 'var(--amber)' }}>74</div>
+                <div className="text-3xl font-black" style={{ color: 'var(--cash)' }}>74</div>
                 <div className="text-xs" style={{ color: 'var(--text-secondary)' }}>Overall Score</div>
               </div>
             </div>
@@ -181,10 +181,10 @@ export default function LandingPage() {
 
             <div className="grid grid-cols-5 gap-3 text-center text-xs">
               {[
-                { label: 'Market', value: '78', color: 'var(--amber)' },
+                { label: 'Market', value: '78', color: 'var(--cash)' },
                 { label: 'Competition', value: '35', color: 'var(--green)' },
                 { label: 'Complexity', value: '42', color: 'var(--text)' },
-                { label: 'Revenue', value: '72', color: 'var(--amber)' },
+                { label: 'Revenue', value: '72', color: 'var(--cash)' },
                 { label: 'AI Build', value: '65', color: 'var(--blue)' },
               ].map((s) => (
                 <div key={s.label}>
@@ -219,7 +219,7 @@ export default function LandingPage() {
           href="/dashboard/pasture"
           className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-bold transition-all hover:scale-105"
           style={{
-            background: 'var(--amber)',
+            background: 'var(--cash)',
             color: '#FFFFFF',
             boxShadow: '0 0 30px rgba(34, 197, 94, 0.3)',
           }}

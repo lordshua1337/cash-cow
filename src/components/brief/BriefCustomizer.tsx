@@ -73,14 +73,14 @@ export function BriefCustomizer({ onGenerate, onClose, isLoading }: BriefCustomi
               onClick={() => toggleSection(section.id)}
               className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-sm text-left transition-all"
               style={{
-                background: enabledSections[section.id] ? 'var(--amber-soft)' : 'var(--bg)',
+                background: enabledSections[section.id] ? 'var(--cash-soft)' : 'var(--bg)',
                 border: `1px solid ${enabledSections[section.id] ? 'rgba(34,197,94,0.3)' : 'var(--border)'}`,
               }}
             >
               <div
                 className="w-4 h-4 rounded flex items-center justify-center shrink-0"
                 style={{
-                  background: enabledSections[section.id] ? 'var(--amber)' : 'transparent',
+                  background: enabledSections[section.id] ? 'var(--cash)' : 'transparent',
                   border: enabledSections[section.id] ? 'none' : '1px solid var(--border)',
                 }}
               >
@@ -108,7 +108,7 @@ export function BriefCustomizer({ onGenerate, onClose, isLoading }: BriefCustomi
               onClick={addCustomSection}
               disabled={!customSection.trim()}
               className="px-3 py-2 rounded-lg text-xs font-bold disabled:opacity-50"
-              style={{ background: 'var(--amber-soft)', color: 'var(--amber)' }}
+              style={{ background: 'var(--cash-soft)', color: 'var(--cash)' }}
             >
               Add
             </button>
@@ -136,7 +136,7 @@ export function BriefCustomizer({ onGenerate, onClose, isLoading }: BriefCustomi
           onClick={handleGenerate}
           disabled={isLoading}
           className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-sm font-bold transition-all disabled:opacity-50"
-          style={{ background: 'var(--amber)', color: '#fff' }}
+          style={{ background: 'var(--cash)', color: '#fff' }}
         >
           {isLoading ? (
             <>

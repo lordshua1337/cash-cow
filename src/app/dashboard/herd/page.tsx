@@ -10,14 +10,14 @@ import type { Calf, CalfStatus, ConfidenceLevel, Recommendation } from '@/lib/ty
 
 const STATUS_CONFIG: Record<CalfStatus, { label: string; icon: typeof TrendingUp; color: string; bg: string }> = {
   grazing: { label: 'Grazing', icon: TrendingUp, color: 'var(--blue)', bg: 'var(--blue-soft)' },
-  building: { label: 'Building', icon: Hammer, color: 'var(--amber)', bg: 'var(--amber-soft)' },
+  building: { label: 'Building', icon: Hammer, color: 'var(--cash)', bg: 'var(--cash-soft)' },
   milking: { label: 'Milking', icon: DollarSign, color: 'var(--green)', bg: 'var(--green-soft)' },
   dried_up: { label: 'Dried Up', icon: Skull, color: 'var(--text-muted)', bg: 'var(--bg-alt)' },
 }
 
 const CONFIDENCE_CONFIG: Record<ConfidenceLevel, { label: string; color: string; bg: string }> = {
   high: { label: 'High confidence (80%+ verified)', color: 'var(--green)', bg: 'var(--green-soft)' },
-  medium: { label: 'Medium confidence (50-79% verified)', color: 'var(--amber)', bg: 'var(--amber-soft)' },
+  medium: { label: 'Medium confidence (50-79% verified)', color: 'var(--cash)', bg: 'var(--cash-soft)' },
   low: { label: 'Low confidence (mostly AI estimates)', color: 'var(--red)', bg: 'var(--red-soft)' },
 }
 
@@ -176,14 +176,14 @@ export default function HerdPage() {
       >
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <Lightbulb size={18} style={{ color: 'var(--amber)' }} />
+            <Lightbulb size={18} style={{ color: 'var(--cash)' }} />
             <h3 className="font-bold">AI Recommendations</h3>
           </div>
           {recommendations.length === 0 && !recsLoading && (
             <button
               onClick={handleGetRecommendations}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all"
-              style={{ background: 'var(--amber-soft)', color: 'var(--amber)', border: '1px solid rgba(34,197,94,0.2)' }}
+              style={{ background: 'var(--cash-soft)', color: 'var(--cash)', border: '1px solid rgba(34,197,94,0.2)' }}
             >
               <Lightbulb size={12} />
               Get Recommendations
@@ -193,7 +193,7 @@ export default function HerdPage() {
 
         {recsLoading && (
           <div className="flex items-center gap-3 py-4">
-            <Loader size={16} className="animate-spin" style={{ color: 'var(--amber)' }} />
+            <Loader size={16} className="animate-spin" style={{ color: 'var(--cash)' }} />
             <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Analyzing your portfolio...</p>
           </div>
         )}
@@ -257,7 +257,7 @@ export default function HerdPage() {
         </div>
         <div>
           <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Building</p>
-          <p className="text-2xl font-black" style={{ color: 'var(--amber)' }}>
+          <p className="text-2xl font-black" style={{ color: 'var(--cash)' }}>
             {statusCounts['building'] ?? 0}
           </p>
         </div>
@@ -311,7 +311,7 @@ export default function HerdPage() {
       {calves.length === 0 ? (
         <div className="text-center py-16">
           <p className="text-lg mb-2" style={{ color: 'var(--text-secondary)' }}>No calves match this filter.</p>
-          <Link href="/dashboard/pasture" className="text-sm font-medium" style={{ color: 'var(--amber)' }}>
+          <Link href="/dashboard/pasture" className="text-sm font-medium" style={{ color: 'var(--cash)' }}>
             Go to The Pasture and research a niche to generate ideas.
           </Link>
         </div>
@@ -351,7 +351,7 @@ export default function HerdPage() {
 
                 <div className="flex gap-2 flex-wrap mb-3">
                   {[
-                    { label: 'Market', value: calf.marketDemandScore, color: 'var(--amber)' },
+                    { label: 'Market', value: calf.marketDemandScore, color: 'var(--cash)' },
                     { label: 'Revenue', value: calf.revenuePotentialScore, color: 'var(--green)' },
                     { label: 'AI Build', value: calf.aiBuildabilityScore, color: 'var(--blue)' },
                   ].map((s) => (
@@ -382,7 +382,7 @@ export default function HerdPage() {
                     )}
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-black" style={{ color: 'var(--amber)' }}>{calf.overallScore}</p>
+                    <p className="text-2xl font-black" style={{ color: 'var(--cash)' }}>{calf.overallScore}</p>
                     <p style={{ color: 'var(--text-muted)' }}>Score</p>
                   </div>
                 </div>

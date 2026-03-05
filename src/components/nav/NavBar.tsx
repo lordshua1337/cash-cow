@@ -2,9 +2,10 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Beef, Search, Briefcase } from 'lucide-react'
+import { Beef, Search, Briefcase, TrendingUp } from 'lucide-react'
 
 const NAV_ITEMS = [
+  { href: '/dashboard/trends', label: 'Trends', icon: TrendingUp },
   { href: '/dashboard/pasture', label: 'The Pasture', icon: Search },
   { href: '/dashboard/herd', label: 'The Herd', icon: Briefcase },
 ] as const
@@ -20,9 +21,9 @@ export default function NavBar() {
       <Link href="/" className="flex items-center gap-2 group">
         <div
           className="flex items-center justify-center w-8 h-8 rounded-lg transition-all group-hover:scale-105"
-          style={{ background: 'var(--amber-soft)', border: '1px solid rgba(34, 197, 94, 0.3)' }}
+          style={{ background: 'var(--cash-soft)', border: '1px solid rgba(34, 197, 94, 0.3)' }}
         >
-          <Beef size={18} style={{ color: 'var(--amber)' }} />
+          <Beef size={18} style={{ color: 'var(--cash)' }} />
         </div>
         <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--text)' }}>
           Cash Cow
@@ -39,8 +40,8 @@ export default function NavBar() {
               href={href}
               className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all"
               style={{
-                background: isActive ? 'var(--amber-soft)' : 'transparent',
-                color: isActive ? 'var(--amber)' : 'var(--text-secondary)',
+                background: isActive ? 'var(--cash-soft)' : 'transparent',
+                color: isActive ? 'var(--cash)' : 'var(--text-secondary)',
               }}
             >
               <Icon size={16} />

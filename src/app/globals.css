@@ -12,10 +12,10 @@
   --text-secondary: #A0A0A0;
   --text-muted: #666666;
 
-  --amber: #22C55E;
-  --amber-light: #4ADE80;
-  --amber-soft: rgba(34, 197, 94, 0.08);
-  --amber-glow: rgba(34, 197, 94, 0.15);
+  --cash: #22C55E;
+  --cash-light: #4ADE80;
+  --cash-soft: rgba(34, 197, 94, 0.08);
+  --cash-glow: rgba(34, 197, 94, 0.15);
 
   --green: #22C55E;
   --green-light: #4ADE80;
@@ -49,7 +49,7 @@ body {
 }
 
 ::selection {
-  background: var(--amber-glow);
+  background: var(--cash-glow);
   color: var(--text);
 }
 
