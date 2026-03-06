@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import {
   TrendingUp,
@@ -11,6 +11,7 @@ import {
   AlertTriangle,
   XCircle,
   Filter,
+  Radio,
 } from 'lucide-react'
 import {
   TRENDS,
@@ -29,15 +30,70 @@ const VERDICT_ICONS: Record<MarketTrend['verdict'], typeof Zap> = {
   'High Risk': AlertTriangle,
 }
 
+const CACHE_KEY = 'cashcow-live-trends'
+const CACHE_TTL = 60 * 60 * 1000 // 1 hour
+
+interface CachedTrends {
+  readonly trends: readonly MarketTrend[]
+  readonly live: boolean
+  readonly fetchedAt: string
+}
+
+function loadCachedTrends(): CachedTrends | null {
+  if (typeof window === 'undefined') return null
+  const raw = localStorage.getItem(CACHE_KEY)
+  if (!raw) return null
+  try {
+    const parsed = JSON.parse(raw) as CachedTrends
+    if (Date.now() - new Date(parsed.fetchedAt).getTime() > CACHE_TTL) return null
+    return parsed
+  } catch {
+    return null
+  }
+}
+
+function saveCachedTrends(data: CachedTrends): void {
+  if (typeof window === 'undefined') return
+  localStorage.setItem(CACHE_KEY, JSON.stringify(data))
+}
+
 export default function TrendsPage() {
   const [selectedCategory, setSelectedCategory] = useState<TrendCategory | 'All'>('All')
   const [selectedVerdict, setSelectedVerdict] = useState<MarketTrend['verdict'] | 'All'>('All')
   const [sortBy, setSortBy] = useState<'score' | 'confidence' | 'buildDays'>('score')
+  const [trends, setTrends] = useState<readonly MarketTrend[]>(TRENDS)
+  const [isLive, setIsLive] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  // Fetch live data on mount
+  useEffect(() => {
+    const cached = loadCachedTrends()
+    if (cached) {
+      setTrends(cached.trends)
+      setIsLive(cached.live)
+      return
+    }
+
+    setLoading(true)
+    fetch('/api/trends')
+      .then(res => res.json())
+      .then((data: CachedTrends) => {
+        setTrends(data.trends)
+        setIsLive(data.live)
+        saveCachedTrends(data)
+      })
+      .catch(() => {
+        // Fallback to static
+        setTrends(TRENDS)
+        setIsLive(false)
+      })
+      .finally(() => setLoading(false))
+  }, [])
 
   const categories = getCategories()
 
   const filtered = useMemo(() => {
-    let result = [...TRENDS]
+    let result = [...trends]
 
     if (selectedCategory !== 'All') {
       result = result.filter(t => t.category === selectedCategory)
@@ -53,10 +109,10 @@ export default function TrendsPage() {
     })
 
     return result
-  }, [selectedCategory, selectedVerdict, sortBy])
+  }, [trends, selectedCategory, selectedVerdict, sortBy])
 
-  const buildNowCount = TRENDS.filter(t => t.verdict === 'Build Now').length
-  const avgScore = Math.round(TRENDS.reduce((s, t) => s + t.score, 0) / TRENDS.length)
+  const buildNowCount = trends.filter(t => t.verdict === 'Build Now').length
+  const avgScore = Math.round(trends.reduce((s, t) => s + t.score, 0) / trends.length)
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8">
@@ -67,15 +123,28 @@ export default function TrendsPage() {
           <h1 className="text-2xl font-black">Trend Sniper</h1>
         </div>
         <p style={{ color: 'var(--text-secondary)' }} className="text-sm">
-          Market trends from HackerNews, GitHub, Reddit, Google Trends, and Product Hunt.
+          Market trends scored from live signals.
           Click a trend to pre-fill your pasture research.
         </p>
+        {/* Live indicator */}
+        <div className="flex items-center gap-2 mt-2">
+          {loading ? (
+            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Fetching live signals...</span>
+          ) : isLive ? (
+            <span className="flex items-center gap-1.5 text-xs font-medium" style={{ color: 'var(--cash)' }}>
+              <Radio size={10} className="animate-pulse" />
+              Live -- HackerNews + GitHub
+            </span>
+          ) : (
+            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Static data (API unavailable)</span>
+          )}
+        </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {[
-          { label: 'Trends Tracked', value: TRENDS.length, color: 'var(--text)' },
+          { label: 'Trends Tracked', value: trends.length, color: 'var(--text)' },
           { label: 'Build Now', value: buildNowCount, color: 'var(--cash)' },
           { label: 'Avg Score', value: avgScore, color: 'var(--blue)' },
           { label: 'Categories', value: categories.length, color: 'var(--orange)' },
