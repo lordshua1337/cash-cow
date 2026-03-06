@@ -50,19 +50,33 @@ export default function LandingPage() {
           Cash Cow researches markets, mines competitor complaints, scores product ideas by demand and buildability, and generates build-ready briefs. From niche to product brief in minutes.
         </p>
 
-        <Link
-          href="/dashboard/pasture"
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-bold transition-all hover:scale-105"
-          style={{
-            background: 'var(--cash)',
-            color: '#FFFFFF',
-            boxShadow: '0 0 30px rgba(34, 197, 94, 0.3)',
-          }}
-        >
-          <Target size={18} />
-          Explore Markets
-          <ArrowRight size={18} />
-        </Link>
+        <div className="flex items-center gap-3 flex-wrap justify-center">
+          <Link
+            href="/dashboard/pasture"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-bold transition-all hover:scale-105"
+            style={{
+              background: 'var(--cash)',
+              color: '#FFFFFF',
+              boxShadow: '0 0 30px rgba(34, 197, 94, 0.3)',
+            }}
+          >
+            <Target size={18} />
+            Explore Markets
+            <ArrowRight size={18} />
+          </Link>
+          <Link
+            href="/dashboard/trends"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-bold transition-all hover:scale-105"
+            style={{
+              background: 'transparent',
+              color: 'var(--cash)',
+              border: '1px solid rgba(34, 197, 94, 0.5)',
+            }}
+          >
+            <TrendingUp size={18} />
+            Browse Trends
+          </Link>
+        </div>
 
         {/* Stats */}
         <div className="flex items-center gap-8 mt-16 flex-wrap justify-center">
