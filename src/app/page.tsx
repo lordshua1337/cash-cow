@@ -83,62 +83,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* How it works */}
-      <div className="border-t px-6 py-16" style={{ borderColor: 'var(--border)' }}>
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-2xl font-black text-center mb-2">From Niche to Product Brief in 3 Steps</h2>
-          <p className="text-sm text-center mb-10" style={{ color: 'var(--text-secondary)' }}>
-            Graze. Score. Build.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {[
-              {
-                Icon: Search,
-                step: '01',
-                title: 'Graze the Pasture',
-                desc: 'Pick a niche. Cash Cow fetches trending products, analyzes competitors, mines real user complaints from G2 and Reddit, and maps the market landscape.',
-              },
-              {
-                Icon: Zap,
-                step: '02',
-                title: 'Score Your Calves',
-                desc: 'AI generates product ideas from market gaps. Each idea is scored on market demand, competition density, build complexity, revenue potential, and AI buildability.',
-              },
-              {
-                Icon: FileText,
-                step: '03',
-                title: 'Get Your Brief',
-                desc: 'Choose a calf and get a complete build playbook: tech stack, MVP features, data model, revenue model, risks, and timeline. Ready to hand to your AI coding assistant.',
-              },
-            ].map(({ Icon, step, title, desc }) => (
-              <div
-                key={title}
-                className="flex flex-col gap-3 p-6 rounded-xl"
-                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className="flex items-center justify-center w-10 h-10 rounded-lg"
-                    style={{ background: 'var(--cash-soft)', border: '1px solid rgba(34, 197, 94, 0.2)' }}
-                  >
-                    <Icon size={20} style={{ color: 'var(--cash)' }} />
-                  </div>
-                  <span className="text-xs font-bold" style={{ color: 'var(--text-secondary)' }}>
-                    {step}
-                  </span>
-                </div>
-                <h3 className="font-bold text-base">{title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  {desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Example calf */}
+      {/* Example calf -- show the output first */}
       <div className="border-t px-6 py-16" style={{ borderColor: 'var(--border)' }}>
         <div className="mx-auto max-w-3xl">
           <h2 className="text-2xl font-black text-center mb-2">What a Scored Idea Looks Like</h2>
@@ -205,6 +150,61 @@ export default function LandingPage() {
                 Pricing: <span style={{ color: 'var(--text)' }}>$49/mo</span>
               </span>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* How it works -- after showing the output */}
+      <div className="border-t px-6 py-16" style={{ borderColor: 'var(--border)' }}>
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-2xl font-black text-center mb-2">From Niche to Product Brief in 3 Steps</h2>
+          <p className="text-sm text-center mb-10" style={{ color: 'var(--text-secondary)' }}>
+            Graze. Score. Build.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {[
+              {
+                Icon: Search,
+                step: '01',
+                title: 'Graze the Pasture',
+                desc: 'Pick a niche. Cash Cow fetches trending products, analyzes competitors, mines real user complaints from G2 and Reddit, and maps the market landscape.',
+              },
+              {
+                Icon: Zap,
+                step: '02',
+                title: 'Score Your Calves',
+                desc: 'AI generates product ideas from market gaps. Each idea is scored on market demand, competition density, build complexity, revenue potential, and AI buildability.',
+              },
+              {
+                Icon: FileText,
+                step: '03',
+                title: 'Get Your Brief',
+                desc: 'Choose a calf and get a complete build playbook: tech stack, MVP features, data model, revenue model, risks, and timeline. Ready to hand to your AI coding assistant.',
+              },
+            ].map(({ Icon, step, title, desc }) => (
+              <div
+                key={title}
+                className="flex flex-col gap-3 p-6 rounded-xl"
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className="flex items-center justify-center w-10 h-10 rounded-lg"
+                    style={{ background: 'var(--cash-soft)', border: '1px solid rgba(34, 197, 94, 0.2)' }}
+                  >
+                    <Icon size={20} style={{ color: 'var(--cash)' }} />
+                  </div>
+                  <span className="text-xs font-bold" style={{ color: 'var(--text-secondary)' }}>
+                    {step}
+                  </span>
+                </div>
+                <h3 className="font-bold text-base">{title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  {desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
