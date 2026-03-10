@@ -1,15 +1,22 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Nunito, Fredoka } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({
+const nunito = Nunito({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-nunito',
+  weight: ['400', '600', '700', '800'],
+})
+
+const fredoka = Fredoka({
+  subsets: ['latin'],
+  variable: '--font-fredoka',
+  weight: ['400', '600', '700'],
 })
 
 export const metadata: Metadata = {
-  title: 'Cash Cow -- Milk Trending Niches for Product Gold',
-  description: 'AI-powered product discovery engine. Research markets, generate scored product ideas, and get build-ready briefs. Stop guessing what to build.',
+  title: 'Cash Cow -- Find Ideas That Actually Make Money',
+  description: 'Browse trending products, spot the gap nobody fills, and get a complete build spec ready for Claude Code. From zero to blueprint in 5 minutes.',
 }
 
 export default function RootLayout({
@@ -18,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${nunito.variable} ${fredoka.variable}`}>
       <body>{children}</body>
     </html>
   )
