@@ -1,14 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-const CLAUDE_API_KEY = process.env.CLAUDE_API_KEY || ''
-const CLAUDE_MODEL = 'claude-sonnet-4-20250514'
+import { callLLM } from '@/lib/ai/llm'
 
 export async function POST(req: NextRequest) {
   try {
-    if (!CLAUDE_API_KEY) {
-      return NextResponse.json({ error: 'AI not configured' }, { status: 500 })
-    }
-
     const body = await req.json()
     const { snapshot } = body
 
@@ -58,29 +52,7 @@ ${JSON.stringify(snapshot.reviewComplaintClusters.map((c: { complaintTheme: stri
 TRENDING PRODUCTS:
 ${snapshot.trendingProducts.map((p: { name: string }) => p.name).join(', ')}`
 
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': CLAUDE_API_KEY,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: CLAUDE_MODEL,
-        max_tokens: 4000,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: userPrompt }],
-      }),
-    })
-
-    if (!res.ok) {
-      const err = await res.text()
-      console.error('Claude gap analysis error:', err)
-      return NextResponse.json({ error: 'AI analysis failed' }, { status: 500 })
-    }
-
-    const data = await res.json()
-    const text = data.content?.[0]?.text || ''
+    const text = await callLLM(systemPrompt, userPrompt, 4000)
     const match = text.match(/\[[\s\S]*\]/)
     if (!match) {
       return NextResponse.json({ error: 'Could not parse gap analysis' }, { status: 500 })

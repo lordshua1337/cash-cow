@@ -9,41 +9,7 @@ import {
   calculateOverallScore,
 } from '@/lib/scoring'
 
-const CLAUDE_API_KEY = process.env.CLAUDE_API_KEY || ''
-const CLAUDE_MODEL = 'claude-sonnet-4-20250514'
-
-async function callClaude(systemPrompt: string, userPrompt: string, maxTokens = 4000): Promise<string> {
-  if (!CLAUDE_API_KEY) {
-    throw new Error('CLAUDE_API_KEY not configured')
-  }
-
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': CLAUDE_API_KEY,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
-      model: CLAUDE_MODEL,
-      max_tokens: maxTokens,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: userPrompt }],
-    }),
-  })
-
-  if (!res.ok) {
-    const err = await res.text()
-    throw new Error(`Claude API error: ${res.status} ${err}`)
-  }
-
-  const data = await res.json()
-  const content = data.content?.[0]
-  if (content?.type === 'text') {
-    return content.text
-  }
-  throw new Error('Unexpected Claude response format')
-}
+import { callLLM } from '@/lib/ai/llm'
 
 function extractJson<T>(text: string): T {
   const match = text.match(/\{[\s\S]*\}/)
@@ -104,7 +70,7 @@ Rules:
 
   const userPrompt = `Research the "${niche}" market niche. Provide comprehensive market analysis including trending products, competitor landscape, and common user complaints.`
 
-  const response = await callClaude(system, userPrompt)
+  const response = await callLLM(system, userPrompt)
   const raw = extractJson<RawSnapshotData>(response)
 
   const now = new Date().toISOString()
@@ -198,7 +164,7 @@ Trending Products: ${JSON.stringify(snapshot.trendingProducts.map((p) => p.name)
 Competitors: ${JSON.stringify(snapshot.competitorLandscape.map((c) => ({ company: c.company, pricing: c.pricing, features: c.keyFeatures })))}
 Top Complaints: ${JSON.stringify(snapshot.reviewComplaintClusters.map((c) => ({ theme: c.complaintTheme, frequency: c.frequency })))}`
 
-  const response = await callClaude(system, userPrompt, 6000)
+  const response = await callLLM(system, userPrompt, 6000)
   const rawCalves = extractJsonArray<RawCalfData>(response)
 
   const now = new Date().toISOString()
@@ -291,5 +257,5 @@ Revenue Potential: $${calf.revenuePotentialMin}-$${calf.revenuePotentialMax}/mo
 Variations: ${JSON.stringify(calf.variationLevels)}
 ${snapshot ? `Market Context: ${snapshot.competitorLandscape.map((c) => `${c.company} (${c.pricing})`).join(', ')}` : ''}`
 
-  return callClaude(system, userPrompt, 4000)
+  return callLLM(system, userPrompt, 4000)
 }
