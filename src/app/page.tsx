@@ -23,35 +23,52 @@ const CX = {
 
 const WORDS = ['remix', 'reshape', 'rebuild', 'rethink']
 
-function CowSpots({ opacity = 0.15 }: { opacity?: number }) {
-  const spots = [
-    { w: 200, h: 150, top: '3%', left: '-3%', shape: 'cow-spot-1', rotate: -15 },
-    { w: 160, h: 180, top: '2%', right: '0%', shape: 'cow-spot-2', rotate: 20 },
-    { w: 220, h: 160, bottom: '6%', left: '3%', shape: 'cow-spot-3', rotate: -8 },
-    { w: 140, h: 170, bottom: '3%', right: '-2%', shape: 'cow-spot-4', rotate: 35 },
-    { w: 120, h: 100, top: '42%', left: '6%', shape: 'cow-spot-5', rotate: -25 },
-    { w: 130, h: 110, top: '38%', right: '4%', shape: 'cow-spot-6', rotate: 10 },
-  ]
+// Scattered cow spots -- each spot is an absolute-positioned organic black blob
+const SPOT_SETS = {
+  hero: [
+    { w: 220, h: 170, top: '2%', left: '-4%', shape: 'cow-spot-1', rotate: -12 },
+    { w: 180, h: 200, top: '0%', right: '-1%', shape: 'cow-spot-2', rotate: 25 },
+    { w: 250, h: 170, bottom: '4%', left: '2%', shape: 'cow-spot-3', rotate: -5 },
+    { w: 160, h: 190, bottom: '2%', right: '-3%', shape: 'cow-spot-4', rotate: 30 },
+    { w: 130, h: 110, top: '45%', left: '5%', shape: 'cow-spot-5', rotate: -20 },
+    { w: 150, h: 120, top: '35%', right: '3%', shape: 'cow-spot-6', rotate: 15 },
+    { w: 90, h: 80, top: '20%', left: '15%', shape: 'cow-spot-3', rotate: 40 },
+    { w: 100, h: 85, bottom: '25%', right: '12%', shape: 'cow-spot-5', rotate: -35 },
+  ],
+  light: [
+    { w: 180, h: 140, top: '5%', left: '-2%', shape: 'cow-spot-2', rotate: -18 },
+    { w: 150, h: 170, top: '3%', right: '1%', shape: 'cow-spot-4', rotate: 22 },
+    { w: 200, h: 150, bottom: '5%', left: '4%', shape: 'cow-spot-6', rotate: -10 },
+    { w: 130, h: 160, bottom: '8%', right: '-1%', shape: 'cow-spot-1', rotate: 28 },
+    { w: 100, h: 90, top: '40%', left: '8%', shape: 'cow-spot-3', rotate: -30 },
+  ],
+} as const
+
+function CowSpots({ variant = 'hero', opacity = 0.22 }: { variant?: 'hero' | 'light'; opacity?: number }) {
+  const spots = SPOT_SETS[variant]
 
   return (
     <>
-      {spots.map((s, i) => (
-        <div
-          key={i}
-          className={`cow-spot ${s.shape}`}
-          aria-hidden="true"
-          style={{
-            width: s.w,
-            height: s.h,
-            top: s.top,
-            left: s.left,
-            right: s.right,
-            bottom: s.bottom,
-            opacity,
-            transform: `rotate(${s.rotate}deg)`,
-          }}
-        />
-      ))}
+      {spots.map((s, i) => {
+        const style: React.CSSProperties = {
+          width: s.w,
+          height: s.h,
+          opacity,
+          transform: `rotate(${s.rotate}deg)`,
+        }
+        if ('top' in s) style.top = s.top
+        if ('bottom' in s) style.bottom = (s as { bottom: string }).bottom
+        if ('left' in s) style.left = s.left
+        if ('right' in s) style.right = (s as { right: string }).right
+        return (
+          <div
+            key={i}
+            className={`cow-spot ${s.shape}`}
+            aria-hidden="true"
+            style={style}
+          />
+        )
+      })}
     </>
   )
 }
@@ -90,7 +107,7 @@ export default function LandingPage() {
         className="cow-border-bottom relative overflow-hidden"
         style={{ background: 'var(--white)' }}
       >
-        <CowSpots opacity={0.18} />
+        <CowSpots variant="hero" opacity={0.28} />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-28 text-center relative z-10">
 
@@ -157,7 +174,7 @@ export default function LandingPage() {
 
       {/* ====== HOW IT WORKS ====== */}
       <section id="how" className="relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--cream)' }}>
-        <CowSpots opacity={0.1} />
+        <CowSpots variant="light" opacity={0.15} />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <h2
@@ -221,7 +238,7 @@ export default function LandingPage() {
 
       {/* ====== SPEC PREVIEW ====== */}
       <section className="cow-border-top cow-border-bottom relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--white)' }}>
-        <CowSpots opacity={0.12} />
+        <CowSpots variant="light" opacity={0.18} />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <h2
@@ -312,7 +329,7 @@ export default function LandingPage() {
 
       {/* ====== LIVE IDEAS ====== */}
       <section className="relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--cream)' }}>
-        <CowSpots opacity={0.08} />
+        <CowSpots variant="light" opacity={0.12} />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="flex items-end justify-between gap-4 mb-10">
@@ -409,7 +426,7 @@ export default function LandingPage() {
 
       {/* ====== BOTTOM CTA ====== */}
       <section className="cow-border-top relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--white)' }}>
-        <CowSpots opacity={0.15} />
+        <CowSpots variant="hero" opacity={0.22} />
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center relative z-10">
           <div className="text-6xl mb-6">&#x1F4B0;</div>
