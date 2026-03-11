@@ -7,9 +7,9 @@ import type { ProductIdea } from '@/lib/types'
 import { getFavorites, removeFavorite, getCachedSpec, removeCachedSpec, storeTempIdea } from '@/lib/favorites'
 
 const COMPLEXITY_CONFIG = {
-  weekend: { label: 'Weekend', icon: Clock, color: 'var(--cash)', bg: 'var(--cash-soft)' },
-  'few-weeks': { label: 'Few Weeks', icon: Calendar, color: 'var(--gold)', bg: 'var(--gold-soft)' },
-  'month-plus': { label: 'Month+', icon: CalendarRange, color: 'var(--blue)', bg: 'var(--blue-soft)' },
+  weekend: { label: 'Weekend', icon: Clock, color: 'var(--cash)' },
+  'few-weeks': { label: 'Few Weeks', icon: Calendar, color: 'var(--gold)' },
+  'month-plus': { label: 'Month+', icon: CalendarRange, color: 'var(--blue)' },
 } as const
 
 export default function FavoritesPage() {
@@ -57,13 +57,13 @@ export default function FavoritesPage() {
               className="animate-in text-center py-20 rounded-2xl"
               style={{
                 background: 'var(--white)',
-                border: '2px dashed var(--spot-gray)',
+                border: '1.5px dashed rgba(45, 35, 25, 0.12)',
                 animationDelay: '0.1s',
               }}
             >
               <Heart
                 size={48}
-                style={{ color: 'var(--spot-gray)', margin: '0 auto 16px' }}
+                style={{ color: 'var(--brown-faint)', margin: '0 auto 16px', opacity: 0.4 }}
               />
               <p
                 className="text-xl font-bold mb-2"
@@ -76,11 +76,11 @@ export default function FavoritesPage() {
               </p>
               <button
                 onClick={() => router.push('/ideas')}
-                className="btn-bounce inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold"
+                className="btn-hover inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold"
                 style={{
                   background: 'var(--cash)',
                   color: '#fff',
-                  boxShadow: '0 4px 14px rgba(34, 197, 94, 0.3)',
+                  boxShadow: '0 4px 14px rgba(34, 197, 94, 0.25)',
                 }}
               >
                 Find Ideas
@@ -95,31 +95,28 @@ export default function FavoritesPage() {
                 return (
                   <div
                     key={idea.id}
-                    className="animate-in card-lift rounded-2xl p-5 flex flex-col gap-3"
+                    className="animate-in card rounded-2xl p-5 flex flex-col gap-3"
                     style={{
-                      background: 'var(--white)',
-                      border: '2px solid var(--spot-gray)',
-                      boxShadow: '0 4px 20px rgba(41, 37, 36, 0.06)',
                       animationDelay: `${0.05 * i}s`,
                     }}
                   >
                     <div className="flex items-center gap-2 flex-wrap">
                       <span
-                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-xs font-bold"
-                        style={{ background: complexity.bg, color: complexity.color }}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold"
+                        style={{ background: 'var(--cream-dark)', color: complexity.color }}
                       >
                         <complexity.icon size={11} />
                         {complexity.label}
                       </span>
                       <span
-                        className="px-2 py-0.5 rounded-lg text-xs font-bold"
+                        className="px-2.5 py-1 rounded-lg text-xs font-bold"
                         style={{ background: 'var(--cream-dark)', color: 'var(--brown-muted)' }}
                       >
                         {idea.category}
                       </span>
                       {hasSpec && (
                         <span
-                          className="px-2 py-0.5 rounded-lg text-xs font-bold"
+                          className="px-2.5 py-1 rounded-lg text-xs font-bold"
                           style={{ background: 'var(--cash-soft)', color: 'var(--cash)' }}
                         >
                           Spec Ready
@@ -142,11 +139,11 @@ export default function FavoritesPage() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleViewSpec(idea)}
-                        className="btn-bounce inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold"
+                        className="btn-hover inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold"
                         style={{
                           background: 'var(--cash)',
                           color: '#fff',
-                          boxShadow: '0 2px 8px rgba(34, 197, 94, 0.25)',
+                          boxShadow: '0 2px 8px rgba(34, 197, 94, 0.2)',
                         }}
                       >
                         <Zap size={14} />
@@ -154,11 +151,10 @@ export default function FavoritesPage() {
                       </button>
                       <button
                         onClick={() => handleRemove(idea.id)}
-                        className="btn-bounce inline-flex items-center justify-center w-9 h-9 rounded-xl"
+                        className="btn-hover inline-flex items-center justify-center w-9 h-9 rounded-xl"
                         style={{
                           background: 'var(--cream-dark)',
                           color: 'var(--brown-faint)',
-                          border: '1.5px solid var(--spot-gray)',
                         }}
                         title="Remove"
                       >

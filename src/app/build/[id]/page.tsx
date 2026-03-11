@@ -34,9 +34,9 @@ import {
 } from '@/lib/favorites'
 
 const COMPLEXITY_CONFIG = {
-  weekend: { label: 'Weekend Project', icon: Clock, color: 'var(--cash)', bg: 'var(--cash-soft)' },
-  'few-weeks': { label: 'A Few Weeks', icon: Calendar, color: 'var(--gold)', bg: 'var(--gold-soft)' },
-  'month-plus': { label: 'A Month+', icon: CalendarRange, color: 'var(--blue)', bg: 'var(--blue-soft)' },
+  weekend: { label: 'Weekend Project', icon: Clock, color: 'var(--cash)' },
+  'few-weeks': { label: 'A Few Weeks', icon: Calendar, color: 'var(--gold)' },
+  'month-plus': { label: 'A Month+', icon: CalendarRange, color: 'var(--blue)' },
 } as const
 
 type SectionKey =
@@ -103,18 +103,15 @@ export default function BuildSpecPage() {
   const [remixCount, setRemixCount] = useState(0)
   const [changedSections, setChangedSections] = useState<Set<SectionKey>>(new Set())
 
-  // Per-section remix state
   const [activeRemixSection, setActiveRemixSection] = useState<SectionKey | null>(null)
   const [sectionRemixInput, setSectionRemixInput] = useState('')
 
-  // Global remix bar
   const [globalRemixInput, setGlobalRemixInput] = useState('')
   const [globalRemixFocused, setGlobalRemixFocused] = useState(false)
 
   const remixInputRef = useRef<HTMLTextAreaElement>(null)
   const globalInputRef = useRef<HTMLTextAreaElement>(null)
 
-  // Load idea
   useEffect(() => {
     const tempIdea = getTempIdea()
     const favIdea = getFavoriteById(id)
@@ -126,7 +123,6 @@ export default function BuildSpecPage() {
     }
   }, [id])
 
-  // Auto-generate on load
   const generateSpec = useCallback(async () => {
     if (!idea || hasStartedGeneration.current) return
     hasStartedGeneration.current = true
@@ -159,7 +155,6 @@ export default function BuildSpecPage() {
     if (idea && !spec && !loading && !error) generateSpec()
   }, [idea, spec, loading, error, generateSpec])
 
-  // Remix function
   async function handleRemix(instruction: string, sectionHint?: string) {
     if (!spec || !instruction.trim()) return
 
@@ -180,7 +175,6 @@ export default function BuildSpecPage() {
       const data = await res.json()
       const newSpec = data.spec as BuildSpec
 
-      // Detect which sections changed
       const changed = new Set<SectionKey>()
       const keys: SectionKey[] = ['whatYoureBuilding', 'whoWantsThis', 'whyThisCouldWork', 'coreFeatures', 'techStack', 'buildPlan', 'v2Ideas', 'risks']
       for (const key of keys) {
@@ -196,10 +190,8 @@ export default function BuildSpecPage() {
       setSectionRemixInput('')
       setGlobalRemixInput('')
 
-      // Cache updated spec
       if (idea) cacheSpec(idea.id, newSpec)
 
-      // Clear changed highlights after animation
       setTimeout(() => setChangedSections(new Set()), 2000)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Remix failed')
@@ -245,7 +237,6 @@ export default function BuildSpecPage() {
     generateSpec()
   }
 
-  // Not found
   if (!idea) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center" style={{ background: 'var(--cream)' }}>
@@ -257,8 +248,8 @@ export default function BuildSpecPage() {
         </p>
         <button
           onClick={() => router.push('/ideas')}
-          className="btn-bounce inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold"
-          style={{ background: 'var(--cash)', color: '#fff' }}
+          className="btn-hover inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold"
+          style={{ background: 'var(--cash)', color: '#fff', boxShadow: '0 2px 8px rgba(34, 197, 94, 0.2)' }}
         >
           <ArrowLeft size={16} />
           Back to ideas
@@ -296,13 +287,8 @@ export default function BuildSpecPage() {
 
           {/* Idea header */}
           <div
-            className="animate-in rounded-2xl p-6 mb-6"
-            style={{
-              background: 'var(--white)',
-              border: '2px solid var(--spot-gray)',
-              boxShadow: '0 4px 20px rgba(41, 37, 36, 0.06)',
-              animationDelay: '0.05s',
-            }}
+            className="animate-in card rounded-2xl p-6 mb-5"
+            style={{ animationDelay: '0.05s' }}
           >
             <div className="flex items-center gap-2 mb-3 flex-wrap">
               <span className="px-2.5 py-1 rounded-lg text-xs font-bold" style={{ background: 'var(--cream-dark)', color: 'var(--brown-muted)' }}>
@@ -310,7 +296,7 @@ export default function BuildSpecPage() {
               </span>
               <span
                 className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold"
-                style={{ background: COMPLEXITY_CONFIG[idea.complexity].bg, color: COMPLEXITY_CONFIG[idea.complexity].color }}
+                style={{ background: 'var(--cream-dark)', color: COMPLEXITY_CONFIG[idea.complexity].color }}
               >
                 <Clock size={11} />
                 {COMPLEXITY_CONFIG[idea.complexity].label}
@@ -325,8 +311,7 @@ export default function BuildSpecPage() {
           {/* Loading */}
           {loading && (
             <div
-              className="animate-in rounded-2xl p-12 text-center"
-              style={{ background: 'var(--white)', border: '2px solid var(--spot-gray)' }}
+              className="animate-in card rounded-2xl p-12 text-center"
             >
               <Loader2 size={40} className="animate-spin mx-auto mb-4" style={{ color: 'var(--cash)' }} />
               <p className="text-lg font-bold mb-1" style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}>
@@ -341,11 +326,11 @@ export default function BuildSpecPage() {
 
               <div className="mt-8 space-y-4 text-left">
                 {['What You\'re Building', 'Who Wants This', 'Core Features', 'Build Plan'].map((section) => (
-                  <div key={section} className="rounded-xl p-4" style={{ background: 'var(--cream)', border: '1px solid var(--spot-gray)' }}>
-                    <div className="h-3 w-32 rounded mb-3" style={{ background: 'var(--spot-gray)' }} />
+                  <div key={section} className="rounded-xl p-4" style={{ background: 'var(--cream)', border: '1px solid rgba(45, 35, 25, 0.04)' }}>
+                    <div className="h-3 w-32 rounded mb-3" style={{ background: 'rgba(45, 35, 25, 0.06)' }} />
                     <div className="space-y-2">
-                      <div className="h-2.5 rounded" style={{ background: 'var(--spot-gray)', width: '90%' }} />
-                      <div className="h-2.5 rounded" style={{ background: 'var(--spot-gray)', width: '70%' }} />
+                      <div className="h-2.5 rounded" style={{ background: 'rgba(45, 35, 25, 0.06)', width: '90%' }} />
+                      <div className="h-2.5 rounded" style={{ background: 'rgba(45, 35, 25, 0.06)', width: '70%' }} />
                     </div>
                   </div>
                 ))}
@@ -355,10 +340,10 @@ export default function BuildSpecPage() {
 
           {/* Error */}
           {error && (
-            <div className="rounded-2xl p-6 mb-6" style={{ background: 'var(--red-soft)', border: '2px solid rgba(239, 68, 68, 0.2)' }}>
+            <div className="rounded-2xl p-6 mb-5" style={{ background: 'var(--red-soft)', border: '1.5px solid rgba(239, 68, 68, 0.15)' }}>
               <p className="font-bold mb-1" style={{ color: 'var(--red)' }}>Something went wrong</p>
               <p className="text-sm mb-4" style={{ color: 'var(--brown-muted)' }}>{error}</p>
-              <button onClick={handleRetry} className="btn-bounce px-4 py-2 rounded-xl text-sm font-bold" style={{ background: 'var(--red)', color: '#fff' }}>
+              <button onClick={handleRetry} className="btn-hover px-4 py-2 rounded-xl text-sm font-bold" style={{ background: 'var(--red)', color: '#fff' }}>
                 Try Again
               </button>
             </div>
@@ -366,15 +351,12 @@ export default function BuildSpecPage() {
 
           {/* Spec display + remix */}
           {spec && (
-            <div className="space-y-4">
+            <div className="space-y-3">
               {/* Global remix bar */}
               <div
-                className={`animate-in rounded-2xl p-4 ${globalRemixFocused || globalRemixInput ? 'remix-bar-active' : ''}`}
+                className={`animate-in card rounded-2xl p-4 ${globalRemixFocused || globalRemixInput ? 'remix-bar-active' : ''}`}
                 style={{
-                  background: 'var(--white)',
-                  border: `2px solid ${globalRemixFocused || globalRemixInput ? 'var(--cash)' : 'var(--spot-gray)'}`,
-                  boxShadow: globalRemixFocused ? '0 4px 20px rgba(34, 197, 94, 0.1)' : '0 4px 20px rgba(41, 37, 36, 0.06)',
-                  transition: 'border-color 0.2s, box-shadow 0.2s',
+                  borderColor: globalRemixFocused || globalRemixInput ? 'var(--cash)' : undefined,
                 }}
               >
                 <form onSubmit={handleGlobalRemixSubmit}>
@@ -406,7 +388,7 @@ export default function BuildSpecPage() {
                     <button
                       type="submit"
                       disabled={!globalRemixInput.trim() || remixing}
-                      className="btn-bounce self-end inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold flex-shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+                      className="btn-hover self-end inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold flex-shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
                       style={{
                         background: globalRemixInput.trim() ? 'var(--cash)' : 'var(--cream-dark)',
                         color: globalRemixInput.trim() ? '#fff' : 'var(--brown-faint)',
@@ -435,14 +417,7 @@ export default function BuildSpecPage() {
               )}
 
               {/* Spec header */}
-              <div
-                className="animate-in rounded-2xl p-6"
-                style={{
-                  background: 'var(--white)',
-                  border: '2px solid var(--spot-gray)',
-                  boxShadow: '0 4px 20px rgba(41, 37, 36, 0.06)',
-                }}
-              >
+              <div className="animate-in card rounded-2xl p-6">
                 <div className="flex items-center justify-between gap-4 mb-4 flex-wrap">
                   <h2 className="text-2xl font-bold" style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}>
                     {spec.productName}
@@ -450,7 +425,7 @@ export default function BuildSpecPage() {
                   {complexityInfo && (
                     <span
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold"
-                      style={{ background: complexityInfo.bg, color: complexityInfo.color }}
+                      style={{ background: 'var(--cream-dark)', color: complexityInfo.color }}
                     >
                       <complexityInfo.icon size={14} />
                       {complexityInfo.label}
@@ -462,11 +437,10 @@ export default function BuildSpecPage() {
                 </p>
                 <button
                   onClick={handleCopy}
-                  className="btn-bounce inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold"
+                  className="btn-hover inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold"
                   style={{
-                    background: copied ? 'var(--cash-soft)' : 'var(--spot-black)',
-                    color: copied ? 'var(--cash)' : 'var(--cream)',
-                    border: copied ? '2px solid var(--cash)' : '2px solid var(--spot-black)',
+                    background: copied ? 'var(--cash-soft)' : 'var(--brown)',
+                    color: copied ? 'var(--cash)' : '#fff',
                   }}
                 >
                   {copied ? <Check size={14} /> : <Copy size={14} />}
@@ -495,21 +469,18 @@ export default function BuildSpecPage() {
 
               {/* Bottom CTAs */}
               <div
-                className="rounded-2xl p-6 text-center space-y-4"
+                className="card rounded-2xl p-6 text-center space-y-4"
                 style={{
-                  background: 'var(--white)',
-                  border: '2px solid var(--cash)',
-                  boxShadow: '0 4px 20px rgba(34, 197, 94, 0.1)',
+                  borderColor: 'rgba(34, 197, 94, 0.2)',
                 }}
               >
                 <div className="flex items-center justify-center gap-3 flex-wrap">
                   <button
                     onClick={handleCopy}
-                    className="btn-bounce inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-bold"
+                    className="btn-hover inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-bold"
                     style={{
-                      background: 'var(--spot-black)',
-                      color: 'var(--cream)',
-                      boxShadow: '0 4px 20px rgba(28, 25, 23, 0.15)',
+                      background: 'var(--brown)',
+                      color: '#fff',
                     }}
                   >
                     {copied ? <Check size={16} /> : <Copy size={16} />}
@@ -517,11 +488,11 @@ export default function BuildSpecPage() {
                   </button>
                   <button
                     onClick={() => setShowStartGuide(!showStartGuide)}
-                    className="btn-bounce inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-bold"
+                    className="btn-hover inline-flex items-center gap-2 px-6 py-3 rounded-xl text-base font-bold"
                     style={{
                       background: 'var(--cash)',
                       color: '#fff',
-                      boxShadow: '0 4px 14px rgba(34, 197, 94, 0.3)',
+                      boxShadow: '0 4px 14px rgba(34, 197, 94, 0.25)',
                     }}
                   >
                     <Terminal size={16} />
@@ -530,7 +501,7 @@ export default function BuildSpecPage() {
                 </div>
 
                 {showStartGuide && (
-                  <div className="text-left rounded-xl p-5 mt-4" style={{ background: 'var(--spot-black)', color: 'var(--cream)' }}>
+                  <div className="text-left rounded-xl p-5 mt-4" style={{ background: 'var(--brown)', color: 'var(--cream)' }}>
                     <p className="text-sm font-bold mb-3" style={{ color: 'var(--cash-light)' }}>What to do right now:</p>
                     <ol className="space-y-2 text-sm" style={{ color: 'var(--cream-dark)' }}>
                       <li className="flex items-start gap-2">
@@ -597,12 +568,10 @@ function RemixableSection({
 
   return (
     <div
-      className={`rounded-2xl p-5 ${isRemixing ? 'remix-shimmer' : 'section-remixable'} ${isChanged ? 'remix-changed' : ''}`}
+      className={`card rounded-2xl p-5 ${isRemixing ? 'remix-shimmer' : 'section-remixable'} ${isChanged ? 'remix-changed' : ''}`}
       style={{
-        background: 'var(--white)',
-        border: `2px solid ${isActive ? 'var(--cash)' : 'var(--spot-gray)'}`,
-        boxShadow: isActive ? '0 4px 20px rgba(34, 197, 94, 0.08)' : '0 4px 20px rgba(41, 37, 36, 0.04)',
-        transition: 'border-color 0.2s, box-shadow 0.2s',
+        borderColor: isActive ? 'var(--cash)' : undefined,
+        boxShadow: isActive ? '0 4px 20px rgba(34, 197, 94, 0.06)' : undefined,
       }}
     >
       {/* Header -- clickable */}
@@ -628,7 +597,7 @@ function RemixableSection({
 
       {/* Inline remix input */}
       {isActive && (
-        <form onSubmit={onRemixSubmit} className="mt-4 pt-4" style={{ borderTop: '1px solid var(--spot-gray)' }}>
+        <form onSubmit={onRemixSubmit} className="mt-4 pt-4" style={{ borderTop: '1px solid rgba(45, 35, 25, 0.06)' }}>
           <div className="flex gap-2">
             <textarea
               ref={inputRef}
@@ -645,7 +614,7 @@ function RemixableSection({
               style={{
                 color: 'var(--brown)',
                 background: 'var(--cream)',
-                border: '1px solid var(--spot-gray)',
+                border: '1px solid rgba(45, 35, 25, 0.06)',
                 minHeight: '40px',
               }}
               rows={2}
@@ -655,7 +624,7 @@ function RemixableSection({
               <button
                 type="submit"
                 disabled={!remixInput.trim() || isRemixing}
-                className="btn-bounce inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold disabled:opacity-40"
+                className="btn-hover inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold disabled:opacity-40"
                 style={{ background: 'var(--cash)', color: '#fff' }}
               >
                 {isRemixing ? <Loader2 size={12} className="animate-spin" /> : <Send size={12} />}
@@ -705,7 +674,7 @@ function SectionContent({ sectionKey, spec }: { readonly sectionKey: SectionKey;
         <div className="space-y-2">
           {spec.techStack.map((t, i) => (
             <div key={i} className="flex items-start gap-3 text-sm" style={{ color: 'var(--brown-light)' }}>
-              <span className="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold flex-shrink-0" style={{ background: 'var(--cream-dark)', color: 'var(--brown)', border: '1px solid var(--spot-gray)' }}>
+              <span className="inline-flex px-2.5 py-1 rounded-lg text-xs font-bold flex-shrink-0" style={{ background: 'var(--cream-dark)', color: 'var(--brown)' }}>
                 {t.tool}
               </span>
               <span className="pt-0.5" style={{ color: 'var(--brown-muted)' }}>{t.why}</span>

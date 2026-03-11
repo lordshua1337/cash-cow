@@ -14,19 +14,18 @@ export default function Nav() {
 
   return (
     <nav
-      className="w-full px-4 sm:px-6 py-3 flex items-center justify-between"
+      className="w-full px-4 sm:px-6 py-3.5 flex items-center justify-between"
       style={{
-        position: 'relative',
-        borderBottom: '2px solid var(--spot-gray)',
         background: 'var(--white)',
+        borderBottom: '1px solid rgba(45, 35, 25, 0.06)',
       }}
     >
-      <Link href="/" className="flex items-center gap-2.5">
+      <Link href="/" className="flex items-center gap-2.5 group">
         <div
           className="flex items-center justify-center w-9 h-9 rounded-xl"
           style={{
-            background: 'var(--spot-black)',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+            background: 'var(--cash)',
+            boxShadow: '0 2px 8px rgba(34, 197, 94, 0.25)',
           }}
         >
           <span className="text-base">&#x1F404;</span>
@@ -47,10 +46,11 @@ export default function Nav() {
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-bold transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold transition-all"
               style={{
-                background: isActive ? 'var(--spot-black)' : 'transparent',
-                color: isActive ? 'var(--cream)' : 'var(--brown-muted)',
+                background: isActive ? 'var(--cash)' : 'transparent',
+                color: isActive ? '#fff' : 'var(--brown-muted)',
+                boxShadow: isActive ? '0 2px 8px rgba(34, 197, 94, 0.2)' : 'none',
               }}
             >
               <item.icon size={14} />

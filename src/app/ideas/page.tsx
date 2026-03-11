@@ -74,8 +74,13 @@ export default function IdeasPage() {
             <button
               onClick={() => fetchIdeas(activeCategory)}
               disabled={loading}
-              className="btn-bounce inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold flex-shrink-0"
-              style={{ background: 'var(--white)', color: 'var(--brown-muted)', border: '2px solid var(--spot-gray)' }}
+              className="btn-hover inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold flex-shrink-0"
+              style={{
+                background: 'var(--white)',
+                color: 'var(--brown-muted)',
+                border: '1px solid rgba(45, 35, 25, 0.08)',
+                boxShadow: 'var(--shadow-sm)',
+              }}
             >
               <RefreshCw size={12} className={loading ? 'animate-spin' : ''} />
               New batch
@@ -88,11 +93,12 @@ export default function IdeasPage() {
               <button
                 key={cat.key}
                 onClick={() => handleCategoryChange(cat.key)}
-                className="btn-bounce px-3 py-1.5 rounded-lg text-xs font-bold transition-colors"
+                className="btn-hover px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all"
                 style={{
-                  background: activeCategory === cat.key ? 'var(--spot-black)' : 'var(--white)',
-                  color: activeCategory === cat.key ? 'var(--cream)' : 'var(--brown-muted)',
-                  border: `1.5px solid ${activeCategory === cat.key ? 'var(--spot-black)' : 'var(--spot-gray)'}`,
+                  background: activeCategory === cat.key ? 'var(--cash)' : 'var(--white)',
+                  color: activeCategory === cat.key ? '#fff' : 'var(--brown-muted)',
+                  boxShadow: activeCategory === cat.key ? '0 2px 8px rgba(34, 197, 94, 0.2)' : 'var(--shadow-sm)',
+                  border: `1px solid ${activeCategory === cat.key ? 'var(--cash)' : 'rgba(45, 35, 25, 0.06)'}`,
                 }}
               >
                 {cat.label}
