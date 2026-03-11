@@ -75,7 +75,7 @@ export default function FavoritesPage() {
                 Go find an idea to build -- specs are auto-saved when generated.
               </p>
               <button
-                onClick={() => router.push('/')}
+                onClick={() => router.push('/ideas')}
                 className="btn-bounce inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold"
                 style={{
                   background: 'var(--cash)',

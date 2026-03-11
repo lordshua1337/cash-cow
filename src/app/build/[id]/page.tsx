@@ -256,12 +256,12 @@ export default function BuildSpecPage() {
           Go back and pick an idea to build.
         </p>
         <button
-          onClick={() => router.push('/')}
+          onClick={() => router.push('/ideas')}
           className="btn-bounce inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold"
           style={{ background: 'var(--cash)', color: '#fff' }}
         >
           <ArrowLeft size={16} />
-          Back to Ideas
+          Back to ideas
         </button>
       </div>
     )
@@ -276,12 +276,12 @@ export default function BuildSpecPage() {
           {/* Back + remix count */}
           <div className="flex items-center justify-between mb-6">
             <button
-              onClick={() => router.push('/')}
+              onClick={() => router.push('/ideas')}
               className="animate-in inline-flex items-center gap-1.5 text-sm font-bold transition-colors"
               style={{ color: 'var(--brown-muted)' }}
             >
               <ArrowLeft size={14} />
-              Back to Ideas
+              Back to ideas
             </button>
             {remixCount > 0 && (
               <span

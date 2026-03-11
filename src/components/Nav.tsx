@@ -2,22 +2,23 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { TrendingUp, Heart } from 'lucide-react'
+import { Zap, Heart } from 'lucide-react'
 
 const NAV_ITEMS = [
-  { href: '/', label: 'Ideas', icon: TrendingUp },
-  { href: '/favorites', label: 'Favorites', icon: Heart },
+  { href: '/ideas', label: 'Ideas', icon: Zap },
+  { href: '/favorites', label: 'Saved', icon: Heart },
 ]
 
 export default function Nav() {
   const pathname = usePathname()
+  const isLanding = pathname === '/'
 
   return (
     <nav
       className="w-full px-4 sm:px-6 py-3 flex items-center justify-between"
       style={{
-        borderBottom: '2px solid var(--spot-gray)',
-        background: 'var(--white)',
+        borderBottom: isLanding ? 'none' : '2px solid var(--spot-gray)',
+        background: isLanding ? 'transparent' : 'var(--white)',
       }}
     >
       <Link href="/" className="flex items-center gap-2.5">
@@ -40,9 +41,7 @@ export default function Nav() {
 
       <div className="flex items-center gap-1">
         {NAV_ITEMS.map((item) => {
-          const isActive = item.href === '/'
-            ? pathname === '/'
-            : pathname.startsWith(item.href)
+          const isActive = pathname.startsWith(item.href)
 
           return (
             <Link

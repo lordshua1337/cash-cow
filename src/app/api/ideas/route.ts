@@ -137,7 +137,7 @@ Return ONLY valid JSON (no markdown fences) matching this exact shape:
 ]
 
 Rules:
-- Generate exactly 8 ideas
+- Generate exactly 20 ideas
 - ZERO of the ideas should be clones of trending products. Every idea must be ORIGINAL.
 - Each idea must have a SPECIFIC paying customer (not "businesses" -- "freelance designers who...")
 - Be honest about risks -- "Crowded space", "Needs real users to validate", etc.
@@ -145,7 +145,8 @@ Rules:
 - Pitches should be one clear sentence a friend would understand
 - Complexity should be realistic for a solo builder using AI coding tools
 - These are BUSINESS opportunities, not open source projects
-- At least 2 ideas should be "weekend" complexity`
+- At least 6 ideas should be "weekend" complexity
+- Spread ideas across ALL categories -- don't cluster in one area`
 
 export async function GET(request: NextRequest) {
   try {
@@ -186,10 +187,10 @@ Hot categories: ${hotCategories}
 Sample of what people are building and talking about:
 ${sampleTopics}
 
-Using these as MARKET SIGNALS (not templates to copy), generate 8 ORIGINAL product ideas${category !== 'all' ? ` focused on ${categoryLabel}` : ''} that a solo non-technical founder could build and sell. Each idea should ride the momentum of what's hot but solve a DIFFERENT problem for a DIFFERENT audience than the trending products. Be honest about risks.`
+Using these as MARKET SIGNALS (not templates to copy), generate 20 ORIGINAL product ideas${category !== 'all' ? ` focused on ${categoryLabel}` : ''} that a solo non-technical founder could build and sell. Each idea should ride the momentum of what's hot but solve a DIFFERENT problem for a DIFFERENT audience than the trending products. Be honest about risks.`
 
     try {
-      const raw = await callLLM(IDEAS_SYSTEM_PROMPT, userPrompt, 4000)
+      const raw = await callLLM(IDEAS_SYSTEM_PROMPT, userPrompt, 8000)
       const cleaned = raw.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
       const ideas: ProductIdea[] = JSON.parse(cleaned)
 
