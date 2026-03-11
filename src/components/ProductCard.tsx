@@ -1,6 +1,6 @@
 'use client'
 
-import { Heart, ExternalLink, Star, ArrowUp, MessageSquare, Github } from 'lucide-react'
+import { Heart, ExternalLink, Star, ArrowUp, MessageSquare, Github, GitFork } from 'lucide-react'
 import type { TrendingProduct } from '@/lib/types'
 
 interface ProductCardProps {
@@ -51,7 +51,7 @@ export default function ProductCard({ product, isSaved, onToggleSave, action }: 
           </span>
           {product.commentCount > 0 && (
             <span className="inline-flex items-center gap-1">
-              <MessageSquare size={12} />
+              {product.source === 'github' ? <GitFork size={12} /> : <MessageSquare size={12} />}
               {product.commentCount.toLocaleString()}
             </span>
           )}

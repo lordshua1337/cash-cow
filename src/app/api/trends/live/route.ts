@@ -84,7 +84,8 @@ async function fetchGitHubTrending(): Promise<TrendingProduct[]> {
       stargazers_count: number
       html_url: string
       created_at: string
-      watchers_count: number
+      forks_count: number
+      open_issues_count: number
     }) => ({
       id: `gh-${repo.id}`,
       title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
@@ -92,7 +93,7 @@ async function fetchGitHubTrending(): Promise<TrendingProduct[]> {
       url: repo.html_url,
       source: 'github' as const,
       score: Math.min(repo.stargazers_count, 99999),
-      commentCount: repo.watchers_count || 0,
+      commentCount: repo.forks_count || 0,
       timestamp: repo.created_at || new Date().toISOString(),
       category: categorize(repo.name + ' ' + (repo.description || '')),
     }))
