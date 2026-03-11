@@ -14,6 +14,7 @@ import {
   SlidersHorizontal,
   Hammer,
 } from 'lucide-react'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import type { ProductIdea } from '@/lib/types'
 import { FALLBACK_IDEAS } from '@/lib/fallback-ideas'
 
@@ -98,20 +99,29 @@ export default function LandingPage() {
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-20 sm:pt-32 pb-24 sm:pb-36 text-center relative z-10">
 
+          <div className="animate-in mx-auto mb-4" style={{ width: 200, height: 200 }}>
+            <DotLottieReact
+              src="/cow-remix.lottie"
+              loop
+              autoplay
+              style={{ width: '100%', height: '100%' }}
+            />
+          </div>
+
           <div
             className="animate-in inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-8"
             style={{
               background: 'var(--cash-soft)',
               color: 'var(--cash-dark)',
+              animationDelay: '0.05s',
             }}
           >
-            <span>&#x1F404;</span>
             From trending product to monetizable spec in 60 seconds
           </div>
 
           <h1
             className="animate-in text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-[1.08] tracking-tight"
-            style={{ fontFamily: 'var(--font-fredoka), sans-serif', animationDelay: '0.05s' }}
+            style={{ fontFamily: 'var(--font-fredoka), sans-serif', animationDelay: '0.1s' }}
           >
             Don&apos;t start
             <br />
@@ -133,13 +143,13 @@ export default function LandingPage() {
 
           <p
             className="animate-in text-lg sm:text-xl max-w-lg mx-auto mb-10 leading-relaxed"
-            style={{ color: 'var(--brown-muted)', animationDelay: '0.1s' }}
+            style={{ color: 'var(--brown-muted)', animationDelay: '0.15s' }}
           >
             Pick a product people already pay for. Make it yours.
             Get a monetization-focused spec you can paste into Claude Code.
           </p>
 
-          <div className="animate-in flex items-center justify-center gap-3 flex-wrap" style={{ animationDelay: '0.15s' }}>
+          <div className="animate-in flex items-center justify-center gap-3 flex-wrap" style={{ animationDelay: '0.2s' }}>
             <Link
               href="/workflow"
               className="btn-hover inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-lg font-bold"
