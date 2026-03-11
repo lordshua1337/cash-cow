@@ -52,42 +52,31 @@ body {
   color: var(--brown);
 }
 
-/* Cow spot pattern -- CSS only, no images needed */
-.cow-spots {
-  position: relative;
-  overflow: hidden;
-}
-
-.cow-spots::before {
-  content: '';
+/* Cow spot -- single organic blob shape */
+.cow-spot {
   position: absolute;
-  inset: 0;
-  opacity: 0.06;
-  background-image:
-    radial-gradient(ellipse 140px 100px at 10% 20%, var(--spot-black) 0%, transparent 70%),
-    radial-gradient(ellipse 100px 150px at 80% 10%, var(--spot-black) 0%, transparent 70%),
-    radial-gradient(ellipse 180px 120px at 50% 75%, var(--spot-black) 0%, transparent 70%),
-    radial-gradient(ellipse 90px 130px at 90% 55%, var(--spot-black) 0%, transparent 70%),
-    radial-gradient(ellipse 130px 80px at 20% 90%, var(--spot-black) 0%, transparent 70%),
-    radial-gradient(ellipse 110px 100px at 65% 35%, var(--spot-black) 0%, transparent 70%);
+  background: var(--spot-black);
   pointer-events: none;
   z-index: 0;
 }
 
-.cow-spots > * {
-  position: relative;
-  z-index: 1;
-}
+/* Organic blob shapes via asymmetric border-radius */
+.cow-spot-1 { border-radius: 70% 30% 50% 40% / 60% 40% 60% 50%; }
+.cow-spot-2 { border-radius: 40% 60% 30% 70% / 50% 60% 40% 50%; }
+.cow-spot-3 { border-radius: 60% 40% 70% 30% / 40% 50% 60% 40%; }
+.cow-spot-4 { border-radius: 50% 50% 40% 60% / 70% 30% 50% 40%; }
+.cow-spot-5 { border-radius: 30% 70% 60% 40% / 50% 40% 70% 30%; }
+.cow-spot-6 { border-radius: 65% 35% 45% 55% / 55% 45% 35% 65%; }
 
 /* Cow spot border accent */
 .cow-border {
   border-image: repeating-linear-gradient(
     90deg,
     var(--spot-black) 0px,
-    var(--spot-black) 20px,
-    var(--white) 20px,
-    var(--white) 40px
-  ) 8;
+    var(--spot-black) 28px,
+    var(--white) 28px,
+    var(--white) 56px
+  ) 12;
 }
 
 /* Bouncy button hover */
@@ -101,13 +90,13 @@ body {
   transform: scale(0.98);
 }
 
-/* Card hover lift */
+/* Card hover lift -- neubrutalist hard shadow shift */
 .card-lift {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .card-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(41, 37, 36, 0.1);
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 var(--spot-black) !important;
 }
 
 /* Cow loading animation */
@@ -260,46 +249,21 @@ body {
 
 /* Cow spot top border -- thick black/white pattern */
 .cow-border-top {
-  border-top: 8px solid;
+  border-top: 12px solid;
   border-image: repeating-linear-gradient(
     90deg,
-    var(--spot-black) 0px, var(--spot-black) 24px,
-    var(--white) 24px, var(--white) 48px
-  ) 8;
+    var(--spot-black) 0px, var(--spot-black) 28px,
+    var(--white) 28px, var(--white) 56px
+  ) 12;
 }
 
 .cow-border-bottom {
-  border-bottom: 8px solid;
+  border-bottom: 12px solid;
   border-image: repeating-linear-gradient(
     90deg,
-    var(--spot-black) 0px, var(--spot-black) 24px,
-    var(--white) 24px, var(--white) 48px
-  ) 8;
-}
-
-/* Big cow spots -- more visible on landing hero */
-.cow-spots-big {
-  position: relative;
-  overflow: hidden;
-}
-.cow-spots-big::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0.1;
-  background-image:
-    radial-gradient(ellipse 200px 140px at 5% 15%, var(--spot-black) 0%, transparent 70%),
-    radial-gradient(ellipse 160px 200px at 85% 8%, var(--spot-black) 0%, transparent 70%),
-    radial-gradient(ellipse 240px 160px at 50% 80%, var(--spot-black) 0%, transparent 70%),
-    radial-gradient(ellipse 120px 180px at 92% 60%, var(--spot-black) 0%, transparent 70%),
-    radial-gradient(ellipse 180px 120px at 15% 90%, var(--spot-black) 0%, transparent 70%),
-    radial-gradient(ellipse 140px 140px at 70% 40%, var(--spot-black) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-.cow-spots-big > * {
-  position: relative;
-  z-index: 1;
+    var(--spot-black) 0px, var(--spot-black) 28px,
+    var(--white) 28px, var(--white) 56px
+  ) 12;
 }
 
 /* Bouncy cow emoji */

@@ -23,6 +23,39 @@ const CX = {
 
 const WORDS = ['remix', 'reshape', 'rebuild', 'rethink']
 
+function CowSpots({ opacity = 0.12 }: { opacity?: number }) {
+  const spots = [
+    { w: 180, h: 130, top: '5%', left: '-2%', shape: 'cow-spot-1', rotate: -15 },
+    { w: 140, h: 160, top: '3%', right: '2%', shape: 'cow-spot-2', rotate: 20 },
+    { w: 200, h: 140, bottom: '8%', left: '5%', shape: 'cow-spot-3', rotate: -8 },
+    { w: 120, h: 150, bottom: '5%', right: '-1%', shape: 'cow-spot-4', rotate: 35 },
+    { w: 100, h: 90, top: '40%', left: '8%', shape: 'cow-spot-5', rotate: -25 },
+    { w: 110, h: 100, top: '35%', right: '6%', shape: 'cow-spot-6', rotate: 10 },
+  ]
+
+  return (
+    <>
+      {spots.map((s, i) => (
+        <div
+          key={i}
+          className={`cow-spot ${s.shape}`}
+          aria-hidden="true"
+          style={{
+            width: s.w,
+            height: s.h,
+            top: s.top,
+            left: s.left,
+            right: s.right,
+            bottom: s.bottom,
+            opacity,
+            transform: `rotate(${s.rotate}deg)`,
+          }}
+        />
+      ))}
+    </>
+  )
+}
+
 export default function LandingPage() {
   const router = useRouter()
   const [wordIdx, setWordIdx] = useState(0)
@@ -53,24 +86,31 @@ export default function LandingPage() {
     <div style={{ background: 'var(--white)' }}>
 
       {/* ====== HERO ====== */}
-      <section className="cow-spots-big cow-border-bottom" style={{ background: 'var(--white)' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-20 sm:pt-28 pb-20 sm:pb-24 text-center">
+      <section
+        className="cow-border-bottom relative overflow-hidden"
+        style={{ background: 'var(--white)' }}
+      >
+        <CowSpots opacity={0.1} />
 
-          <div className="moo-bounce text-6xl sm:text-7xl mb-6 inline-block">&#x1F404;</div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-28 text-center relative z-10">
+
+          <div className="moo-bounce text-7xl sm:text-8xl mb-8 inline-block">&#x1F404;</div>
 
           <h1
-            className="animate-in text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight"
+            className="animate-in text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.05] tracking-tight"
             style={{ fontFamily: 'var(--font-fredoka), sans-serif', animationDelay: '0.05s' }}
           >
-            Don&apos;t start from scratch.
+            Don&apos;t start
+            <br />
+            from scratch.
             <br />
             <span
+              className="inline-block"
               style={{
                 color: 'var(--cash)',
                 opacity: fading ? 0 : 1,
                 transition: 'opacity 0.2s ease',
-                display: 'inline-block',
-                minWidth: '180px',
+                minWidth: '200px',
               }}
             >
               {WORDS[wordIdx]}
@@ -79,32 +119,34 @@ export default function LandingPage() {
           </h1>
 
           <p
-            className="animate-in text-lg sm:text-xl max-w-lg mx-auto mb-10 leading-relaxed"
+            className="animate-in text-lg sm:text-xl max-w-lg mx-auto mb-10 leading-relaxed font-semibold"
             style={{ color: 'var(--brown-muted)', animationDelay: '0.1s' }}
           >
             Pick a product idea. Reshape it in your words.
             Get a build spec you can paste straight into Claude Code.
           </p>
 
-          <div className="animate-in flex items-center justify-center gap-3 flex-wrap" style={{ animationDelay: '0.15s' }}>
+          <div className="animate-in flex items-center justify-center gap-4 flex-wrap" style={{ animationDelay: '0.15s' }}>
             <Link
               href="/ideas"
-              className="btn-bounce inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-lg font-bold"
+              className="btn-bounce inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-lg font-black"
               style={{
                 background: 'var(--spot-black)',
                 color: 'var(--white)',
-                boxShadow: '0 6px 20px rgba(28, 25, 23, 0.2)',
+                border: '3px solid var(--spot-black)',
+                boxShadow: '6px 6px 0 var(--cash)',
               }}
             >
               Browse Ideas
-              <ArrowRight size={20} />
+              <ArrowRight size={20} strokeWidth={3} />
             </Link>
             <a
               href="#how"
-              className="btn-bounce inline-flex items-center gap-2 px-6 py-4 rounded-2xl text-lg font-bold"
+              className="btn-bounce inline-flex items-center gap-2 px-6 py-4 rounded-2xl text-lg font-black"
               style={{
-                color: 'var(--brown-muted)',
+                color: 'var(--spot-black)',
                 border: '3px solid var(--spot-black)',
+                boxShadow: '4px 4px 0 var(--spot-black)',
               }}
             >
               How it works
@@ -114,10 +156,12 @@ export default function LandingPage() {
       </section>
 
       {/* ====== HOW IT WORKS ====== */}
-      <section id="how" className="py-20 sm:py-28" style={{ background: 'var(--cream)' }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <section id="how" className="relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--cream)' }}>
+        <CowSpots opacity={0.06} />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-16 tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl font-black text-center mb-16 tracking-tight"
             style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
           >
             Pick. Remix. Build. &#x1F42E;
@@ -135,13 +179,13 @@ export default function LandingPage() {
                 num: '2',
                 emoji: '&#x1F504;',
                 title: 'Remix it',
-                desc: 'Click any section. Type what to change. "Target teachers." "Add payments." "Make it simpler." The whole spec reshapes.',
+                desc: '"Target teachers." "Add payments." "Make it simpler." Click any section, type what to change. The whole spec reshapes around your vision.',
               },
               {
                 num: '3',
-                emoji: '&#x1F528;',
+                emoji: '&#x1F680;',
                 title: 'Start building',
-                desc: 'Copy the spec. Paste into Claude Code. Each step has file paths, schemas, and components ready to go.',
+                desc: 'Copy the spec. Paste into Claude Code. Each step has file paths, schemas, and components ready to execute.',
               },
             ].map((step) => (
               <div
@@ -153,20 +197,20 @@ export default function LandingPage() {
                   boxShadow: '6px 6px 0 var(--spot-black)',
                 }}
               >
-                <div className="text-4xl mb-4" dangerouslySetInnerHTML={{ __html: step.emoji }} />
+                <div className="text-5xl mb-5" dangerouslySetInnerHTML={{ __html: step.emoji }} />
                 <div
-                  className="inline-flex items-center justify-center w-10 h-10 rounded-full text-lg font-bold mb-4"
+                  className="inline-flex items-center justify-center w-12 h-12 rounded-full text-xl font-black mb-4"
                   style={{ background: 'var(--spot-black)', color: 'var(--white)', fontFamily: 'var(--font-fredoka), sans-serif' }}
                 >
                   {step.num}
                 </div>
                 <h3
-                  className="text-xl font-bold mb-3"
+                  className="text-2xl font-black mb-3"
                   style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
                 >
                   {step.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                <p className="text-sm leading-relaxed font-medium" style={{ color: 'var(--brown-muted)' }}>
                   {step.desc}
                 </p>
               </div>
@@ -176,21 +220,23 @@ export default function LandingPage() {
       </section>
 
       {/* ====== SPEC PREVIEW ====== */}
-      <section className="cow-border-top cow-border-bottom py-20 sm:py-28" style={{ background: 'var(--white)' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+      <section className="cow-border-top cow-border-bottom relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--white)' }}>
+        <CowSpots opacity={0.07} />
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl font-black text-center mb-4 tracking-tight"
             style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
           >
             Not a vague outline.
             <br />
             A <span style={{ color: 'var(--cash)' }}>real build plan.</span>
           </h2>
-          <p className="text-base text-center mb-12 max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
+          <p className="text-base text-center mb-12 max-w-xl mx-auto font-semibold" style={{ color: 'var(--brown-muted)' }}>
             8 sections. File paths. Database schemas. Step-by-step instructions your AI coding tool can execute.
           </p>
 
-          {/* Mockup */}
+          {/* Terminal mockup */}
           <div
             className="rounded-3xl overflow-hidden"
             style={{
@@ -198,7 +244,6 @@ export default function LandingPage() {
               boxShadow: '8px 8px 0 var(--spot-black)',
             }}
           >
-            {/* Title bar */}
             <div
               className="px-5 py-3.5 flex items-center gap-3"
               style={{ background: 'var(--spot-black)' }}
@@ -237,17 +282,26 @@ export default function LandingPage() {
               </div>
               <div className="flex items-center gap-3 pt-2 flex-wrap">
                 <span
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold"
-                  style={{ background: 'var(--spot-black)', color: 'var(--white)' }}
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-black"
+                  style={{
+                    background: 'var(--cash)',
+                    color: 'var(--white)',
+                    border: '2px solid var(--spot-black)',
+                    boxShadow: '3px 3px 0 var(--spot-black)',
+                  }}
                 >
-                  <RefreshCw size={12} />
+                  <RefreshCw size={12} strokeWidth={3} />
                   Click any section to remix
                 </span>
                 <span
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold"
-                  style={{ border: '2px solid var(--spot-black)', color: 'var(--spot-black)' }}
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-black"
+                  style={{
+                    border: '2px solid var(--spot-black)',
+                    color: 'var(--spot-black)',
+                    boxShadow: '3px 3px 0 var(--spot-black)',
+                  }}
                 >
-                  <Copy size={12} />
+                  <Copy size={12} strokeWidth={3} />
                   Copy as Markdown
                 </span>
               </div>
@@ -257,34 +311,38 @@ export default function LandingPage() {
       </section>
 
       {/* ====== LIVE IDEAS ====== */}
-      <section className="py-20 sm:py-28" style={{ background: 'var(--cream)' }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <section className="relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--cream)' }}>
+        <CowSpots opacity={0.05} />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="flex items-end justify-between gap-4 mb-10">
             <div>
               <h2
-                className="text-3xl sm:text-4xl font-bold tracking-tight"
+                className="text-3xl sm:text-4xl font-black tracking-tight"
                 style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
               >
-                Today&apos;s ideas &#x1F4A1;
+                Today&apos;s ideas
               </h2>
-              <p className="text-sm mt-1" style={{ color: 'var(--brown-muted)' }}>
+              <p className="text-sm mt-1 font-semibold" style={{ color: 'var(--brown-muted)' }}>
                 Fresh from real trending signals. Click any to remix.
               </p>
             </div>
             <Link
               href="/ideas"
-              className="btn-bounce inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-bold flex-shrink-0"
+              className="btn-bounce inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-black flex-shrink-0"
               style={{
                 background: 'var(--spot-black)',
                 color: 'var(--white)',
+                border: '2px solid var(--spot-black)',
+                boxShadow: '4px 4px 0 var(--spot-black)',
               }}
             >
               See all
-              <ArrowRight size={14} />
+              <ArrowRight size={14} strokeWidth={3} />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {ideas.map((idea) => {
               const cx = CX[idea.complexity]
               return (
@@ -295,38 +353,51 @@ export default function LandingPage() {
                   style={{
                     background: 'var(--white)',
                     border: '3px solid var(--spot-black)',
-                    boxShadow: '4px 4px 0 var(--spot-black)',
+                    boxShadow: '5px 5px 0 var(--spot-black)',
                   }}
                 >
                   <div className="flex items-center gap-1.5">
                     <span
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-bold"
-                      style={{ background: 'var(--cream-dark)', color: 'var(--brown-muted)' }}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-black"
+                      style={{
+                        background: 'var(--cream)',
+                        color: 'var(--brown-muted)',
+                        border: '2px solid var(--spot-gray)',
+                      }}
                     >
                       <cx.icon size={10} />
                       {cx.label}
                     </span>
                     <span
-                      className="px-2 py-0.5 rounded-lg text-[11px] font-bold"
-                      style={{ background: 'var(--cream-dark)', color: 'var(--brown-faint)' }}
+                      className="px-2.5 py-1 rounded-lg text-[11px] font-black"
+                      style={{
+                        background: 'var(--cream)',
+                        color: 'var(--brown-faint)',
+                        border: '2px solid var(--spot-gray)',
+                      }}
                     >
                       {idea.category}
                     </span>
                   </div>
                   <h3
-                    className="text-base font-bold leading-tight"
+                    className="text-lg font-black leading-tight"
                     style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
                   >
                     {idea.name}
                   </h3>
-                  <p className="text-sm leading-snug flex-1" style={{ color: 'var(--brown-muted)' }}>
+                  <p className="text-sm leading-snug flex-1 font-medium" style={{ color: 'var(--brown-muted)' }}>
                     {idea.pitch}
                   </p>
                   <span
-                    className="inline-flex items-center gap-1.5 self-start px-3 py-1.5 rounded-xl text-xs font-bold opacity-60 group-hover:opacity-100 transition-opacity"
-                    style={{ background: 'var(--cash)', color: '#fff' }}
+                    className="inline-flex items-center gap-1.5 self-start px-4 py-2 rounded-xl text-xs font-black opacity-70 group-hover:opacity-100 transition-opacity"
+                    style={{
+                      background: 'var(--cash)',
+                      color: '#fff',
+                      border: '2px solid var(--spot-black)',
+                      boxShadow: '3px 3px 0 var(--spot-black)',
+                    }}
                   >
-                    <RefreshCw size={11} />
+                    <RefreshCw size={11} strokeWidth={3} />
                     Remix It
                   </span>
                 </button>
@@ -337,34 +408,37 @@ export default function LandingPage() {
       </section>
 
       {/* ====== BOTTOM CTA ====== */}
-      <section className="cow-spots-big cow-border-top py-20 sm:py-28" style={{ background: 'var(--white)' }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <div className="text-5xl mb-6">&#x1F4B0;</div>
+      <section className="cow-border-top relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--white)' }}>
+        <CowSpots opacity={0.1} />
+
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center relative z-10">
+          <div className="text-6xl mb-6">&#x1F4B0;</div>
           <h2
-            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight"
+            className="text-5xl sm:text-6xl md:text-7xl font-black mb-6 tracking-tight"
             style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
           >
             Stop scrolling.
             <br />
             <span style={{ color: 'var(--cash)' }}>Start building.</span>
           </h2>
-          <p className="text-base mb-10 max-w-md mx-auto" style={{ color: 'var(--brown-muted)' }}>
+          <p className="text-base mb-10 max-w-md mx-auto font-semibold" style={{ color: 'var(--brown-muted)' }}>
             Every idea is remixable. Every spec is copy-pasteable.
             Your weekend project starts right now.
           </p>
           <Link
             href="/ideas"
-            className="btn-bounce inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-lg font-bold"
+            className="btn-bounce inline-flex items-center gap-2.5 px-10 py-5 rounded-2xl text-xl font-black"
             style={{
               background: 'var(--spot-black)',
               color: 'var(--white)',
+              border: '3px solid var(--spot-black)',
               boxShadow: '6px 6px 0 var(--cash)',
             }}
           >
             Browse Ideas
-            <ArrowRight size={20} />
+            <ArrowRight size={22} strokeWidth={3} />
           </Link>
-          <p className="text-xs mt-8" style={{ color: 'var(--brown-faint)' }}>
+          <p className="text-xs mt-8 font-bold" style={{ color: 'var(--brown-faint)' }}>
             Free. No signup. Ideas refresh daily.
           </p>
         </div>
@@ -377,14 +451,18 @@ export default function LandingPage() {
       >
         <div className="flex items-center justify-center gap-2.5 mb-2">
           <div
-            className="flex items-center justify-center w-7 h-7 rounded-lg"
-            style={{ background: 'var(--spot-black)' }}
+            className="flex items-center justify-center w-8 h-8 rounded-lg"
+            style={{
+              background: 'var(--spot-black)',
+              border: '2px solid var(--spot-black)',
+              boxShadow: '3px 3px 0 var(--spot-black)',
+            }}
           >
             <span className="text-sm">&#x1F404;</span>
           </div>
-          <span className="text-sm font-bold" style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}>Cash Cow</span>
+          <span className="text-sm font-black" style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}>Cash Cow</span>
         </div>
-        <p className="text-xs" style={{ color: 'var(--brown-faint)' }}>
+        <p className="text-xs font-bold" style={{ color: 'var(--brown-faint)' }}>
           Pick ideas backed by real signals. Remix them. Build them.
         </p>
       </footer>
