@@ -258,102 +258,58 @@ body {
 .pulse-dot-2 { animation: pulse-dot 1.2s ease-in-out 0.2s infinite; }
 .pulse-dot-3 { animation: pulse-dot 1.2s ease-in-out 0.4s infinite; }
 
-/* ===== LANDING PAGE DARK THEME ===== */
-.landing-dark {
-  --ld-bg: #0A0A0A;
-  --ld-surface: #141414;
-  --ld-surface-2: #1C1C1C;
-  --ld-border: #2A2A2A;
-  --ld-text: #FAFAFA;
-  --ld-text-muted: #888888;
-  --ld-text-dim: #555555;
+/* Cow spot top border -- thick black/white pattern */
+.cow-border-top {
+  border-top: 8px solid;
+  border-image: repeating-linear-gradient(
+    90deg,
+    var(--spot-black) 0px, var(--spot-black) 24px,
+    var(--white) 24px, var(--white) 48px
+  ) 8;
 }
 
-/* Green glow orb behind hero text */
-.hero-glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 40%, transparent 70%);
-  pointer-events: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -55%);
-  z-index: 0;
+.cow-border-bottom {
+  border-bottom: 8px solid;
+  border-image: repeating-linear-gradient(
+    90deg,
+    var(--spot-black) 0px, var(--spot-black) 24px,
+    var(--white) 24px, var(--white) 48px
+  ) 8;
 }
 
-/* Subtle grid pattern for dark sections */
-.dark-grid {
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-
-/* Green accent glow on CTA */
-.glow-btn {
+/* Big cow spots -- more visible on landing hero */
+.cow-spots-big {
   position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
 }
-.glow-btn::before {
+.cow-spots-big::before {
   content: '';
   position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, var(--cash), var(--cash-light));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-  filter: blur(12px);
+  inset: 0;
+  opacity: 0.1;
+  background-image:
+    radial-gradient(ellipse 200px 140px at 5% 15%, var(--spot-black) 0%, transparent 70%),
+    radial-gradient(ellipse 160px 200px at 85% 8%, var(--spot-black) 0%, transparent 70%),
+    radial-gradient(ellipse 240px 160px at 50% 80%, var(--spot-black) 0%, transparent 70%),
+    radial-gradient(ellipse 120px 180px at 92% 60%, var(--spot-black) 0%, transparent 70%),
+    radial-gradient(ellipse 180px 120px at 15% 90%, var(--spot-black) 0%, transparent 70%),
+    radial-gradient(ellipse 140px 140px at 70% 40%, var(--spot-black) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
-.glow-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(34, 197, 94, 0.3);
-}
-.glow-btn:hover::before {
-  opacity: 0.6;
-}
-.glow-btn:active {
-  transform: scale(0.98);
+.cow-spots-big > * {
+  position: relative;
+  z-index: 1;
 }
 
-/* Spec mockup window */
-.mockup-window {
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.06),
-    0 20px 60px rgba(0,0,0,0.5),
-    0 0 80px rgba(34, 197, 94, 0.04);
+/* Bouncy cow emoji */
+@keyframes moo-bounce {
+  0%, 100% { transform: rotate(-3deg) scale(1); }
+  25% { transform: rotate(3deg) scale(1.05); }
+  50% { transform: rotate(-2deg) scale(1.02); }
+  75% { transform: rotate(2deg) scale(1.04); }
 }
-
-/* Step number glow */
-.step-num {
-  text-shadow: 0 0 40px rgba(34, 197, 94, 0.3);
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, var(--cash) 0%, var(--cash-light) 50%, #6EE7B7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Horizontal divider with glow */
-.glow-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
-}
-
-/* Card hover on dark bg */
-.dark-card {
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-.dark-card:hover {
-  border-color: rgba(34, 197, 94, 0.3) !important;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 20px rgba(34, 197, 94, 0.05);
-  transform: translateY(-2px);
-}
+.moo-bounce { animation: moo-bounce 3s ease-in-out infinite; }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
@@ -362,7 +318,5 @@ body {
   .remix-bar-active { animation: none; }
   .btn-bounce { transition: none; }
   .card-lift { transition: none; }
-  .glow-btn { transition: none; }
-  .glow-btn::before { display: none; }
-  .dark-card { transition: none; }
+  .moo-bounce { animation: none; }
 }
