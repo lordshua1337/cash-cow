@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Nunito, Fredoka } from 'next/font/google'
 import './globals.css'
+import Nav from '@/components/Nav'
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -15,8 +16,8 @@ const fredoka = Fredoka({
 })
 
 export const metadata: Metadata = {
-  title: 'Cash Cow -- Find Ideas That Actually Make Money',
-  description: 'Browse trending products, spot the gap nobody fills, and get a complete build spec ready for Claude Code. From zero to blueprint in 5 minutes.',
+  title: 'Cash Cow -- Browse Trending Products & Get Build Specs',
+  description: 'Browse what\'s trending on Hacker News and GitHub. Save what interests you. Get a plain-English build spec ready for Claude Code.',
 }
 
 export default function RootLayout({
@@ -26,7 +27,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${nunito.variable} ${fredoka.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Nav />
+        {children}
+      </body>
     </html>
   )
 }
