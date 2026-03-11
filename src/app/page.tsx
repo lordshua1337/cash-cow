@@ -40,18 +40,18 @@ export default function LandingPage() {
       >
         {/* Soft radial glow behind the lottie */}
         <div
-          className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none hidden lg:block"
+          className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none hidden lg:block"
           style={{
-            background: 'radial-gradient(circle, rgba(34, 197, 94, 0.06) 0%, transparent 70%)',
-            right: '5%',
+            background: 'radial-gradient(circle, rgba(34, 197, 94, 0.08) 0%, transparent 70%)',
+            right: '2%',
           }}
         />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-8 sm:pt-14 pb-12 sm:pb-20 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-0">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-0 sm:pb-0 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-0">
 
             {/* Left: text content */}
-            <div className="flex-1 text-center lg:text-left">
+            <div className="flex-1 text-center lg:text-left lg:pr-0">
               <div
                 className="animate-in inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-5"
                 style={{
@@ -141,7 +141,7 @@ export default function LandingPage() {
             </div>
 
             {/* Right: Lottie cow animation -- BIG */}
-            <div className="flex-shrink-0 w-72 h-72 sm:w-[340px] sm:h-[340px] lg:w-[500px] lg:h-[500px] lg:-mr-8 relative">
+            <div className="flex-shrink-0 w-80 h-80 sm:w-[400px] sm:h-[400px] lg:w-[580px] lg:h-[580px] lg:-mr-16 lg:-my-10 relative">
               <div
                 className="absolute inset-0 rounded-full"
                 style={{
@@ -152,7 +152,7 @@ export default function LandingPage() {
                 src="/cow-remix.lottie"
                 loop
                 autoplay
-                style={{ width: '100%', height: '100%', position: 'relative', zIndex: 1 }}
+                style={{ width: '100%', height: '100%', position: 'relative', zIndex: 1, transform: 'scale(1.25)' }}
               />
             </div>
           </div>
@@ -160,7 +160,7 @@ export default function LandingPage() {
 
         {/* Bottom gradient fade */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-24"
+          className="absolute bottom-0 left-0 right-0 h-16"
           style={{ background: 'linear-gradient(to bottom, transparent, var(--cream))' }}
         />
       </section>
