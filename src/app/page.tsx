@@ -23,14 +23,14 @@ const CX = {
 
 const WORDS = ['remix', 'reshape', 'rebuild', 'rethink']
 
-function CowSpots({ opacity = 0.12 }: { opacity?: number }) {
+function CowSpots({ opacity = 0.15 }: { opacity?: number }) {
   const spots = [
-    { w: 180, h: 130, top: '5%', left: '-2%', shape: 'cow-spot-1', rotate: -15 },
-    { w: 140, h: 160, top: '3%', right: '2%', shape: 'cow-spot-2', rotate: 20 },
-    { w: 200, h: 140, bottom: '8%', left: '5%', shape: 'cow-spot-3', rotate: -8 },
-    { w: 120, h: 150, bottom: '5%', right: '-1%', shape: 'cow-spot-4', rotate: 35 },
-    { w: 100, h: 90, top: '40%', left: '8%', shape: 'cow-spot-5', rotate: -25 },
-    { w: 110, h: 100, top: '35%', right: '6%', shape: 'cow-spot-6', rotate: 10 },
+    { w: 200, h: 150, top: '3%', left: '-3%', shape: 'cow-spot-1', rotate: -15 },
+    { w: 160, h: 180, top: '2%', right: '0%', shape: 'cow-spot-2', rotate: 20 },
+    { w: 220, h: 160, bottom: '6%', left: '3%', shape: 'cow-spot-3', rotate: -8 },
+    { w: 140, h: 170, bottom: '3%', right: '-2%', shape: 'cow-spot-4', rotate: 35 },
+    { w: 120, h: 100, top: '42%', left: '6%', shape: 'cow-spot-5', rotate: -25 },
+    { w: 130, h: 110, top: '38%', right: '4%', shape: 'cow-spot-6', rotate: 10 },
   ]
 
   return (
@@ -90,7 +90,7 @@ export default function LandingPage() {
         className="cow-border-bottom relative overflow-hidden"
         style={{ background: 'var(--white)' }}
       >
-        <CowSpots opacity={0.1} />
+        <CowSpots opacity={0.18} />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-28 text-center relative z-10">
 
@@ -157,7 +157,7 @@ export default function LandingPage() {
 
       {/* ====== HOW IT WORKS ====== */}
       <section id="how" className="relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--cream)' }}>
-        <CowSpots opacity={0.06} />
+        <CowSpots opacity={0.1} />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <h2
@@ -221,7 +221,7 @@ export default function LandingPage() {
 
       {/* ====== SPEC PREVIEW ====== */}
       <section className="cow-border-top cow-border-bottom relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--white)' }}>
-        <CowSpots opacity={0.07} />
+        <CowSpots opacity={0.12} />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <h2
@@ -312,7 +312,7 @@ export default function LandingPage() {
 
       {/* ====== LIVE IDEAS ====== */}
       <section className="relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--cream)' }}>
-        <CowSpots opacity={0.05} />
+        <CowSpots opacity={0.08} />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="flex items-end justify-between gap-4 mb-10">
@@ -409,7 +409,7 @@ export default function LandingPage() {
 
       {/* ====== BOTTOM CTA ====== */}
       <section className="cow-border-top relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--white)' }}>
-        <CowSpots opacity={0.1} />
+        <CowSpots opacity={0.15} />
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center relative z-10">
           <div className="text-6xl mb-6">&#x1F4B0;</div>
