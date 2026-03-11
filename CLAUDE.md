@@ -1,37 +1,43 @@
 # Cash Cow
 
-Trending product browser. Users discover what's hot, save what interests them, get a plain-English build spec for anything they pick.
+Pick a proven idea. Get a build spec. Start building this weekend. The spec IS the product.
 
 ## Persona -- Jake
 
 **Jake, 24, aspiring indie hacker.**
-Works a 9-5 as a junior marketing coordinator. Spends evenings watching YouTube videos about building SaaS products. Has basic coding skills (followed a few tutorials, can tweak a Next.js template) but has never shipped a product.
-
-**Context:** Jake scrolls Twitter/X and sees people posting "$10K MRR" screenshots. He wants to build something but is paralyzed by "what should I build?" He's tried brainstorming in Notion docs and ends up with 40 half-baked ideas. He doesn't know how to evaluate which ones are worth building.
-
-**Goal:** Find a product idea that's already proven (people want it) and get a clear, jargon-free spec he can hand to an AI coding tool to start building this weekend.
-
-**Skill level:** Can follow instructions. Knows what an API is but couldn't build one from scratch. Doesn't know what "BMAD scoring" or "complaint clusters" mean and doesn't want to.
-
-**Emotional state:** Excited but overwhelmed. Has limited time after work. Wants to feel like he's making progress, not studying for an exam. If something feels like homework, he'll close the tab.
+Works a 9-5 as a junior marketing coordinator. Watches SaaS YouTube. Basic coding. Paralyzed by "what should I build?" Wants one proven idea + a spec to build this weekend. Closes tabs that feel like homework. Never leaves the app.
 
 **Design implications:**
 - Every label should make sense to Jake on first read
-- No scores, metrics, or analysis frameworks -- just "here's what's trending" and "here's how to build it"
-- The spec output should read like a friend explaining the project over coffee
-- Save/favorites should feel instant and casual (like bookmarking a tweet)
-- Mobile-first -- Jake browses on his phone during lunch breaks
+- No external links, no star counts, no source badges
+- The spec should read like a smart friend talking, not a consultant
+- Favorites are "your build queue" -- not a guilt list
+- Mobile-first
 
 ## Stack
 
 - Next.js + React + TypeScript
-- Tailwind CSS + shadcn/ui
-- Groq (free) / Claude (paid) for spec generation via src/lib/ai/llm.ts
-- localStorage for favorites (no auth required)
+- Tailwind CSS (cow theme in globals.css)
+- Groq (free) / Claude (paid) for idea + spec generation via src/lib/ai/llm.ts
+- localStorage for favorites + cached specs (no auth required)
 - Vercel deployment
 
 ## Pages
 
-1. `/` -- Browse trending products (HN + GitHub feed)
-2. `/favorites` -- Saved products grid
-3. `/build/[id]` -- Generate plain-English build spec
+1. `/` -- Pick an idea (top pick featured + 5-7 alternatives + category chips)
+2. `/build/[id]` -- Build spec (auto-generates on load, 8 rich sections, copy as markdown, start building CTA)
+3. `/favorites` -- Build queue (saved ideas + cached specs)
+
+## Data Flow
+
+- Homepage: GET /api/ideas?category=all -> fetches HN+GitHub -> feeds to LLM -> returns ProductIdea[]
+- Build page: POST /api/build-spec with ProductIdea -> returns BuildSpec with 8 sections
+- Idea data passed between pages via localStorage (storeTempIdea/getTempIdea)
+- Specs auto-cached in localStorage (getCachedSpec/cacheSpec)
+- Ideas auto-saved to favorites when spec is generated
+- Fallback: if LLM fails, static ideas from src/lib/fallback-ideas.ts
+
+## Key Types
+
+- ProductIdea: id, name, pitch, category, whyNow, risk, complexity
+- BuildSpec: productName, whatYoureBuilding, whoWantsThis, whyThisCouldWork, coreFeatures, techStack, buildPlan, v2Ideas, risks, complexity

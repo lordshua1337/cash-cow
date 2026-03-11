@@ -16,8 +16,8 @@ const fredoka = Fredoka({
 })
 
 export const metadata: Metadata = {
-  title: 'Cash Cow -- Browse Trending Products & Get Build Specs',
-  description: 'Browse what\'s trending on Hacker News and GitHub. Save what interests you. Get a plain-English build spec ready for Claude Code.',
+  title: 'Cash Cow -- Pick an Idea, Get a Build Spec',
+  description: 'Pick a proven product idea. Get a step-by-step build spec you can paste into Claude Code. Start building this weekend.',
 }
 
 export default function RootLayout({

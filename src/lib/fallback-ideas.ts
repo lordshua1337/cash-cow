@@ -1,0 +1,78 @@
+// Static fallback ideas -- served when LLM call fails (never show an empty page)
+
+import type { ProductIdea } from './types'
+
+export const FALLBACK_IDEAS: readonly ProductIdea[] = [
+  {
+    id: 'fallback-1',
+    name: 'InvoicePilot',
+    pitch: 'Automated invoicing for freelancers who hate chasing payments.',
+    category: 'Finance',
+    whyNow: 'Freelance economy is booming post-2024. Most invoicing tools are bloated enterprise software. Freelancers want something dead simple that sends reminders automatically.',
+    risk: 'Crowded space -- you need a strong niche (e.g., just for designers, just for devs).',
+    complexity: 'few-weeks',
+  },
+  {
+    id: 'fallback-2',
+    name: 'ScreenshotToCode',
+    pitch: 'Upload a screenshot of any UI and get clean, production-ready code.',
+    category: 'AI Tools',
+    whyNow: 'AI vision models just got good enough to parse layouts accurately. Designers and non-coders want to skip the handoff step entirely.',
+    risk: 'Output quality varies wildly. Users will churn if the first generation is bad.',
+    complexity: 'few-weeks',
+  },
+  {
+    id: 'fallback-3',
+    name: 'HabitFuel',
+    pitch: 'A habit tracker that turns your streaks into real money donated to causes you care about.',
+    category: 'Health',
+    whyNow: 'Habit apps have 90% churn because there are no real stakes. Adding financial skin-in-the-game via Stripe makes streaks actually stick.',
+    risk: 'Needs real users to validate. The payment friction might kill signups.',
+    complexity: 'weekend',
+  },
+  {
+    id: 'fallback-4',
+    name: 'PitchCraft',
+    pitch: 'AI pitch deck generator that writes investor-ready slides from a one-paragraph idea.',
+    category: 'AI Tools',
+    whyNow: 'Thousands of founders are building with AI tools but still spending weeks on pitch decks. Automate the 80% that is boilerplate.',
+    risk: 'Investors can smell AI-generated decks. The output needs heavy personalization to be useful.',
+    complexity: 'few-weeks',
+  },
+  {
+    id: 'fallback-5',
+    name: 'WaitlistKit',
+    pitch: 'Drop-in waitlist page builder with referral tracking and email notifications.',
+    category: 'Marketing',
+    whyNow: 'Every indie hacker launches with a waitlist. Most cobble together Mailchimp + a Notion page. This bundles it into a 5-minute setup.',
+    risk: 'Low switching cost -- users might just use Carrd + Mailchimp.',
+    complexity: 'weekend',
+  },
+  {
+    id: 'fallback-6',
+    name: 'QuizForge',
+    pitch: 'Turn any article, PDF, or YouTube video into an interactive quiz for students.',
+    category: 'Education',
+    whyNow: 'Teachers are overwhelmed creating assessments. AI can now parse content and generate meaningful questions, not just multiple choice.',
+    risk: 'Schools move slow. B2C student market is easier but harder to monetize.',
+    complexity: 'weekend',
+  },
+  {
+    id: 'fallback-7',
+    name: 'ContentCalendar',
+    pitch: 'AI-powered social media calendar that plans, writes, and schedules a month of posts.',
+    category: 'Marketing',
+    whyNow: 'Solo founders and small teams post inconsistently because planning content takes hours. AI can draft a full month in minutes.',
+    risk: 'Generic AI content performs poorly. Needs strong brand voice customization.',
+    complexity: 'few-weeks',
+  },
+  {
+    id: 'fallback-8',
+    name: 'FocusMode',
+    pitch: 'A distraction blocker that earns you focus coins redeemable for real rewards.',
+    category: 'Productivity',
+    whyNow: 'Screen time is at all-time highs. Existing blockers are punitive. Gamifying focus with rewards flips the psychology.',
+    risk: 'Browser extensions have limited reach. Needs mobile to really work.',
+    complexity: 'weekend',
+  },
+]

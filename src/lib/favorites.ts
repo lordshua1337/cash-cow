@@ -1,48 +1,104 @@
-// localStorage wrapper for saved products
+// localStorage wrapper for saved ideas and cached specs
 
-import type { TrendingProduct } from './types'
+import type { ProductIdea, BuildSpec } from './types'
 
-const STORAGE_KEY = 'cashcow-favorites'
+const IDEAS_KEY = 'cashcow-favorites'
+const SPECS_KEY = 'cashcow-specs'
 
-function readStore(): TrendingProduct[] {
+// -- Ideas --
+
+function readIdeas(): ProductIdea[] {
   if (typeof window === 'undefined') return []
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(IDEAS_KEY)
     if (!raw) return []
-    return JSON.parse(raw) as TrendingProduct[]
+    return JSON.parse(raw) as ProductIdea[]
   } catch {
     return []
   }
 }
 
-function writeStore(items: TrendingProduct[]): void {
+function writeIdeas(items: ProductIdea[]): void {
   if (typeof window === 'undefined') return
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+  localStorage.setItem(IDEAS_KEY, JSON.stringify(items))
 }
 
-export function getFavorites(): TrendingProduct[] {
-  return readStore()
+export function getFavorites(): ProductIdea[] {
+  return readIdeas()
 }
 
-export function addFavorite(product: TrendingProduct): TrendingProduct[] {
-  const current = readStore()
-  if (current.some((p) => p.id === product.id)) return current
-  const updated = [...current, product]
-  writeStore(updated)
+export function addFavorite(idea: ProductIdea): ProductIdea[] {
+  const current = readIdeas()
+  if (current.some((p) => p.id === idea.id)) return current
+  const updated = [...current, idea]
+  writeIdeas(updated)
   return updated
 }
 
-export function removeFavorite(id: string): TrendingProduct[] {
-  const current = readStore()
+export function removeFavorite(id: string): ProductIdea[] {
+  const current = readIdeas()
   const updated = current.filter((p) => p.id !== id)
-  writeStore(updated)
+  writeIdeas(updated)
   return updated
 }
 
 export function isFavorite(id: string): boolean {
-  return readStore().some((p) => p.id === id)
+  return readIdeas().some((p) => p.id === id)
 }
 
-export function getFavoriteById(id: string): TrendingProduct | undefined {
-  return readStore().find((p) => p.id === id)
+export function getFavoriteById(id: string): ProductIdea | undefined {
+  return readIdeas().find((p) => p.id === id)
+}
+
+// -- Cached Specs --
+
+function readSpecs(): Record<string, BuildSpec> {
+  if (typeof window === 'undefined') return {}
+  try {
+    const raw = localStorage.getItem(SPECS_KEY)
+    if (!raw) return {}
+    return JSON.parse(raw) as Record<string, BuildSpec>
+  } catch {
+    return {}
+  }
+}
+
+function writeSpecs(specs: Record<string, BuildSpec>): void {
+  if (typeof window === 'undefined') return
+  localStorage.setItem(SPECS_KEY, JSON.stringify(specs))
+}
+
+export function getCachedSpec(ideaId: string): BuildSpec | undefined {
+  return readSpecs()[ideaId]
+}
+
+export function cacheSpec(ideaId: string, spec: BuildSpec): void {
+  const current = readSpecs()
+  writeSpecs({ ...current, [ideaId]: spec })
+}
+
+export function removeCachedSpec(id: string): void {
+  const current = readSpecs()
+  const { [id]: _, ...rest } = current
+  writeSpecs(rest)
+}
+
+// -- Temporary idea storage for passing between pages --
+
+const TEMP_IDEA_KEY = 'cashcow-temp-idea'
+
+export function storeTempIdea(idea: ProductIdea): void {
+  if (typeof window === 'undefined') return
+  localStorage.setItem(TEMP_IDEA_KEY, JSON.stringify(idea))
+}
+
+export function getTempIdea(): ProductIdea | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const raw = localStorage.getItem(TEMP_IDEA_KEY)
+    if (!raw) return null
+    return JSON.parse(raw) as ProductIdea
+  } catch {
+    return null
+  }
 }

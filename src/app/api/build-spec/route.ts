@@ -1,54 +1,56 @@
 import { NextResponse } from 'next/server'
 import { callLLM } from '@/lib/ai/llm'
-import type { TrendingProduct, BuildSpec } from '@/lib/types'
+import type { ProductIdea, BuildSpec } from '@/lib/types'
 
-const SYSTEM_PROMPT = `You are a product advisor who creates build specs. The spec has two audiences:
-1. A human who needs to understand what they're building (plain English summaries)
-2. An AI coding assistant (Claude Code) that will receive the Markdown output and actually build it (needs real technical detail)
+const SYSTEM_PROMPT = `You are a senior product advisor writing build specs for solo builders who use AI coding tools (Claude Code, Cursor, etc.).
 
-You will receive a trending product/project. Return ONLY valid JSON matching this exact shape (no markdown, no code fences):
+You will receive a product idea. Return ONLY valid JSON (no markdown, no code fences) matching this exact shape:
+
 {
-  "productName": "string - a catchy, memorable product name",
-  "whatItDoes": "string - 2-3 sentences a non-technical person can understand",
-  "whoItsFor": "string - describe the specific person, not a vague audience",
-  "coreFeatures": ["string array - 5-8 MVP features, described in plain English"],
-  "techStack": ["string array - specific technologies with brief why, e.g. 'Next.js - handles frontend and API routes in one project'"],
-  "mvpScope": "string - what ships in v1 and what waits, 2-3 sentences",
-  "complexity": "one of: weekend | few-weeks | month-plus",
-  "buildSteps": ["string array - 8-12 ordered build steps. Each step should be specific enough for Claude Code to execute: include file paths, component names, API routes, database tables. Example: 'Create /app/api/upload/route.ts - POST endpoint that accepts CSV, parses with papaparse, validates columns, stores in Supabase uploads table' NOT 'Set up the upload feature'"]
+  "productName": "string - the product name",
+  "whatYoureBuilding": "string - 2-3 sentences a friend would understand. No jargon.",
+  "whoWantsThis": "string - a SPECIFIC person (not 'businesses' -- 'freelance designers who spend 3 hours a week chasing invoices'). What pain they have. Why they'd pay.",
+  "whyThisCouldWork": "string - honest assessment. What signals support this. What competition looks like. What gap you're filling. NOT blind hype.",
+  "coreFeatures": ["string array - 5-8 MVP features. Each one is a sentence a human understands ('Users upload a CSV and instantly see a chart they can customize and export'). Not developer-speak."],
+  "techStack": [{"tool": "string", "why": "string - one line why"}],
+  "buildPlan": ["string array - 8-12 SPECIFIC ordered steps. Each step must be concrete enough to paste into Claude Code as an instruction. Include file paths, table schemas, component names. BAD: 'Set up authentication'. GOOD: 'Create Supabase Auth with magic link login. Build a /login page with email input. Add middleware to protect /dashboard routes. Store user profile in a profiles table with columns: id, email, display_name, created_at.'"],
+  "v2Ideas": ["string array - 3-4 features to add after MVP ships"],
+  "risks": ["string array - 2-3 honest things that could go wrong. 'If you can't get 10 beta users in the first week, this market might not exist.'"],
+  "complexity": "one of: weekend | few-weeks | month-plus"
 }
 
-Rules:
-- whatItDoes, whoItsFor, coreFeatures, mvpScope = plain English for the human
-- techStack, buildSteps = real technical detail for Claude Code
-- Build steps must be specific: file paths, endpoint shapes, database schema hints, component names
-- Each build step should be independently executable -- Claude Code should be able to take one step and run with it
-- Tech stack should be practical solo-builder choices (Next.js, Supabase, Tailwind, shadcn, Vercel)
-- MVP scope should be ruthlessly focused`
+Critical rules:
+- Write for a solo builder using AI coding tools (Claude Code, Cursor)
+- Build plan steps must be SPECIFIC enough to execute -- file paths, table schemas, component names, endpoint shapes
+- Be honest about risks -- don't hype. Builders respect honesty more than cheerleading
+- Tech stack should be practical: Next.js + Supabase + Tailwind + Vercel
+- MVP scope should be ruthlessly small -- what ships in one weekend
+- The human-readable parts (what, who, why) should sound like a smart friend talking, not a consultant
+- Each build step should reference real files: /app/page.tsx, /app/api/..., etc.
+- V2 ideas should be ambitious but realistic follow-ups`
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const product = body.product as TrendingProduct
+    const idea = body.idea as ProductIdea
 
-    if (!product?.title) {
-      return NextResponse.json({ error: 'Missing product data' }, { status: 400 })
+    if (!idea?.name) {
+      return NextResponse.json({ error: 'Missing idea data' }, { status: 400 })
     }
 
-    const userPrompt = `Here's a trending product/project I want to build my own version of:
+    const userPrompt = `Here's a product idea I want to build:
 
-Name: ${product.title}
-Description: ${product.description}
-Source: ${product.source === 'hackernews' ? 'Hacker News (Show HN)' : 'GitHub Trending'}
-Popularity: ${product.source === 'hackernews' ? `${product.score} upvotes, ${product.commentCount} comments` : `${product.score} stars`}
-Category: ${product.category}
-URL: ${product.url}
+Name: ${idea.name}
+Pitch: ${idea.pitch}
+Category: ${idea.category}
+Why now: ${idea.whyNow}
+Biggest risk: ${idea.risk}
+Estimated complexity: ${idea.complexity}
 
-Write me a complete build spec for creating my own version of this. Make it practical for a solo builder.`
+Write me a complete, actionable build spec. Make the build plan steps specific enough that I can paste each one into Claude Code and it will know exactly what to build. Include real file paths, database schemas, and component names.`
 
-    const raw = await callLLM(SYSTEM_PROMPT, userPrompt, 4000)
+    const raw = await callLLM(SYSTEM_PROMPT, userPrompt, 6000)
 
-    // Parse the JSON response, handling potential markdown fences
     const cleaned = raw.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
     const spec: BuildSpec = JSON.parse(cleaned)
 
