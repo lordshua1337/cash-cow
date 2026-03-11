@@ -47,13 +47,13 @@ export default function LandingPage() {
           }}
         />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 sm:pt-20 pb-20 sm:pb-28 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-8 sm:pt-14 pb-12 sm:pb-20 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-0">
 
             {/* Left: text content */}
-            <div className="flex-1 text-center lg:text-left max-w-xl lg:max-w-none">
+            <div className="flex-1 text-center lg:text-left">
               <div
-                className="animate-in inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-6"
+                className="animate-in inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-5"
                 style={{
                   background: 'var(--cash-soft)',
                   color: 'var(--cash-dark)',
@@ -64,7 +64,7 @@ export default function LandingPage() {
               </div>
 
               <h1
-                className="animate-in text-4xl sm:text-5xl lg:text-6xl font-black mb-5 leading-[1.1] tracking-tight"
+                className="animate-in text-4xl sm:text-5xl lg:text-[3.5rem] font-black mb-4 leading-[1.1] tracking-tight"
                 style={{ fontFamily: 'var(--font-fredoka), sans-serif', animationDelay: '0.05s' }}
               >
                 Don&apos;t start
@@ -86,7 +86,7 @@ export default function LandingPage() {
               </h1>
 
               <p
-                className="animate-in text-base sm:text-lg max-w-md mx-auto lg:mx-0 mb-8 leading-relaxed"
+                className="animate-in text-base max-w-md mx-auto lg:mx-0 mb-6 leading-relaxed"
                 style={{ color: 'var(--brown-muted)', animationDelay: '0.1s' }}
               >
                 Pick a product people already pay for. Make it yours.
@@ -120,7 +120,7 @@ export default function LandingPage() {
 
               {/* Trust signals */}
               <div
-                className="animate-in flex items-center justify-center lg:justify-start gap-5 mt-8"
+                className="animate-in flex items-center justify-center lg:justify-start gap-5 mt-6"
                 style={{ animationDelay: '0.2s' }}
               >
                 {[
@@ -140,13 +140,12 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Right: Lottie cow animation */}
-            <div className="flex-shrink-0 w-64 h-64 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] relative">
-              {/* Soft circle behind the animation */}
+            {/* Right: Lottie cow animation -- BIG */}
+            <div className="flex-shrink-0 w-72 h-72 sm:w-[340px] sm:h-[340px] lg:w-[500px] lg:h-[500px] lg:-mr-8 relative">
               <div
-                className="absolute inset-4 rounded-full"
+                className="absolute inset-0 rounded-full"
                 style={{
-                  background: 'radial-gradient(circle, var(--cash-soft) 0%, transparent 70%)',
+                  background: 'radial-gradient(circle, rgba(34, 197, 94, 0.07) 0%, transparent 65%)',
                 }}
               />
               <DotLottieReact
