@@ -22,8 +22,14 @@ Return ONLY valid JSON (no markdown, no code fences) matching this exact shape:
   "buildPlan": ["string array - 8-12 specific steps with file paths, schemas, component names"],
   "v2Ideas": ["string array - 3-4 post-MVP features"],
   "risks": ["string array - 2-3 honest risks"],
-  "complexity": "weekend | few-weeks | month-plus"
+  "complexity": "weekend | few-weeks | month-plus",
+  "monetizationModel": "string - how this makes money (optional, include if present in original)",
+  "pricingStrategy": "string - pricing tiers (optional, include if present in original)",
+  "revenueTimeline": "string - revenue projections (optional, include if present in original)",
+  "customerAcquisition": "string - how to get customers (optional, include if present in original)"
 }
+
+If the original spec has monetization fields (monetizationModel, pricingStrategy, revenueTimeline, customerAcquisition), include them in the output and update them if the remix logically affects them.
 
 Rules:
 - Honor the user's remix instruction precisely

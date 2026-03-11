@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { Heart, Trash2, Zap, Clock, Calendar, CalendarRange } from 'lucide-react'
+import { Bookmark, Trash2, FileText, Clock, Calendar, CalendarRange } from 'lucide-react'
 import type { ProductIdea } from '@/lib/types'
 import { getFavorites, removeFavorite, getCachedSpec, removeCachedSpec, storeTempIdea } from '@/lib/favorites'
 
@@ -61,7 +61,7 @@ export default function FavoritesPage() {
                 animationDelay: '0.1s',
               }}
             >
-              <Heart
+              <Bookmark
                 size={48}
                 style={{ color: 'var(--brown-faint)', margin: '0 auto 16px', opacity: 0.4 }}
               />
@@ -75,7 +75,7 @@ export default function FavoritesPage() {
                 Go find an idea to build -- specs are auto-saved when generated.
               </p>
               <button
-                onClick={() => router.push('/ideas')}
+                onClick={() => router.push('/workflow')}
                 className="btn-hover inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold"
                 style={{
                   background: 'var(--cash)',
@@ -83,7 +83,7 @@ export default function FavoritesPage() {
                   boxShadow: '0 4px 14px rgba(34, 197, 94, 0.25)',
                 }}
               >
-                Find Ideas
+                Build Something
               </button>
             </div>
           ) : (
@@ -146,7 +146,7 @@ export default function FavoritesPage() {
                           boxShadow: '0 2px 8px rgba(34, 197, 94, 0.2)',
                         }}
                       >
-                        <Zap size={14} />
+                        <FileText size={14} />
                         {hasSpec ? 'View Spec' : 'Get Spec'}
                       </button>
                       <button

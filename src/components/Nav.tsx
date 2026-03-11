@@ -2,11 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Zap, Heart } from 'lucide-react'
+import { Hammer, Bookmark } from 'lucide-react'
 
 const NAV_ITEMS = [
-  { href: '/ideas', label: 'Ideas', icon: Zap },
-  { href: '/favorites', label: 'Saved', icon: Heart },
+  { href: '/workflow', label: 'Build', icon: Hammer },
+  { href: '/favorites', label: 'Saved', icon: Bookmark },
 ]
 
 export default function Nav() {

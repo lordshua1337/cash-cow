@@ -25,6 +25,11 @@ export interface BuildSpec {
   readonly v2Ideas: readonly string[]
   readonly risks: readonly string[]
   readonly complexity: Complexity
+  // Monetization fields (optional for backward compat with old specs)
+  readonly monetizationModel?: string
+  readonly pricingStrategy?: string
+  readonly revenueTimeline?: string
+  readonly customerAcquisition?: string
 }
 
 // Keep TrendSource for internal API fetching (HN + GitHub raw data)

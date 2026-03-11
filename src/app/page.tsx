@@ -10,9 +10,11 @@ import {
   Clock,
   Calendar,
   CalendarRange,
+  Compass,
+  SlidersHorizontal,
+  Hammer,
 } from 'lucide-react'
 import type { ProductIdea } from '@/lib/types'
-import { storeTempIdea } from '@/lib/favorites'
 import { FALLBACK_IDEAS } from '@/lib/fallback-ideas'
 
 const CX = {
@@ -80,9 +82,8 @@ export default function LandingPage() {
       .catch(() => {})
   }, [])
 
-  function go(idea: ProductIdea) {
-    storeTempIdea(idea)
-    router.push(`/build/${idea.id}`)
+  function go() {
+    router.push('/workflow')
   }
 
   return (
@@ -105,7 +106,7 @@ export default function LandingPage() {
             }}
           >
             <span>&#x1F404;</span>
-            From idea to build spec in 60 seconds
+            From trending product to monetizable spec in 60 seconds
           </div>
 
           <h1
@@ -134,13 +135,13 @@ export default function LandingPage() {
             className="animate-in text-lg sm:text-xl max-w-lg mx-auto mb-10 leading-relaxed"
             style={{ color: 'var(--brown-muted)', animationDelay: '0.1s' }}
           >
-            Pick a product idea. Reshape it in your words.
-            Get a build spec you can paste straight into Claude Code.
+            Pick a product people already pay for. Make it yours.
+            Get a monetization-focused spec you can paste into Claude Code.
           </p>
 
           <div className="animate-in flex items-center justify-center gap-3 flex-wrap" style={{ animationDelay: '0.15s' }}>
             <Link
-              href="/ideas"
+              href="/workflow"
               className="btn-hover inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-lg font-bold"
               style={{
                 background: 'var(--cash)',
@@ -148,7 +149,7 @@ export default function LandingPage() {
                 boxShadow: '0 4px 16px rgba(34, 197, 94, 0.3)',
               }}
             >
-              Browse Ideas
+              Start Building
               <ArrowRight size={20} strokeWidth={2.5} />
             </Link>
             <a
@@ -179,10 +180,10 @@ export default function LandingPage() {
               className="text-4xl sm:text-5xl font-black mb-4 tracking-tight"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
             >
-              Pick. Remix. Build.
+              Discover. Customize. Build.
             </h2>
             <p className="text-base max-w-md mx-auto" style={{ color: 'var(--brown-muted)' }}>
-              Three steps from &quot;what should I build?&quot; to a real build plan.
+              Four steps from &quot;what should I build?&quot; to a monetizable spec.
             </p>
           </div>
 
@@ -190,45 +191,59 @@ export default function LandingPage() {
             {[
               {
                 num: '1',
-                emoji: '&#x1F50D;',
-                title: 'Pick an idea',
-                desc: 'Browse dozens of product ideas generated from real trending signals. Filter by category. Find one that clicks.',
+                icon: Compass,
+                iconBg: 'var(--cash-soft)',
+                iconColor: 'var(--cash)',
+                title: 'Pick inspiration',
+                desc: 'Browse trending products people actually pay for. Pick one as your starting point -- not to clone, but to ride the same wave.',
               },
               {
                 num: '2',
-                emoji: '&#x1F504;',
-                title: 'Remix it',
-                desc: '"Target teachers." "Add payments." "Make it simpler." Click any section, type what to change. The whole spec reshapes around your vision.',
+                icon: SlidersHorizontal,
+                iconBg: 'var(--gold-soft)',
+                iconColor: 'var(--gold)',
+                title: 'Make it yours',
+                desc: 'Answer 4 quick questions: who, what, features, tech. The AI generates an original product with pricing and revenue strategy.',
               },
               {
                 num: '3',
-                emoji: '&#x1F680;',
-                title: 'Start building',
-                desc: 'Copy the spec. Paste into Claude Code. Each step has file paths, schemas, and components ready to execute.',
+                icon: Hammer,
+                iconBg: 'var(--blue-soft)',
+                iconColor: 'var(--blue)',
+                title: 'Build and ship',
+                desc: 'Get a full spec with monetization model, pricing tiers, customer acquisition plan. Copy into Claude Code and start.',
               },
-            ].map((step) => (
-              <div
-                key={step.num}
-                className="card rounded-2xl p-7 text-center"
-              >
-                <div className="text-4xl mb-4" dangerouslySetInnerHTML={{ __html: step.emoji }} />
+            ].map((step) => {
+              const StepIcon = step.icon
+              return (
                 <div
-                  className="inline-flex items-center justify-center w-10 h-10 rounded-full text-base font-black mb-4"
-                  style={{ background: 'var(--cash)', color: '#fff', fontFamily: 'var(--font-fredoka), sans-serif' }}
+                  key={step.num}
+                  className="card rounded-2xl p-7 text-center"
                 >
-                  {step.num}
+                  <div
+                    className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4"
+                    style={{ background: step.iconBg }}
+                  >
+                    <StepIcon size={26} style={{ color: step.iconColor }} strokeWidth={2} />
+                  </div>
+                  <div
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-full text-base font-black mb-4"
+                    style={{ background: 'var(--cash)', color: '#fff', fontFamily: 'var(--font-fredoka), sans-serif' }}
+                  >
+                    {step.num}
+                  </div>
+                  <h3
+                    className="text-xl font-black mb-2"
+                    style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                    {step.desc}
+                  </p>
                 </div>
-                <h3
-                  className="text-xl font-black mb-2"
-                  style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
-                >
-                  {step.title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
-                  {step.desc}
-                </p>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
@@ -248,7 +263,7 @@ export default function LandingPage() {
               A <span style={{ color: 'var(--cash)' }}>real build plan.</span>
             </h2>
             <p className="text-base max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
-              8 sections. File paths. Database schemas. Step-by-step instructions your AI coding tool can execute.
+              12 sections including pricing, revenue timeline, and customer acquisition. File paths. Database schemas. Step-by-step instructions your AI coding tool can execute.
             </p>
           </div>
 
@@ -331,14 +346,14 @@ export default function LandingPage() {
                 className="text-3xl sm:text-4xl font-black tracking-tight"
                 style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
               >
-                Today&apos;s ideas
+                Trending now
               </h2>
               <p className="text-sm mt-1" style={{ color: 'var(--brown-muted)' }}>
-                Fresh from real trending signals. Click any to remix.
+                Products people are paying for right now. Click to build something like it.
               </p>
             </div>
             <Link
-              href="/ideas"
+              href="/workflow"
               className="btn-hover inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-bold flex-shrink-0"
               style={{
                 background: 'var(--cash)',
@@ -357,7 +372,7 @@ export default function LandingPage() {
               return (
                 <button
                   key={idea.id}
-                  onClick={() => go(idea)}
+                  onClick={() => go()}
                   className="card rounded-2xl p-5 text-left flex flex-col gap-2.5 group"
                 >
                   <div className="flex items-center gap-1.5">
@@ -422,11 +437,11 @@ export default function LandingPage() {
             <span style={{ color: 'var(--cash)' }}>Start building.</span>
           </h2>
           <p className="text-base mb-10 max-w-md mx-auto" style={{ color: 'var(--brown-muted)' }}>
-            Every idea is remixable. Every spec is copy-pasteable.
+            Every spec includes pricing, revenue projections, and a customer acquisition plan.
             Your weekend project starts right now.
           </p>
           <Link
-            href="/ideas"
+            href="/workflow"
             className="btn-hover inline-flex items-center gap-2.5 px-10 py-5 rounded-2xl text-xl font-bold"
             style={{
               background: 'var(--cash)',
@@ -438,7 +453,7 @@ export default function LandingPage() {
             <ArrowRight size={22} strokeWidth={2.5} />
           </Link>
           <p className="text-xs mt-8 font-semibold" style={{ color: 'var(--brown-faint)' }}>
-            Free. No signup. Ideas refresh daily.
+            Free. No signup. Trending products refresh daily.
           </p>
         </div>
       </section>
@@ -463,7 +478,7 @@ export default function LandingPage() {
           <span className="text-sm font-bold" style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}>Cash Cow</span>
         </div>
         <p className="text-xs" style={{ color: 'var(--brown-faint)' }}>
-          Pick ideas backed by real signals. Remix them. Build them.
+          Pick monetizable products. Make them yours. Build and ship.
         </p>
       </footer>
     </div>
