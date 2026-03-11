@@ -107,7 +107,7 @@ export default function LandingPage() {
         className="cow-border-bottom relative overflow-hidden"
         style={{ background: 'var(--white)' }}
       >
-        <CowSpots variant="hero" opacity={0.28} />
+        <CowSpots variant="hero" opacity={0.7} />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-20 sm:pb-28 text-center relative z-10">
 
@@ -174,7 +174,7 @@ export default function LandingPage() {
 
       {/* ====== HOW IT WORKS ====== */}
       <section id="how" className="relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--cream)' }}>
-        <CowSpots variant="light" opacity={0.15} />
+        <CowSpots variant="light" opacity={0.45} />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <h2
@@ -238,7 +238,7 @@ export default function LandingPage() {
 
       {/* ====== SPEC PREVIEW ====== */}
       <section className="cow-border-top cow-border-bottom relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--white)' }}>
-        <CowSpots variant="light" opacity={0.18} />
+        <CowSpots variant="light" opacity={0.5} />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <h2
@@ -329,7 +329,7 @@ export default function LandingPage() {
 
       {/* ====== LIVE IDEAS ====== */}
       <section className="relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--cream)' }}>
-        <CowSpots variant="light" opacity={0.12} />
+        <CowSpots variant="light" opacity={0.35} />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="flex items-end justify-between gap-4 mb-10">
@@ -426,7 +426,7 @@ export default function LandingPage() {
 
       {/* ====== BOTTOM CTA ====== */}
       <section className="cow-border-top relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--white)' }}>
-        <CowSpots variant="hero" opacity={0.22} />
+        <CowSpots variant="hero" opacity={0.6} />
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center relative z-10">
           <div className="text-6xl mb-6">&#x1F4B0;</div>
