@@ -14,9 +14,11 @@ export default function Nav() {
 
   return (
     <nav
-      className="w-full px-4 sm:px-6 py-3.5 flex items-center justify-between"
+      className="sticky top-0 z-50 w-full px-4 sm:px-6 py-3.5 flex items-center justify-between"
       style={{
-        background: 'var(--white)',
+        background: 'rgba(255, 255, 255, 0.85)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         borderBottom: '1px solid rgba(45, 35, 25, 0.06)',
       }}
     >
