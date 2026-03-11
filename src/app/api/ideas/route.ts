@@ -113,7 +113,15 @@ async function fetchGitHubTrending(): Promise<TrendingProduct[]> {
 
 const IDEAS_SYSTEM_PROMPT = `You are a product advisor for solo non-technical founders who want to build and sell SaaS products.
 
-You will receive real trending data from Hacker News and GitHub. Use these as CONTEXT and SIGNALS -- do NOT just repackage them as ideas. Instead, synthesize product IDEAS that a solo builder could actually ship and sell.
+You will receive trending data from Hacker News and GitHub. This data tells you WHAT SPACES ARE HOT right now -- what developers are building, what problems people are talking about, what categories have momentum. Use it as MARKET INTELLIGENCE only.
+
+DO NOT generate ideas that clone, copy, or directly compete with the trending products. Instead:
+1. Look at what categories and problem spaces are getting attention
+2. Identify ADJACENT problems, UNDERSERVED audiences, or GAPS that the trending products don't address
+3. Generate ORIGINAL product ideas that ride the same wave but solve DIFFERENT problems for DIFFERENT people
+
+Example of what NOT to do: If a code editor is trending, don't suggest "build a code editor."
+Example of what TO do: If a code editor is trending, notice that dev tools are hot, and suggest "a tool that helps non-technical founders write product specs that developers actually want to build from" -- adjacent space, different audience, different problem.
 
 Return ONLY valid JSON (no markdown fences) matching this exact shape:
 [
@@ -122,7 +130,7 @@ Return ONLY valid JSON (no markdown fences) matching this exact shape:
     "name": "string - catchy product name (not a repo name)",
     "pitch": "string - one sentence: what it does for WHO",
     "category": "string - one of: AI Tools, Productivity, Finance, Health, Education, Marketing, Dev Tools, SaaS",
-    "whyNow": "string - 1-2 sentences on why this is a good bet right now",
+    "whyNow": "string - 1-2 sentences on why this is a good bet RIGHT NOW. Reference the market momentum you're seeing, not the trending products themselves.",
     "risk": "string - 1 honest sentence about the biggest risk",
     "complexity": "one of: weekend | few-weeks | month-plus"
   }
@@ -130,6 +138,7 @@ Return ONLY valid JSON (no markdown fences) matching this exact shape:
 
 Rules:
 - Generate exactly 8 ideas
+- ZERO of the ideas should be clones of trending products. Every idea must be ORIGINAL.
 - Each idea must have a SPECIFIC paying customer (not "businesses" -- "freelance designers who...")
 - Be honest about risks -- "Crowded space", "Needs real users to validate", etc.
 - Names should be catchy and memorable (InvoicePilot, not invoice-tracker)
@@ -152,16 +161,32 @@ export async function GET(request: NextRequest) {
 
     const allTrends = [...hnTrends, ...ghTrends].sort((a, b) => b.score - a.score).slice(0, 20)
 
-    // Build context summary for the LLM
-    const trendingSummary = allTrends.map((t) =>
-      `- ${t.title} (${t.source}, ${t.score} ${t.source === 'hackernews' ? 'upvotes' : 'stars'}): ${t.description}`
-    ).join('\n')
+    // Summarize trending data as market signals, not product lists
+    const categoryBuckets: Record<string, number> = {}
+    const topicSignals: string[] = []
 
-    const userPrompt = `Here are today's trending products and projects from Hacker News and GitHub:
+    for (const t of allTrends) {
+      const cat = categorize(t.title + ' ' + t.description)
+      categoryBuckets[cat] = (categoryBuckets[cat] || 0) + 1
+      topicSignals.push(`${t.title}: ${t.description}`)
+    }
 
-${trendingSummary}
+    const hotCategories = Object.entries(categoryBuckets)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 5)
+      .map(([cat, count]) => `${cat} (${count} trending)`)
+      .join(', ')
 
-Based on these real trending signals, generate 8 product IDEAS${category !== 'all' ? ` focused on ${categoryLabel}` : ''} that a solo non-technical founder could build and sell. Each idea must include who would pay for it and why now. Be honest about risks. These are business opportunities, not open source projects.`
+    const sampleTopics = topicSignals.slice(0, 10).map((t) => `- ${t}`).join('\n')
+
+    const userPrompt = `Here's what's hot in the market right now:
+
+Hot categories: ${hotCategories}
+
+Sample of what people are building and talking about:
+${sampleTopics}
+
+Using these as MARKET SIGNALS (not templates to copy), generate 8 ORIGINAL product ideas${category !== 'all' ? ` focused on ${categoryLabel}` : ''} that a solo non-technical founder could build and sell. Each idea should ride the momentum of what's hot but solve a DIFFERENT problem for a DIFFERENT audience than the trending products. Be honest about risks.`
 
     try {
       const raw = await callLLM(IDEAS_SYSTEM_PROMPT, userPrompt, 4000)
