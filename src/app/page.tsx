@@ -223,7 +223,7 @@ export default function LandingPage() {
           </div>
 
           {/* Part 1: What's in the spec */}
-          <div className="mb-10">
+          <div className="mb-20">
             <h3
               className="text-2xl sm:text-3xl font-black mb-3 text-center tracking-tight"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
@@ -233,7 +233,7 @@ export default function LandingPage() {
             <p className="text-base text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
               Every section is built to make your AI builder do the heavy lifting. You just click &ldquo;generate.&rdquo;
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 { title: 'Gap analysis', desc: 'What competitors charge, what they\u2019re missing, and exactly where your product slides in. You\u2019re not guessing\u2014you\u2019re filling a proven hole.' },
                 { title: 'Monetization model', desc: 'Subscription, marketplace cut, usage-based\u2014the exact mechanics of how money flows into your bank account. Not \u201Cfigure it out later.\u201D' },
@@ -269,7 +269,7 @@ export default function LandingPage() {
           </div>
 
           {/* Part 2: The supporting files */}
-          <div className="mb-10">
+          <div className="mb-20">
             <h3
               className="text-2xl sm:text-3xl font-black mb-3 text-center tracking-tight"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
@@ -279,7 +279,7 @@ export default function LandingPage() {
             <p className="text-base text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
               Six additional files that turn your spec from &ldquo;cool plan&rdquo; into &ldquo;running business.&rdquo;
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 { title: 'Customer persona file', desc: 'A detailed persona doc your AI builder uses to make every decision for a real human\u2014not a generic \u201Cuser.\u201D Every UI choice, every line of copy, informed by who\u2019s actually paying.' },
                 { title: 'Landing page design file', desc: 'Full page structure, copy blocks, CTA placement, SEO meta tags, Open Graph cards. Your marketing site builds itself the same day your product does.' },
@@ -325,7 +325,7 @@ export default function LandingPage() {
             <p className="text-base text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
               Strategic extras that close the gap between &ldquo;I have code&rdquo; and &ldquo;I have a business.&rdquo;
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {[
                 { title: 'Competitive intel brief', desc: 'Who you\u2019re up against, what they charge, their weak spots, and your unfair advantage. Know the battlefield before you build.' },
                 { title: 'Launch day playbook', desc: 'Where to post, what to say, when to post it. Product Hunt, Reddit, Indie Hackers, Twitter\u2014a timed launch sequence so day one actually counts.' },
