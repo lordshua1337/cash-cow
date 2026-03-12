@@ -235,21 +235,22 @@ export default function LandingPage() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { icon: Swords, title: 'Gap analysis', desc: 'What competitors charge, what they\u2019re missing, and exactly where your product slides in. You\u2019re not guessing\u2014you\u2019re filling a proven hole.' },
-                { icon: DollarSign, title: 'Monetization model', desc: 'Subscription, marketplace cut, usage-based\u2014the exact mechanics of how money flows into your bank account. Not \u201Cfigure it out later.\u201D' },
-                { icon: CircleDollarSign, title: 'Pricing tiers', desc: 'Specific dollar amounts, tier names, and free-to-paid conversion targets. Not vibes. Math.' },
-                { icon: TrendingUp, title: 'Revenue projections', desc: 'Month-by-month forecast for your first 6 months as a solo builder. When ramen money hits. When real money hits.' },
-                { icon: Target, title: 'Customer acquisition plan', desc: 'Where your first 100 paying users come from. Specific channels, specific tactics. No \u201Cpost and pray.\u201D' },
-                { icon: Hammer, title: 'Step-by-step build plan', desc: 'File paths, database schemas, component names, tech stack. Your AI builder reads this and just\u2026 builds it.' },
+                { title: 'Gap analysis', desc: 'What competitors charge, what they\u2019re missing, and exactly where your product slides in. You\u2019re not guessing\u2014you\u2019re filling a proven hole.' },
+                { title: 'Monetization model', desc: 'Subscription, marketplace cut, usage-based\u2014the exact mechanics of how money flows into your bank account. Not \u201Cfigure it out later.\u201D' },
+                { title: 'Pricing tiers', desc: 'Specific dollar amounts, tier names, and free-to-paid conversion targets. Not vibes. Math.' },
+                { title: 'Revenue projections', desc: 'Month-by-month forecast for your first 6 months as a solo builder. When ramen money hits. When real money hits.' },
+                { title: 'Customer acquisition plan', desc: 'Where your first 100 paying users come from. Specific channels, specific tactics. No \u201Cpost and pray.\u201D' },
+                { title: 'Step-by-step build plan', desc: 'File paths, database schemas, component names, tech stack. Your AI builder reads this and just\u2026 builds it.' },
               ].map((item) => (
                 <div key={item.title} className="card rounded-2xl p-6">
                   <div className="flex items-start gap-4">
-                    <div
-                      className="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl mt-0.5"
-                      style={{ background: 'var(--cash-soft)' }}
-                    >
-                      <item.icon size={20} style={{ color: 'var(--cash)' }} strokeWidth={2} />
-                    </div>
+                    <Image
+                      src="/green-plus-file.svg"
+                      alt=""
+                      width={44}
+                      height={44}
+                      className="flex-shrink-0 mt-0.5"
+                    />
                     <div>
                       <h3
                         className="text-base font-black mb-1"
