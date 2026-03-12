@@ -739,76 +739,89 @@ export default function LandingPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
               <div
-                className="rounded-2xl p-6 relative overflow-hidden"
-                style={{ background: '#1e1e2e', border: '2px solid rgba(203,166,247,0.25)' }}
+                className="rounded-none p-5 overflow-hidden"
+                style={{ background: '#282a36', border: '1px solid #3a3d4a' }}
               >
-                {/* Subtle gradient glow */}
-                <div
-                  className="absolute inset-0 opacity-[0.07] pointer-events-none"
-                  style={{ background: 'radial-gradient(ellipse at top right, #cba6f7, transparent 60%)' }}
-                />
-
-                {/* Recommended pill */}
-                <div className="relative flex items-center gap-2 mb-4">
-                  <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center"
-                    style={{ background: 'rgba(166,227,161,0.15)' }}
-                  >
-                    <Check size={16} strokeWidth={3} style={{ color: '#a6e3a1' }} />
-                  </div>
-                  <span
-                    className="text-xs font-bold tracking-wide uppercase"
-                    style={{ color: '#a6e3a1' }}
-                  >
-                    Recommended
-                  </span>
-                </div>
-
-                {/* Robot mascot + title */}
-                <div className="relative flex items-center gap-3 mb-3">
+                {/* Header: mascot + Claude Code title */}
+                <div className="flex items-start gap-3 mb-3">
                   {/* Pixel robot mascot */}
-                  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    {/* Antenna */}
-                    <rect x="16" y="0" width="4" height="4" fill="#f9e2af" />
-                    <rect x="14" y="2" width="2" height="2" fill="#f9e2af" />
-                    <rect x="20" y="2" width="2" height="2" fill="#f9e2af" />
-                    {/* Head */}
-                    <rect x="8" y="4" width="20" height="14" rx="2" fill="#fab387" />
-                    <rect x="10" y="4" width="16" height="2" fill="#f9c68b" />
-                    {/* Eyes */}
-                    <rect x="12" y="9" width="4" height="4" rx="1" fill="#1e1e2e" />
-                    <rect x="20" y="9" width="4" height="4" rx="1" fill="#1e1e2e" />
-                    <rect x="13" y="10" width="2" height="2" fill="#cdd6f4" />
-                    <rect x="21" y="10" width="2" height="2" fill="#cdd6f4" />
-                    {/* Mouth */}
-                    <rect x="14" y="14" width="8" height="2" rx="1" fill="#1e1e2e" />
-                    {/* Body */}
-                    <rect x="10" y="20" width="16" height="12" rx="2" fill="#fab387" />
-                    <rect x="12" y="22" width="12" height="4" rx="1" fill="#f9c68b" />
-                    {/* Arms */}
-                    <rect x="6" y="22" width="4" height="8" rx="2" fill="#fab387" />
-                    <rect x="26" y="22" width="4" height="8" rx="2" fill="#fab387" />
-                    {/* Feet */}
-                    <rect x="12" y="32" width="4" height="4" rx="1" fill="#fab387" />
-                    <rect x="20" y="32" width="4" height="4" rx="1" fill="#fab387" />
+                  <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 mt-0.5">
+                    <rect x="16" y="0" width="4" height="3" fill="#e8956a" />
+                    <rect x="14" y="1" width="2" height="2" fill="#e8956a" />
+                    <rect x="20" y="1" width="2" height="2" fill="#e8956a" />
+                    <rect x="8" y="3" width="20" height="14" rx="2" fill="#d4845a" />
+                    <rect x="10" y="3" width="16" height="2" fill="#e8956a" />
+                    <rect x="12" y="8" width="4" height="4" rx="1" fill="#282a36" />
+                    <rect x="20" y="8" width="4" height="4" rx="1" fill="#282a36" />
+                    <rect x="13" y="9" width="2" height="2" fill="#f8f8f2" />
+                    <rect x="21" y="9" width="2" height="2" fill="#f8f8f2" />
+                    <rect x="14" y="13" width="8" height="2" rx="1" fill="#282a36" />
+                    <rect x="10" y="19" width="16" height="12" rx="2" fill="#d4845a" />
+                    <rect x="12" y="21" width="12" height="4" rx="1" fill="#e8956a" />
+                    <rect x="6" y="21" width="4" height="8" rx="2" fill="#d4845a" />
+                    <rect x="26" y="21" width="4" height="8" rx="2" fill="#d4845a" />
+                    <rect x="12" y="31" width="4" height="4" rx="1" fill="#d4845a" />
+                    <rect x="20" y="31" width="4" height="4" rx="1" fill="#d4845a" />
                   </svg>
                   <div>
-                    <p
-                      className="text-lg font-black"
-                      style={{ fontFamily: 'var(--font-fredoka), sans-serif', color: '#cdd6f4' }}
-                    >
-                      Claude Code
-                    </p>
-                    <p className="text-xs" style={{ color: 'rgba(205,214,244,0.35)' }}>
-                      by Anthropic
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-sm" style={{ color: '#f8f8f2' }}>Claude Code</span>
+                      <span className="text-xs" style={{ color: '#6272a4' }}>v2.1</span>
+                    </div>
+                    <div className="text-xs" style={{ color: '#6272a4' }}>
+                      Opus 4.6 &middot; Claude Max
+                    </div>
+                    <div className="text-xs" style={{ color: '#6272a4' }}>
+                      ~/projects/your-app
+                    </div>
                   </div>
                 </div>
 
-                {/* Description */}
-                <p className="relative text-sm leading-relaxed" style={{ color: 'rgba(205,214,244,0.6)' }}>
+                {/* Separator line */}
+                <div className="mb-3" style={{ color: '#6272a4', fontSize: '11px', fontFamily: 'monospace', letterSpacing: '2px' }}>
+                  &#x2500;&#x2500;&#x2500; &#x2500;&#x2500;&#x2500; &#x2500; &#x2500;&#x2500; &#x2500;&#x2500;&#x2500;&#x2500; &#x2500; &#x2500;&#x2500;&#x2500; &#x2500;&#x2500;
+                </div>
+
+                {/* Activity lines */}
+                <div style={{ fontFamily: 'monospace', fontSize: '12px', lineHeight: '1.7' }}>
+                  <div style={{ color: '#f8f8f2' }}>
+                    <span style={{ color: '#6272a4' }}>{'\u2517'} </span>
+                    Read <span style={{ color: '#e8956a' }}>build-spec.md</span>
+                    <span style={{ color: '#6272a4' }}> (48 sections)</span>
+                  </div>
+                  <div style={{ color: '#f8f8f2' }}>
+                    <span style={{ color: '#6272a4' }}>{'\u2517'} </span>
+                    Created <span style={{ color: '#e8956a' }}>src/app/dashboard/page.tsx</span>
+                  </div>
+                  <div style={{ color: '#f8f8f2' }}>
+                    <span style={{ color: '#6272a4' }}>{'\u2517'} </span>
+                    Created <span style={{ color: '#e8956a' }}>src/lib/stripe.ts</span>
+                  </div>
+                  <div style={{ color: '#f8f8f2' }}>
+                    <span style={{ color: '#6272a4' }}>{'\u2517'} </span>
+                    Created <span style={{ color: '#e8956a' }}>14 more files...</span>
+                  </div>
+                </div>
+
+                {/* Separator line */}
+                <div className="my-3" style={{ color: '#6272a4', fontSize: '11px', fontFamily: 'monospace', letterSpacing: '2px' }}>
+                  &#x2500; &#x2500;&#x2500; &#x2500;&#x2500;&#x2500;&#x2500; &#x2500;&#x2500;&#x2500; &#x2500; &#x2500;&#x2500; &#x2500;&#x2500;&#x2500; &#x2500;&#x2500;&#x2500;&#x2500;
+                </div>
+
+                {/* Status line */}
+                <div className="flex items-center gap-1.5" style={{ fontFamily: 'monospace', fontSize: '12px' }}>
+                  <span
+                    className="inline-block w-2 h-2 rounded-full"
+                    style={{ background: '#50fa7b' }}
+                  />
+                  <span style={{ color: '#50fa7b' }}>Deployed</span>
+                  <span style={{ color: '#6272a4' }}>&mdash; your-app.vercel.app</span>
+                </div>
+
+                {/* Bottom description */}
+                <p className="text-xs mt-4 leading-relaxed" style={{ color: '#bfc7d5' }}>
                   Best results. Reads the entire spec, builds every file, handles deployment.
-                  Setup instructions are included with your spec.
+                  Setup instructions included with your spec.
                 </p>
               </div>
               <div className="card rounded-2xl p-6">
