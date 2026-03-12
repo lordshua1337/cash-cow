@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -35,11 +36,15 @@ import {
   Briefcase,
   BookOpen,
   MousePointer,
+  Sparkles,
+  Download,
 } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import DropInFilesCarousel from '@/components/DropInFilesCarousel'
 
 export default function LandingPage() {
+  const [showHowItWorks, setShowHowItWorks] = useState(false)
 
   return (
     <div>
@@ -99,8 +104,8 @@ export default function LandingPage() {
               Start Building
               <ArrowRight size={20} strokeWidth={2.5} />
             </Link>
-            <a
-              href="#how"
+            <button
+              onClick={() => setShowHowItWorks(true)}
               className="btn-hover inline-flex items-center gap-2 px-6 py-4 rounded-2xl text-lg font-bold"
               style={{
                 color: 'var(--brown)',
@@ -108,7 +113,7 @@ export default function LandingPage() {
               }}
             >
               How it works
-            </a>
+            </button>
           </div>
 
           {/* Spacer to keep cow from floating into buttons */}
@@ -133,7 +138,7 @@ export default function LandingPage() {
       </section>
 
       {/* ====== HOW IT WORKS ====== */}
-      <section id="how" className="relative overflow-hidden py-16 sm:py-20" style={{ background: 'var(--cream)' }}>
+      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: 'var(--cream)' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-14">
             <h2
@@ -691,6 +696,141 @@ export default function LandingPage() {
           Pick monetizable products. Make them yours. Build and ship.
         </p>
       </footer>
+
+      {/* ====== HOW IT WORKS MODAL ====== */}
+      <AnimatePresence>
+        {showHowItWorks && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ background: 'rgba(45, 35, 25, 0.6)', backdropFilter: 'blur(8px)' }}
+            onClick={() => setShowHowItWorks(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-3xl p-8 sm:p-10"
+              style={{ background: 'var(--white)', boxShadow: '0 25px 60px rgba(0,0,0,0.2)' }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setShowHowItWorks(false)}
+                className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center"
+                style={{ background: 'var(--cream-dark)', color: 'var(--brown-muted)' }}
+              >
+                <X size={18} strokeWidth={2.5} />
+              </button>
+
+              <h2
+                className="text-2xl sm:text-3xl font-black mb-2 tracking-tight"
+                style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+              >
+                How it works
+              </h2>
+              <p className="text-base mb-8" style={{ color: 'var(--brown-muted)' }}>
+                Five steps from &ldquo;I have no idea what to build&rdquo; to &ldquo;it&apos;s live and making money.&rdquo;
+              </p>
+
+              <div className="space-y-6">
+                {[
+                  {
+                    num: '1',
+                    icon: <Compass size={22} />,
+                    title: 'Discover',
+                    desc: 'Browse trending products that real people already pay for\u2014sourced from Product Hunt. Filter by category (SaaS, AI, Marketplace, Mobile). Pick one as your inspiration. Not to clone it. To ride the same market wave with your own twist.',
+                    color: 'var(--cash)',
+                    bg: 'var(--cash-soft)',
+                  },
+                  {
+                    num: '2',
+                    icon: <SlidersHorizontal size={22} />,
+                    title: 'Customize',
+                    desc: 'A 4-step wizard walks you through it: Who are you building this for? What makes yours different? What features matter most? Any tech preferences? Each answer shapes your spec into something original\u2014not a template.',
+                    color: 'var(--cash)',
+                    bg: 'var(--cash-soft)',
+                  },
+                  {
+                    num: '3',
+                    icon: <Sparkles size={22} />,
+                    title: 'Generate your spec',
+                    desc: 'Our AI takes your answers and the inspiration product, then generates a 12-section build spec. Monetization model, pricing tiers, revenue projections, customer acquisition plan, full tech stack, database schema, build steps\u2014everything.',
+                    color: 'var(--cash)',
+                    bg: 'var(--cash-soft)',
+                  },
+                  {
+                    num: '4',
+                    icon: <RefreshCw size={22} />,
+                    title: 'Remix until it\u2019s perfect',
+                    desc: 'Don\u2019t like the pricing? Click the section and remix it. Want a different tech stack? Remix it. Every section is individually tweakable with AI\u2014or edit it yourself. The spec is yours to shape until it feels right.',
+                    color: 'var(--cash)',
+                    bg: 'var(--cash-soft)',
+                  },
+                  {
+                    num: '5',
+                    icon: <Download size={22} />,
+                    title: 'Export and build',
+                    desc: 'Download your spec as Markdown. Drop the file into Claude Code (recommended), Cursor, Windsurf, or any AI code builder. It reads the spec, builds the entire product, and you launch. Setup instructions included for every tool.',
+                    color: 'var(--cash)',
+                    bg: 'var(--cash-soft)',
+                  },
+                ].map((step) => (
+                  <div key={step.num} className="flex gap-4">
+                    <div className="flex-shrink-0">
+                      <div
+                        className="w-11 h-11 rounded-2xl flex items-center justify-center"
+                        style={{ background: step.bg, color: step.color }}
+                      >
+                        {step.icon}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span
+                          className="text-xs font-black px-2 py-0.5 rounded-full"
+                          style={{ background: step.bg, color: step.color }}
+                        >
+                          Step {step.num}
+                        </span>
+                        <h3
+                          className="text-base font-black"
+                          style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                        >
+                          {step.title}
+                        </h3>
+                      </div>
+                      <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                        {step.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA at bottom of modal */}
+              <div className="mt-8 text-center">
+                <Link
+                  href="/workflow"
+                  className="btn-hover inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-lg font-bold"
+                  style={{
+                    background: 'var(--cash)',
+                    color: '#fff',
+                    boxShadow: '0 4px 20px rgba(34, 197, 94, 0.35)',
+                  }}
+                >
+                  Start Building
+                  <ArrowRight size={20} strokeWidth={2.5} />
+                </Link>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
