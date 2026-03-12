@@ -1,69 +1,58 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
+import { useCallback, useEffect, useState, type ReactNode } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
-import { motion, AnimatePresence } from 'framer-motion'
-import { DotLottieReact } from '@lottiefiles/dotlottie-react'
+import { motion } from 'framer-motion'
+import {
+  ScanFace,
+  LayoutTemplate,
+  PackageCheck,
+  Network,
+  BotMessageSquare,
+  Gem,
+} from 'lucide-react'
 
 interface FileItem {
   title: string
   desc: string
-  lottie?: string
+  icon: ReactNode
 }
+
+const COW_RED = '#E8676B'
 
 const FILES: FileItem[] = [
   {
     title: 'Customer persona file',
     desc: 'A detailed persona doc your AI builder uses to make every decision for a real human\u2014not a generic \u201Cuser.\u201D Every UI choice, every line of copy, informed by who\u2019s actually paying.',
+    icon: <ScanFace size={56} strokeWidth={1.5} color={COW_RED} />,
   },
   {
     title: 'Landing page design file',
     desc: 'Full page structure, copy blocks, CTA placement, SEO meta tags, Open Graph cards. Your marketing site builds itself the same day your product does.',
-    lottie: 'https://lottie.host/49940132-3c94-4e72-a7a2-efea834ddecd/ItIRGYgEbk.lottie',
+    icon: <LayoutTemplate size={56} strokeWidth={1.5} color={COW_RED} />,
   },
   {
     title: 'One-click deploy template',
     desc: 'Pre-configured repo scaffold matching your spec\u2019s tech stack. Clone it, drop your files in, ship. The gap between \u201Cplan\u201D and \u201Crunning code\u201D shrinks to minutes.',
+    icon: <PackageCheck size={56} strokeWidth={1.5} color={COW_RED} />,
   },
   {
     title: 'Database schema file',
     desc: 'Complete SQL migrations, table relationships, and RLS policies. Your entire backend structure, ready to paste into Supabase.',
+    icon: <Network size={56} strokeWidth={1.5} color={COW_RED} />,
   },
   {
     title: 'Auto-email system file',
     desc: 'Custom AI-powered email setup with Fastmail. Welcome sequences, onboarding drips, upgrade nudges, churn recovery\u2014all automated. Never read or reply to an email again.',
+    icon: <BotMessageSquare size={56} strokeWidth={1.5} color={COW_RED} />,
   },
   {
     title: 'Brand identity file',
     desc: 'App name, color palette, typography, tone of voice, logo direction, and component styling tokens. Everything looks like one cohesive product from day one.',
+    icon: <Gem size={56} strokeWidth={1.5} color={COW_RED} />,
   },
 ]
-
-function LottieSlide({ src, shouldPlay }: { src: string; shouldPlay: boolean }) {
-  const dotLottieRef = useRef<any>(null)
-  const [triggered, setTriggered] = useState(false)
-
-  useEffect(() => {
-    if (shouldPlay && !triggered && dotLottieRef.current) {
-      setTriggered(true)
-      dotLottieRef.current.play()
-    }
-  }, [shouldPlay, triggered])
-
-  return (
-    <div className="mx-auto mb-6 w-[100px] h-[100px]">
-      <DotLottieReact
-        src={src}
-        autoplay={false}
-        loop={false}
-        dotLottieRefCallback={(ref) => { dotLottieRef.current = ref }}
-        style={{ width: '100%', height: '100%' }}
-      />
-    </div>
-  )
-}
 
 export default function DropInFilesCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -76,30 +65,18 @@ export default function DropInFilesCarousel() {
   )
 
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [settledIndex, setSettledIndex] = useState<number | null>(null)
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return
     setSelectedIndex(emblaApi.selectedScrollSnap())
-    setSettledIndex(null)
-  }, [emblaApi])
-
-  const onSettle = useCallback(() => {
-    if (!emblaApi) return
-    setSettledIndex(emblaApi.selectedScrollSnap())
   }, [emblaApi])
 
   useEffect(() => {
     if (!emblaApi) return
     emblaApi.on('select', onSelect)
-    emblaApi.on('settle', onSettle)
     onSelect()
-    onSettle()
-    return () => {
-      emblaApi.off('select', onSelect)
-      emblaApi.off('settle', onSettle)
-    }
-  }, [emblaApi, onSelect, onSettle])
+    return () => { emblaApi.off('select', onSelect) }
+  }, [emblaApi, onSelect])
 
   const scrollTo = useCallback(
     (index: number) => emblaApi?.scrollTo(index),
@@ -143,25 +120,13 @@ export default function DropInFilesCarousel() {
                     border: isActive ? '2px solid #E8676B' : '2px solid transparent',
                   }}
                 >
-                  {/* Icon or Lottie */}
+                  {/* Unique icon per card */}
                   <motion.div
                     animate={{ scale: isActive ? 1 : 0.7 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                    className="mb-6 flex justify-center"
                   >
-                    {file.lottie ? (
-                      <LottieSlide
-                        src={file.lottie}
-                        shouldPlay={settledIndex === i}
-                      />
-                    ) : (
-                      <Image
-                        src="/icon-file-plus-cow-red.svg"
-                        alt=""
-                        width={100}
-                        height={100}
-                        className="mx-auto mb-6"
-                      />
-                    )}
+                    {file.icon}
                   </motion.div>
 
                   {/* Title */}
