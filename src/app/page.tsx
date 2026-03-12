@@ -13,10 +13,20 @@ import {
   RefreshCw,
   FileDown,
   Rocket,
-  Wand2,
   DollarSign,
   Target,
   Zap,
+  Users,
+  Layout,
+  GitBranch,
+  Database,
+  Mail,
+  Palette,
+  Swords,
+  CalendarCheck,
+  Filter,
+  TrendingUp,
+  FileText,
 } from 'lucide-react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 
@@ -134,7 +144,7 @@ export default function LandingPage() {
                 num: '1',
                 image: '/step-1.png',
                 title: 'Pick inspiration',
-                desc: 'Browse trending products people actually pay for. Pick one as your starting point -- not to clone, but to ride the same wave.',
+                desc: 'Browse trending products people actually pay for. Pick one as your starting point\u2014not to clone, but to ride the same wave.',
               },
               {
                 num: '2',
@@ -177,8 +187,9 @@ export default function LandingPage() {
 
       {/* ====== WHAT YOU GET ====== */}
       <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: 'var(--white)' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          {/* Hero moment */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+
+          {/* Section header */}
           <div className="text-center mb-14">
             <h2
               className="text-3xl sm:text-4xl font-black mb-3 tracking-tight"
@@ -205,44 +216,142 @@ export default function LandingPage() {
               Your end-to-end product launch kit
             </h3>
             <p className="text-sm sm:text-base max-w-lg mx-auto leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
-              Not a vague idea doc. Not a &quot;TODO: figure out pricing later&quot; situation.
-              This is the whole playbook -- from database schema to customer acquisition strategy --
-              in one copy-pasteable file that your AI code builder actually understands.
+              Not a vague idea doc. Not a &ldquo;TODO: figure out pricing later&rdquo; situation.
+              This is the whole playbook&mdash;from database schema to customer acquisition strategy&mdash;in
+              one copy-pasteable file that your AI code builder actually understands.
             </p>
           </div>
 
-          {/* What's inside */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              { icon: DollarSign, title: 'Pricing that makes sense', desc: 'Freemium tiers, price points, and conversion math. Not "charge money for it" -- actual strategy.' },
-              { icon: BarChart3, title: 'Revenue projections', desc: 'Month-by-month targets. When you hit ramen profitability. When you quit your job. (Kidding. Mostly.)' },
-              { icon: Target, title: 'Customer acquisition', desc: 'Where your users hang out, how to reach them, and what to say. No "post on Twitter and pray."' },
-              { icon: Hammer, title: 'Full build plan', desc: 'Step-by-step instructions with file paths, schemas, and tech stack. Your AI builder eats this for breakfast.' },
-              { icon: Wand2, title: 'Remix any section', desc: 'Don\'t like the pricing model? Hate the tech stack? Remix individual sections until it feels right.' },
-              { icon: Rocket, title: 'Ship it this weekend', desc: 'Seriously. Drop the file in, follow the plan, tweak what you want, deploy. Your money printer goes brrr.' },
-            ].map((item) => (
-              <div key={item.title} className="card rounded-2xl p-5">
-                <div className="flex items-start gap-3">
-                  <div
-                    className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl mt-0.5"
-                    style={{ background: 'var(--cash-soft)' }}
-                  >
-                    <item.icon size={20} style={{ color: 'var(--cash)' }} strokeWidth={2} />
-                  </div>
-                  <div>
-                    <h3
-                      className="text-sm font-black mb-1"
-                      style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+          {/* Part 1: What's in the spec */}
+          <div className="mb-10">
+            <h3
+              className="text-xl sm:text-2xl font-black mb-2 text-center tracking-tight"
+              style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+            >
+              What&apos;s in the spec
+            </h3>
+            <p className="text-sm text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
+              Every section is built to make your AI builder do the heavy lifting. You just click &ldquo;generate.&rdquo;
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { icon: Swords, title: 'Gap analysis', desc: 'What competitors charge, what they\u2019re missing, and exactly where your product slides in. You\u2019re not guessing\u2014you\u2019re filling a proven hole.' },
+                { icon: DollarSign, title: 'Monetization model', desc: 'Subscription, marketplace cut, usage-based\u2014the exact mechanics of how money flows into your bank account. Not \u201Cfigure it out later.\u201D' },
+                { icon: CircleDollarSign, title: 'Pricing tiers', desc: 'Specific dollar amounts, tier names, and free-to-paid conversion targets. Not vibes. Math.' },
+                { icon: TrendingUp, title: 'Revenue projections', desc: 'Month-by-month forecast for your first 6 months as a solo builder. When ramen money hits. When real money hits.' },
+                { icon: Target, title: 'Customer acquisition plan', desc: 'Where your first 100 paying users come from. Specific channels, specific tactics. No \u201Cpost and pray.\u201D' },
+                { icon: Hammer, title: 'Step-by-step build plan', desc: 'File paths, database schemas, component names, tech stack. Your AI builder reads this and just\u2026 builds it.' },
+              ].map((item) => (
+                <div key={item.title} className="card rounded-2xl p-5">
+                  <div className="flex items-start gap-3">
+                    <div
+                      className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl mt-0.5"
+                      style={{ background: 'var(--cash-soft)' }}
                     >
-                      {item.title}
-                    </h3>
-                    <p className="text-xs leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
-                      {item.desc}
-                    </p>
+                      <item.icon size={20} style={{ color: 'var(--cash)' }} strokeWidth={2} />
+                    </div>
+                    <div>
+                      <h3
+                        className="text-sm font-black mb-1"
+                        style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                      >
+                        {item.title}
+                      </h3>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Part 2: The supporting files */}
+          <div className="mb-10">
+            <h3
+              className="text-xl sm:text-2xl font-black mb-2 text-center tracking-tight"
+              style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+            >
+              The <span style={{ color: 'var(--cash)' }}>drop-in files</span>
+            </h3>
+            <p className="text-sm text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
+              Six additional files that turn your spec from &ldquo;cool plan&rdquo; into &ldquo;running business.&rdquo;
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { icon: Users, title: 'Customer persona file', desc: 'A detailed persona doc your AI builder uses to make every decision for a real human\u2014not a generic \u201Cuser.\u201D Every UI choice, every line of copy, informed by who\u2019s actually paying.' },
+                { icon: Layout, title: 'Landing page design file', desc: 'Full page structure, copy blocks, CTA placement, SEO meta tags, Open Graph cards. Your marketing site builds itself the same day your product does.' },
+                { icon: GitBranch, title: 'One-click deploy template', desc: 'Pre-configured repo scaffold matching your spec\u2019s tech stack. Clone it, drop your files in, ship. The gap between \u201Cplan\u201D and \u201Crunning code\u201D shrinks to minutes.' },
+                { icon: Database, title: 'Database schema file', desc: 'Complete SQL migrations, table relationships, and RLS policies. Your entire backend structure, ready to paste into Supabase.' },
+                { icon: Mail, title: 'Auto-email system file', desc: 'Custom AI-powered email setup with Fastmail. Welcome sequences, onboarding drips, upgrade nudges, churn recovery\u2014all automated. Never read or reply to an email again.' },
+                { icon: Palette, title: 'Brand identity file', desc: 'App name, color palette, typography, tone of voice, logo direction, and component styling tokens. Everything looks like one cohesive product from day one.' },
+              ].map((item) => (
+                <div key={item.title} className="card rounded-2xl p-5">
+                  <div className="flex items-start gap-3">
+                    <div
+                      className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl mt-0.5"
+                      style={{ background: 'var(--gold-soft)' }}
+                    >
+                      <item.icon size={20} style={{ color: 'var(--gold)' }} strokeWidth={2} />
+                    </div>
+                    <div>
+                      <h3
+                        className="text-sm font-black mb-1"
+                        style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                      >
+                        {item.title}
+                      </h3>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Part 3: The strategic extras */}
+          <div>
+            <h3
+              className="text-xl sm:text-2xl font-black mb-2 text-center tracking-tight"
+              style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+            >
+              Make it <span style={{ color: 'var(--cash)' }}>unstoppable</span>
+            </h3>
+            <p className="text-sm text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
+              Strategic extras that close the gap between &ldquo;I have code&rdquo; and &ldquo;I have a business.&rdquo;
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                { icon: Swords, title: 'Competitive intel brief', desc: 'Who you\u2019re up against, what they charge, their weak spots, and your unfair advantage. Know the battlefield before you build.' },
+                { icon: CalendarCheck, title: 'Launch day playbook', desc: 'Where to post, what to say, when to post it. Product Hunt, Reddit, Indie Hackers, Twitter\u2014a timed launch sequence so day one actually counts.' },
+                { icon: Filter, title: 'Funnel blueprint', desc: 'Email capture, onboarding flow, upgrade triggers, retention loops. The full conversion funnel mapped out so you\u2019re not launching into the void.' },
+              ].map((item) => (
+                <div key={item.title} className="card rounded-2xl p-5">
+                  <div className="flex items-start gap-3">
+                    <div
+                      className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl mt-0.5"
+                      style={{ background: 'var(--blue-soft)' }}
+                    >
+                      <item.icon size={20} style={{ color: 'var(--blue)' }} strokeWidth={2} />
+                    </div>
+                    <div>
+                      <h3
+                        className="text-sm font-black mb-1"
+                        style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                      >
+                        {item.title}
+                      </h3>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -294,7 +403,7 @@ export default function LandingPage() {
 
             <div className="p-6 sm:p-8 space-y-5" style={{ background: 'var(--cream)', fontFamily: 'monospace', fontSize: '14px', lineHeight: '1.8' }}>
               <div>
-                <p className="font-bold" style={{ color: 'var(--brown)' }}># InvoicePilot -- Build Spec</p>
+                <p className="font-bold" style={{ color: 'var(--brown)' }}># InvoicePilot &mdash; Build Spec</p>
               </div>
               <div>
                 <p className="font-bold mb-1" style={{ color: 'var(--cash-dark)' }}>## What You&apos;re Building</p>
