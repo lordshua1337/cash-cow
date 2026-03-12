@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, type MouseEvent } from 'react'
+import confetti from 'canvas-confetti'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -323,7 +324,23 @@ export default function LandingPage() {
                 { title: 'Launch day playbook', desc: 'Where to post, what to say, when to post it. Product Hunt, Reddit, Indie Hackers, Twitter\u2014a timed launch sequence so day one actually counts.' },
                 { title: 'Funnel blueprint', desc: 'Email capture, onboarding flow, upgrade triggers, retention loops. The full conversion funnel mapped out so you\u2019re not launching into the void.' },
               ].map((item) => (
-                <div key={item.title} className="card rounded-2xl p-6">
+                <div
+                  key={item.title}
+                  className="card rounded-2xl p-6 cursor-pointer transition-transform active:scale-95"
+                  onClick={(e: MouseEvent<HTMLDivElement>) => {
+                    const x = e.clientX / window.innerWidth
+                    const y = e.clientY / window.innerHeight
+                    confetti({
+                      particleCount: 80,
+                      spread: 70,
+                      origin: { x, y },
+                      colors: ['#FF0000', '#FF8000', '#FFD700', '#22C55E', '#0099FF', '#6633FF', '#CC33FF'],
+                      ticks: 120,
+                      gravity: 1.2,
+                      scalar: 0.9,
+                    })
+                  }}
+                >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 flex flex-col gap-1 mt-0.5">
                       <Image src="/rainbow-pdf.svg" alt="" width={28} height={28} />
