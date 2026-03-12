@@ -741,18 +741,15 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
               <div
                 className="rounded-none p-5 overflow-hidden"
-                style={{ background: '#282a36', border: '1px solid #3a3d4a' }}
+                style={{ background: '#2a2a2a', border: '1px solid #3a3a3a' }}
               >
                 {/* Header: mascot + Claude Code title */}
                 <div className="flex items-start gap-3 mb-3">
                   {/* Pixel robot mascot */}
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 mt-0.5">
-                    {/* Head */}
                     <rect x="3" y="2" width="18" height="13" fill="#c4704a" />
-                    {/* Eyes */}
-                    <rect x="7" y="6" width="3" height="3" fill="#282a36" />
-                    <rect x="14" y="6" width="3" height="3" fill="#282a36" />
-                    {/* Legs */}
+                    <rect x="7" y="6" width="3" height="3" fill="#2a2a2a" />
+                    <rect x="14" y="6" width="3" height="3" fill="#2a2a2a" />
                     <rect x="4" y="15" width="3" height="7" fill="#c4704a" />
                     <rect x="9" y="15" width="3" height="5" fill="#c4704a" />
                     <rect x="13" y="15" width="3" height="5" fill="#c4704a" />
@@ -760,46 +757,46 @@ export default function LandingPage() {
                   </svg>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-sm" style={{ color: '#f8f8f2' }}>Claude Code</span>
-                      <span className="text-xs" style={{ color: '#6272a4' }}>v2.1</span>
+                      <span className="font-bold text-sm" style={{ color: '#ffffff' }}>Claude Code</span>
+                      <span className="text-xs" style={{ color: '#777' }}>v2.1</span>
                     </div>
-                    <div className="text-xs" style={{ color: '#6272a4' }}>
+                    <div className="text-xs" style={{ color: '#777' }}>
                       Opus 4.6 &middot; Claude Max
                     </div>
-                    <div className="text-xs" style={{ color: '#6272a4' }}>
+                    <div className="text-xs" style={{ color: '#777' }}>
                       ~/projects/your-app
                     </div>
                   </div>
                 </div>
 
                 {/* Separator line */}
-                <div className="mb-3" style={{ color: '#6272a4', fontSize: '11px', fontFamily: 'monospace', letterSpacing: '2px' }}>
+                <div className="mb-3" style={{ color: '#555', fontSize: '11px', fontFamily: 'monospace', letterSpacing: '2px' }}>
                   &#x2500;&#x2500;&#x2500; &#x2500;&#x2500;&#x2500; &#x2500; &#x2500;&#x2500; &#x2500;&#x2500;&#x2500;&#x2500; &#x2500; &#x2500;&#x2500;&#x2500; &#x2500;&#x2500;
                 </div>
 
                 {/* Activity lines */}
                 <div style={{ fontFamily: 'monospace', fontSize: '12px', lineHeight: '1.7' }}>
-                  <div style={{ color: '#f8f8f2' }}>
-                    <span style={{ color: '#6272a4' }}>{'\u2517'} </span>
-                    Read <span style={{ color: '#e8956a' }}>build-spec.md</span>
-                    <span style={{ color: '#6272a4' }}> (48 sections)</span>
+                  <div style={{ color: '#e0e0e0' }}>
+                    <span style={{ color: '#555' }}>{'\u2517'} </span>
+                    Read <span style={{ color: '#c4704a' }}>build-spec.md</span>
+                    <span style={{ color: '#777' }}> (48 sections)</span>
                   </div>
-                  <div style={{ color: '#f8f8f2' }}>
-                    <span style={{ color: '#6272a4' }}>{'\u2517'} </span>
-                    Created <span style={{ color: '#e8956a' }}>src/app/dashboard/page.tsx</span>
+                  <div style={{ color: '#e0e0e0' }}>
+                    <span style={{ color: '#555' }}>{'\u2517'} </span>
+                    Created <span style={{ color: '#c4704a' }}>src/app/dashboard/page.tsx</span>
                   </div>
-                  <div style={{ color: '#f8f8f2' }}>
-                    <span style={{ color: '#6272a4' }}>{'\u2517'} </span>
-                    Created <span style={{ color: '#e8956a' }}>src/lib/stripe.ts</span>
+                  <div style={{ color: '#e0e0e0' }}>
+                    <span style={{ color: '#555' }}>{'\u2517'} </span>
+                    Created <span style={{ color: '#c4704a' }}>src/lib/stripe.ts</span>
                   </div>
-                  <div style={{ color: '#f8f8f2' }}>
-                    <span style={{ color: '#6272a4' }}>{'\u2517'} </span>
-                    Created <span style={{ color: '#e8956a' }}>14 more files...</span>
+                  <div style={{ color: '#e0e0e0' }}>
+                    <span style={{ color: '#555' }}>{'\u2517'} </span>
+                    Created <span style={{ color: '#c4704a' }}>14 more files...</span>
                   </div>
                 </div>
 
                 {/* Separator line */}
-                <div className="my-3" style={{ color: '#6272a4', fontSize: '11px', fontFamily: 'monospace', letterSpacing: '2px' }}>
+                <div className="my-3" style={{ color: '#555', fontSize: '11px', fontFamily: 'monospace', letterSpacing: '2px' }}>
                   &#x2500; &#x2500;&#x2500; &#x2500;&#x2500;&#x2500;&#x2500; &#x2500;&#x2500;&#x2500; &#x2500; &#x2500;&#x2500; &#x2500;&#x2500;&#x2500; &#x2500;&#x2500;&#x2500;&#x2500;
                 </div>
 
@@ -807,21 +804,21 @@ export default function LandingPage() {
                 <div className="flex items-center gap-1.5" style={{ fontFamily: 'monospace', fontSize: '12px' }}>
                   <span
                     className="inline-block w-2 h-2 rounded-full"
-                    style={{ background: '#50fa7b' }}
+                    style={{ background: 'var(--cash)' }}
                   />
-                  <span style={{ color: '#50fa7b' }}>Deployed</span>
-                  <span style={{ color: '#6272a4' }}>&mdash; your-app.vercel.app</span>
+                  <span style={{ color: 'var(--cash)' }}>Deployed</span>
+                  <span style={{ color: '#777' }}>&mdash; your-app.vercel.app</span>
                 </div>
 
                 {/* Bottom description */}
-                <p className="text-xs mt-4 leading-relaxed" style={{ color: '#bfc7d5' }}>
+                <p className="text-xs mt-4 leading-relaxed" style={{ color: '#aaa' }}>
                   Best results. Reads the entire spec, builds every file, handles deployment.
                   Setup instructions included with your spec.
                 </p>
 
                 {/* One-click install */}
                 <div className="mt-4">
-                  <p className="text-[10px] font-bold uppercase tracking-wider mb-1.5" style={{ color: '#6272a4' }}>
+                  <p className="text-[10px] font-bold uppercase tracking-wider mb-1.5" style={{ color: 'var(--cash)' }}>
                     Install free
                   </p>
                   <button
@@ -834,14 +831,14 @@ export default function LandingPage() {
                       }
                     }}
                     className="w-full flex items-center gap-2 px-3 py-2 text-left group transition-colors"
-                    style={{ background: '#21222c', border: '1px solid #3a3d4a', fontFamily: 'monospace', fontSize: '12px' }}
+                    style={{ background: '#222', border: '1px solid #3a3a3a', fontFamily: 'monospace', fontSize: '12px' }}
                   >
-                    <span style={{ color: '#6272a4' }}>$</span>
-                    <span className="flex-1 truncate" style={{ color: '#f8f8f2' }}>
+                    <span style={{ color: '#555' }}>$</span>
+                    <span className="flex-1 truncate" style={{ color: '#e0e0e0' }}>
                       npm install -g @anthropic-ai/claude-code
                     </span>
-                    <span id="cc-copy-btn" className="text-[10px] font-bold" style={{ color: '#50fa7b' }} />
-                    <Copy size={14} className="flex-shrink-0 opacity-40 group-hover:opacity-100 transition-opacity" style={{ color: '#f8f8f2' }} />
+                    <span id="cc-copy-btn" className="text-[10px] font-bold" style={{ color: 'var(--cash)' }} />
+                    <Copy size={14} className="flex-shrink-0 opacity-40 group-hover:opacity-100 transition-opacity" style={{ color: '#e0e0e0' }} />
                   </button>
                 </div>
               </div>
@@ -856,18 +853,18 @@ export default function LandingPage() {
                   The spec is a Markdown file. It works anywhere that reads Markdown.
                 </p>
 
-                <div className="space-y-2.5">
+                <div className="space-y-2">
                   {[
                     { name: 'Cursor', note: 'Full spec support' },
                     { name: 'Windsurf', note: 'Full spec support' },
-                    { name: 'Copilot Workspace', note: 'Partial (no multi-file)' },
+                    { name: 'Copilot', note: 'Partial (no multi-file)' },
                     { name: 'Bolt / Lovable', note: 'Paste sections individually' },
-                    { name: 'Any Markdown editor', note: 'Read + build manually' },
+                    { name: 'Any .md editor', note: 'Read + build manually' },
                   ].map((tool) => (
-                    <div key={tool.name} className="flex items-center gap-2.5">
-                      <Check size={15} strokeWidth={3} style={{ color: 'var(--cash)', flexShrink: 0 }} />
-                      <span className="text-sm font-bold" style={{ color: 'var(--brown)' }}>{tool.name}</span>
-                      <span className="text-xs" style={{ color: 'var(--brown-muted)' }}>&mdash; {tool.note}</span>
+                    <div key={tool.name} className="flex items-center gap-2">
+                      <Check size={14} strokeWidth={3} className="flex-shrink-0" style={{ color: 'var(--cash)' }} />
+                      <span className="text-sm font-bold whitespace-nowrap" style={{ color: 'var(--brown)' }}>{tool.name}</span>
+                      <span className="text-xs whitespace-nowrap" style={{ color: 'var(--brown-muted)' }}>{tool.note}</span>
                     </div>
                   ))}
                 </div>
