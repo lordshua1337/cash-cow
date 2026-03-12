@@ -315,8 +315,32 @@ export default function LandingPage() {
 
             {/* Robocow + stacked cards side by side */}
             <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
-              {/* Robocow */}
-              <div className="flex-shrink-0">
+              {/* Robocow + counter */}
+              <div className="flex-shrink-0 flex flex-col items-center">
+                {confettiClicks >= 5 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center mb-3 py-2.5 px-5 rounded-xl"
+                    style={{ background: 'var(--cream-dark)' }}
+                  >
+                    <p className="text-xs font-bold" style={{ color: 'var(--brown-muted)' }}>
+                      The most anyone has ever clicked this is 957 times.
+                    </p>
+                    <p
+                      className="text-sm font-black mt-0.5"
+                      style={{
+                        fontFamily: 'var(--font-fredoka), sans-serif',
+                        background: 'linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
+                    >
+                      You: {confettiClicks}
+                    </p>
+                  </motion.div>
+                )}
                 <Image
                   src="/robocow-unstoppable.png"
                   alt="Unstoppable robocow"
@@ -370,31 +394,6 @@ export default function LandingPage() {
                   </div>
                 ))}
 
-                {/* Easter egg counter after 5 clicks */}
-                {confettiClicks >= 5 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center mt-4 py-2.5 px-5 rounded-xl mx-auto w-fit"
-                    style={{ background: 'var(--cream-dark)' }}
-                  >
-                    <p className="text-xs font-bold" style={{ color: 'var(--brown-muted)' }}>
-                      The most anyone has ever clicked this is 957 times.
-                    </p>
-                    <p
-                      className="text-sm font-black mt-0.5"
-                      style={{
-                        fontFamily: 'var(--font-fredoka), sans-serif',
-                        background: 'linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                      }}
-                    >
-                      You: {confettiClicks}
-                    </p>
-                  </motion.div>
-                )}
               </div>
             </div>
           </div>
