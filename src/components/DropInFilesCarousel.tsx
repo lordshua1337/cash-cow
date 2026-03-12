@@ -5,12 +5,12 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { motion } from 'framer-motion'
 import {
-  ScanFace,
-  LayoutTemplate,
-  PackageCheck,
-  Network,
-  BotMessageSquare,
-  Gem,
+  Fingerprint,
+  MousePointerClick,
+  Rocket,
+  Table2,
+  WandSparkles,
+  Crown,
 } from 'lucide-react'
 
 interface FileItem {
@@ -25,32 +25,32 @@ const FILES: FileItem[] = [
   {
     title: 'Customer persona file',
     desc: 'A detailed persona doc your AI builder uses to make every decision for a real human\u2014not a generic \u201Cuser.\u201D Every UI choice, every line of copy, informed by who\u2019s actually paying.',
-    icon: <ScanFace size={56} strokeWidth={1.5} color={COW_RED} />,
+    icon: <Fingerprint size={56} strokeWidth={1.5} color={COW_RED} />,
   },
   {
     title: 'Landing page design file',
     desc: 'Full page structure, copy blocks, CTA placement, SEO meta tags, Open Graph cards. Your marketing site builds itself the same day your product does.',
-    icon: <LayoutTemplate size={56} strokeWidth={1.5} color={COW_RED} />,
+    icon: <MousePointerClick size={56} strokeWidth={1.5} color={COW_RED} />,
   },
   {
     title: 'One-click deploy template',
     desc: 'Pre-configured repo scaffold matching your spec\u2019s tech stack. Clone it, drop your files in, ship. The gap between \u201Cplan\u201D and \u201Crunning code\u201D shrinks to minutes.',
-    icon: <PackageCheck size={56} strokeWidth={1.5} color={COW_RED} />,
+    icon: <Rocket size={56} strokeWidth={1.5} color={COW_RED} />,
   },
   {
     title: 'Database schema file',
     desc: 'Complete SQL migrations, table relationships, and RLS policies. Your entire backend structure, ready to paste into Supabase.',
-    icon: <Network size={56} strokeWidth={1.5} color={COW_RED} />,
+    icon: <Table2 size={56} strokeWidth={1.5} color={COW_RED} />,
   },
   {
     title: 'Auto-email system file',
     desc: 'Custom AI-powered email setup with Fastmail. Welcome sequences, onboarding drips, upgrade nudges, churn recovery\u2014all automated. Never read or reply to an email again.',
-    icon: <BotMessageSquare size={56} strokeWidth={1.5} color={COW_RED} />,
+    icon: <WandSparkles size={56} strokeWidth={1.5} color={COW_RED} />,
   },
   {
     title: 'Brand identity file',
     desc: 'App name, color palette, typography, tone of voice, logo direction, and component styling tokens. Everything looks like one cohesive product from day one.',
-    icon: <Gem size={56} strokeWidth={1.5} color={COW_RED} />,
+    icon: <Crown size={56} strokeWidth={1.5} color={COW_RED} />,
   },
 ]
 
