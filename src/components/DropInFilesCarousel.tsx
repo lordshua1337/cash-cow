@@ -113,18 +113,6 @@ export default function DropInFilesCarousel() {
                     />
                   </motion.div>
 
-                  {/* File number badge */}
-                  <div
-                    className="inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-black mb-4"
-                    style={{
-                      background: '#E8676B',
-                      color: '#fff',
-                      fontFamily: 'var(--font-fredoka), sans-serif',
-                    }}
-                  >
-                    {i + 1}
-                  </div>
-
                   {/* Title */}
                   <h3
                     className="text-xl sm:text-2xl font-black mb-3"
