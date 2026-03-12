@@ -32,7 +32,7 @@ export default function LandingPage() {
         />
 
         {/* Content */}
-        <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
+        <div className="relative z-10 text-center px-6 pt-10 sm:pt-14 max-w-3xl mx-auto">
           <div
             className="animate-in inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-6"
             style={{
