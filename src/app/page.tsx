@@ -647,8 +647,9 @@ export default function LandingPage() {
               A <span style={{ color: 'var(--cash)' }}>real build plan.</span>
             </h2>
             <p className="text-base max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
-              12 sections including pricing, revenue timeline, and customer acquisition.
-              File paths, schemas, and step-by-step instructions.
+              Build something you AND other people love, so you can create while getting paid for it.
+              12 sections. Pricing, revenue, acquisition, the whole thing.
+              Heck, add it to your portfolio to show you&apos;re a pro. (we won&apos;t say anything.)
             </p>
             <Image
               src="/step-4.png"
