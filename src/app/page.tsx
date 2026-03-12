@@ -55,11 +55,18 @@ const MILESTONES: [number, string, boolean][] = [
   [500, "FIVE HUNDRED. ok genuinely.. are you ok? do you need water? a snack maybe?", true],
   [700, "700. you've spent more time clicking confetti than most people spend on their entire product launch strategy", false],
   [900, "900?? oh no.. oh no no no.. the record.. it's.. it's moving. WHAT", true],
-  [1000, "ONE THOUSAND CLICKS. you are actually unhinged and i mean that as a compliment", true],
-  [1500, "1,500. halfway to the record (which keeps moving because it's CHEATING). unfair honestly", false],
-  [2000, "TWO THOUSAND. ok you need to go outside. touch grass. look at the sky. then come back and keep clicking obviously", true],
-  [2500, "2,500.. the record is approaching 3,000. so are you. this is gonna be a photo finish", false],
-  [3000, "3,000. you did it. you caught the record. it's over. go build something now. seriously. please. the cow is begging you", true],
+  [1000, "ONE THOUSAND CLICKS. the record keeps pulling away.. this thing is FAST", true],
+  [1100, "1,100.. it's slowing down. you can feel it. it's getting tired. YOU'RE NOT", false],
+  [1200, "1,200.. the gap is closing. oh my god the gap is closing", false],
+  [1300, "YOU PASSED IT. YOU ACTUALLY PASSED IT. THE RECORD IS YOURS. wait.. wait is it still going?", true],
+  [1400, "ok it stopped. it actually stopped. you won. you're the new record holder. congratulations you beautiful psycho", true],
+  [1600, "wait.. wait. is the record.. moving again? no. NO. it can't be", true],
+  [1800, "IT'S BACK. THE RECORD IS CLIMBING AGAIN. IT WAS PLAYING DEAD. THIS THING IS SENTIENT", true],
+  [2000, "TWO THOUSAND. you and the record are in an arms race now. this is cold war energy", true],
+  [2500, "2,500.. you've been at this for a while. the record respects you. but it will not stop", false],
+  [3000, "3,000. at this point you and the record are basically in a relationship. toxic but committed", true],
+  [4000, "4,000. you're both still going. this is the longest confetti session in human history (probably)", false],
+  [5000, "5,000. ok it's over. the record maxed out. you win for real this time. now go build something. please. the cow is literally begging you", true],
 ]
 
 const MILESTONE_MAP = new Map(MILESTONES.map(([count, msg, force]) => [count, { msg, force }]))
@@ -157,20 +164,45 @@ export default function LandingPage() {
     }
   }, [confettiClicks])
 
+  // Record always stays ahead until ~1250, then user "wins," then record comes back
   useEffect(() => {
     if (confettiClicks < 900 || fakeRecordStarted.current) return
     fakeRecordStarted.current = true
 
     const tick = () => {
       setFakeRecord((prev) => {
-        if (prev >= 3000) return 3000
-        const jump = Math.floor(Math.random() * 4) + 1
-        return Math.min(prev + jump, 3000)
+        if (prev >= 5000) return 5000
+
+        // Phase 1: Stay ahead of user until they hit ~1250
+        // Jump aggressively to always be 20-80 ahead
+        if (prev < 1250) {
+          const target = confettiClicks + 20 + Math.floor(Math.random() * 60)
+          const jump = Math.max(1, target - prev)
+          return Math.min(prev + jump, 5000)
+        }
+
+        // Phase 2: Slow down and let user pass around 1250-1300
+        if (prev < 1350) {
+          // Barely move — user overtakes
+          if (Math.random() > 0.3) return prev
+          return prev + 1
+        }
+
+        // Phase 3: User thinks they won. Pause for a bit then come back
+        if (prev < 1500) {
+          // Stall for a while, then start creeping
+          if (Math.random() > 0.15) return prev
+          return prev + 1
+        }
+
+        // Phase 4: Record wakes back up and starts climbing again
+        const jump = Math.floor(Math.random() * 3) + 1
+        return Math.min(prev + jump, 5000)
       })
-      const nextDelay = Math.floor(Math.random() * 2000) + 500
+      const nextDelay = Math.floor(Math.random() * 800) + 200
       setTimeout(tick, nextDelay)
     }
-    setTimeout(tick, 1000)
+    setTimeout(tick, 500)
   }, [confettiClicks])
 
   return (
