@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
@@ -41,6 +41,36 @@ const FILES: FileItem[] = [
   },
 ]
 
+function LottieSlide({ src, shouldPlay }: { src: string; shouldPlay: boolean }) {
+  const [triggered, setTriggered] = useState(false)
+
+  useEffect(() => {
+    if (shouldPlay && !triggered) {
+      setTriggered(true)
+    }
+  }, [shouldPlay, triggered])
+
+  return (
+    <div className="mx-auto mb-6 w-[100px] h-[100px]">
+      {triggered ? (
+        <DotLottieReact
+          src={src}
+          autoplay
+          loop={false}
+          style={{ width: '100%', height: '100%' }}
+        />
+      ) : (
+        <Image
+          src="/icon-file-plus-cow-red.svg"
+          alt=""
+          width={100}
+          height={100}
+        />
+      )}
+    </div>
+  )
+}
+
 export default function DropInFilesCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -52,18 +82,30 @@ export default function DropInFilesCarousel() {
   )
 
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [settledIndex, setSettledIndex] = useState<number | null>(null)
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return
     setSelectedIndex(emblaApi.selectedScrollSnap())
+    setSettledIndex(null)
+  }, [emblaApi])
+
+  const onSettle = useCallback(() => {
+    if (!emblaApi) return
+    setSettledIndex(emblaApi.selectedScrollSnap())
   }, [emblaApi])
 
   useEffect(() => {
     if (!emblaApi) return
     emblaApi.on('select', onSelect)
+    emblaApi.on('settle', onSettle)
     onSelect()
-    return () => { emblaApi.off('select', onSelect) }
-  }, [emblaApi, onSelect])
+    onSettle()
+    return () => {
+      emblaApi.off('select', onSelect)
+      emblaApi.off('settle', onSettle)
+    }
+  }, [emblaApi, onSelect, onSettle])
 
   const scrollTo = useCallback(
     (index: number) => emblaApi?.scrollTo(index),
@@ -113,14 +155,10 @@ export default function DropInFilesCarousel() {
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                   >
                     {file.lottie ? (
-                      <div className="mx-auto mb-6 w-[100px] h-[100px]">
-                        <DotLottieReact
-                          src={file.lottie}
-                          autoplay
-                          loop={false}
-                          style={{ width: '100%', height: '100%' }}
-                        />
-                      </div>
+                      <LottieSlide
+                        src={file.lottie}
+                        shouldPlay={settledIndex === i}
+                      />
                     ) : (
                       <Image
                         src="/icon-file-plus-cow-red.svg"
