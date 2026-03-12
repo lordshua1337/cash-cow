@@ -334,8 +334,8 @@ export default function LandingPage() {
                 <div key={item.title} className="card rounded-2xl p-6">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 flex flex-col gap-1 mt-0.5">
-                      <Image src="/brown-pdf.svg" alt="" width={18} height={18} />
-                      <Image src="/brown-webpage.svg" alt="" width={18} height={18} />
+                      <Image src="/brown-pdf.svg" alt="" width={28} height={28} />
+                      <Image src="/brown-webpage.svg" alt="" width={28} height={28} />
                     </div>
                     <div>
                       <h3
