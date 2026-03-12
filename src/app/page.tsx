@@ -209,7 +209,7 @@ export default function LandingPage() {
             className="card rounded-2xl p-8 sm:p-10 text-center mb-10"
             style={{ border: '2px solid var(--cash)', background: 'var(--cash-soft)' }}
           >
-            <Image src="/file-system-cow.svg" alt="Launch kit" width={80} height={80} className="mx-auto mb-4" />
+            <Image src="/step-5.png" alt="Launch kit cow" width={120} height={120} className="mx-auto mb-4" />
             <h3
               className="text-2xl sm:text-3xl font-black mb-3"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
@@ -454,12 +454,16 @@ export default function LandingPage() {
           <p className="text-xs mt-6 font-semibold" style={{ color: 'var(--brown-faint)' }}>
             Free. No signup. Trending products refresh daily.
           </p>
+        </div>
+        {/* Rocket cow anchored to bottom -- smoke blasts off the footer */}
+        <div className="relative z-10 flex justify-center mt-8 -mb-20 sm:-mb-28">
           <Image
-            src="/step-5.png"
-            alt="Cash cow with money"
-            width={200}
-            height={200}
-            className="mx-auto mt-8"
+            src="/rocket-cow.png"
+            alt="Rocket cow blasting off"
+            width={280}
+            height={280}
+            className="object-contain"
+            style={{ marginBottom: '-2rem' }}
           />
         </div>
       </section>
