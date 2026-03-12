@@ -1,8 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import {
   ArrowRight,
   Compass,
@@ -15,152 +13,124 @@ import {
 } from 'lucide-react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 
-const WORDS = ['remix', 'reshape', 'rebuild', 'rethink']
-
 export default function LandingPage() {
-  const router = useRouter()
-  const [wordIdx, setWordIdx] = useState(0)
-  const [fading, setFading] = useState(false)
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setFading(true)
-      setTimeout(() => { setWordIdx((i) => (i + 1) % WORDS.length); setFading(false) }, 200)
-    }, 2400)
-    return () => clearInterval(id)
-  }, [])
 
   return (
     <div>
 
       {/* ====== HERO ====== */}
       <section
-        className="relative overflow-hidden min-h-[calc(100vh-60px)] flex items-center"
+        className="relative overflow-hidden min-h-[calc(100vh-60px)] flex flex-col items-center justify-center"
         style={{ background: 'var(--white)' }}
       >
-        {/* Soft radial glow behind the lottie */}
+        {/* Radial glow behind cow */}
         <div
-          className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none hidden lg:block"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(34, 197, 94, 0.08) 0%, transparent 70%)',
-            right: '2%',
           }}
         />
 
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-8 sm:py-0 relative z-10 w-full">
-          <div className="flex flex-col lg:flex-row items-center gap-0">
+        {/* Cow -- centered background layer */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[550px] lg:h-[550px] pointer-events-none" style={{ zIndex: 1 }}>
+          <DotLottieReact
+            src="/cow-remix.lottie"
+            loop
+            autoplay
+            style={{ width: '100%', height: '100%', transform: 'scale(1.4)', opacity: 0.18 }}
+          />
+        </div>
 
-            {/* Left: text content -- takes ~65% of width */}
-            <div className="lg:w-[62%] text-center lg:text-left">
-              <div
-                className="animate-in inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-5"
-                style={{
-                  background: 'var(--cash-soft)',
-                  color: 'var(--cash-dark)',
-                }}
-              >
-                <CircleDollarSign size={14} />
-                Monetizable specs in 60 seconds
-              </div>
-
-              <h1
-                className="animate-in text-4xl sm:text-5xl lg:text-6xl font-black mb-4 leading-[1.08] tracking-tight"
-                style={{ fontFamily: 'var(--font-fredoka), sans-serif', animationDelay: '0.05s' }}
-              >
-                Don&apos;t start
-                <br />
-                from scratch.
-                <br />
-                <span
-                  className="inline-block"
-                  style={{
-                    color: 'var(--cash)',
-                    opacity: fading ? 0 : 1,
-                    transition: 'opacity 0.2s ease',
-                    minWidth: '160px',
-                  }}
-                >
-                  {WORDS[wordIdx]}
-                </span>{' '}
-                it.
-              </h1>
-
-              <p
-                className="animate-in text-base sm:text-lg max-w-xl mx-auto lg:mx-0 mb-6 leading-relaxed"
-                style={{ color: 'var(--brown-muted)', animationDelay: '0.1s' }}
-              >
-                Pick a product people already pay for. Make it yours.
-                Get a spec with pricing, revenue timeline, and a real build plan.
-              </p>
-
-              <div className="animate-in flex items-center justify-center lg:justify-start gap-3 flex-wrap" style={{ animationDelay: '0.15s' }}>
-                <Link
-                  href="/workflow"
-                  className="btn-hover inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl text-base font-bold"
-                  style={{
-                    background: 'var(--cash)',
-                    color: '#fff',
-                    boxShadow: '0 4px 16px rgba(34, 197, 94, 0.3)',
-                  }}
-                >
-                  Start Building
-                  <ArrowRight size={18} strokeWidth={2.5} />
-                </Link>
-                <a
-                  href="#how"
-                  className="btn-hover inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl text-base font-bold"
-                  style={{
-                    color: 'var(--brown)',
-                    background: 'var(--cream-dark)',
-                  }}
-                >
-                  How it works
-                </a>
-              </div>
-
-              {/* Trust signals */}
-              <div
-                className="animate-in flex items-center justify-center lg:justify-start gap-5 mt-6"
-                style={{ animationDelay: '0.2s' }}
-              >
-                {[
-                  { icon: BarChart3, text: 'Revenue projections' },
-                  { icon: CircleDollarSign, text: 'Pricing strategy' },
-                  { icon: Hammer, text: 'Build-ready spec' },
-                ].map((item) => (
-                  <div
-                    key={item.text}
-                    className="flex items-center gap-1.5 text-xs font-bold"
-                    style={{ color: 'var(--brown-faint)' }}
-                  >
-                    <item.icon size={12} style={{ color: 'var(--cash)' }} />
-                    {item.text}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right: Lottie cow animation */}
-            <div className="lg:w-[38%] flex-shrink-0 w-72 h-72 sm:w-[360px] sm:h-[360px] lg:w-auto lg:h-[480px] lg:-mr-6 relative">
-              <div
-                className="absolute inset-[-15%] rounded-full"
-                style={{
-                  background: 'radial-gradient(circle, rgba(34, 197, 94, 0.07) 0%, transparent 65%)',
-                }}
-              />
-              <DotLottieReact
-                src="/cow-remix.lottie"
-                loop
-                autoplay
-                style={{ width: '100%', height: '100%', position: 'relative', zIndex: 1, transform: 'scale(1.35)' }}
-              />
-            </div>
+        {/* Content -- on top of cow */}
+        <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
+          <div
+            className="animate-in inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-6"
+            style={{
+              background: 'var(--cash-soft)',
+              color: 'var(--cash-dark)',
+            }}
+          >
+            <CircleDollarSign size={14} />
+            Monetizable specs in 60 seconds
           </div>
+
+          <h1
+            className="animate-in text-5xl sm:text-6xl lg:text-7xl font-black mb-5 leading-[1.05] tracking-tight"
+            style={{ fontFamily: 'var(--font-fredoka), sans-serif', animationDelay: '0.05s' }}
+          >
+            Don&apos;t start from scratch.
+            <br />
+            <span style={{ color: 'var(--cash)' }}>Rebuild</span> it.
+          </h1>
+
+          <p
+            className="animate-in text-base sm:text-lg max-w-lg mx-auto mb-8 leading-relaxed"
+            style={{ color: 'var(--brown-muted)', animationDelay: '0.1s' }}
+          >
+            Pick a product people already pay for. Make it yours.
+            Get a spec with pricing, revenue timeline, and a real build plan.
+          </p>
+
+          <div className="animate-in flex items-center justify-center gap-3 flex-wrap mb-6" style={{ animationDelay: '0.15s' }}>
+            <Link
+              href="/workflow"
+              className="btn-hover inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-lg font-bold"
+              style={{
+                background: 'var(--cash)',
+                color: '#fff',
+                boxShadow: '0 4px 20px rgba(34, 197, 94, 0.35)',
+              }}
+            >
+              Start Building
+              <ArrowRight size={20} strokeWidth={2.5} />
+            </Link>
+            <a
+              href="#how"
+              className="btn-hover inline-flex items-center gap-2 px-6 py-4 rounded-2xl text-lg font-bold"
+              style={{
+                color: 'var(--brown)',
+                background: 'var(--cream-dark)',
+              }}
+            >
+              How it works
+            </a>
+          </div>
+
+          {/* Trust signals */}
+          <div
+            className="animate-in flex items-center justify-center gap-6"
+            style={{ animationDelay: '0.2s' }}
+          >
+            {[
+              { icon: BarChart3, text: 'Revenue projections' },
+              { icon: CircleDollarSign, text: 'Pricing strategy' },
+              { icon: Hammer, text: 'Build-ready spec' },
+            ].map((item) => (
+              <div
+                key={item.text}
+                className="flex items-center gap-1.5 text-xs font-bold"
+                style={{ color: 'var(--brown-faint)' }}
+              >
+                <item.icon size={12} style={{ color: 'var(--cash)' }} />
+                {item.text}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Cow -- foreground layer peeking from bottom */}
+        <div className="relative z-20 mt-auto w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] lg:w-[400px] lg:h-[400px] -mb-4">
+          <DotLottieReact
+            src="/cow-remix.lottie"
+            loop
+            autoplay
+            style={{ width: '100%', height: '100%', transform: 'scale(1.4)' }}
+          />
         </div>
 
         {/* Bottom gradient fade */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-16"
+          className="absolute bottom-0 left-0 right-0 h-24 z-30"
           style={{ background: 'linear-gradient(to bottom, transparent, var(--cream))' }}
         />
       </section>
