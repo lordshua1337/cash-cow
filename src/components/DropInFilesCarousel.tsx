@@ -42,31 +42,25 @@ const FILES: FileItem[] = [
 ]
 
 function LottieSlide({ src, shouldPlay }: { src: string; shouldPlay: boolean }) {
+  const dotLottieRef = useRef<any>(null)
   const [triggered, setTriggered] = useState(false)
 
   useEffect(() => {
-    if (shouldPlay && !triggered) {
+    if (shouldPlay && !triggered && dotLottieRef.current) {
       setTriggered(true)
+      dotLottieRef.current.play()
     }
   }, [shouldPlay, triggered])
 
   return (
     <div className="mx-auto mb-6 w-[100px] h-[100px]">
-      {triggered ? (
-        <DotLottieReact
-          src={src}
-          autoplay
-          loop={false}
-          style={{ width: '100%', height: '100%' }}
-        />
-      ) : (
-        <Image
-          src="/icon-file-plus-cow-red.svg"
-          alt=""
-          width={100}
-          height={100}
-        />
-      )}
+      <DotLottieReact
+        src={src}
+        autoplay={false}
+        loop={false}
+        dotLottieRefCallback={(ref) => { dotLottieRef.current = ref }}
+        style={{ width: '100%', height: '100%' }}
+      />
     </div>
   )
 }
