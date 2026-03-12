@@ -32,7 +32,7 @@ export default function Nav() {
           className="rounded-lg"
         />
         <span
-          className="text-lg font-bold tracking-tight hidden sm:inline"
+          className="text-xl font-black tracking-tight hidden sm:inline"
           style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
         >
           Cash Cow
