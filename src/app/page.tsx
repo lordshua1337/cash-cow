@@ -745,23 +745,17 @@ export default function LandingPage() {
                 {/* Header: mascot + Claude Code title */}
                 <div className="flex items-start gap-3 mb-3">
                   {/* Pixel robot mascot */}
-                  <svg width="32" height="32" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 mt-0.5">
-                    <rect x="16" y="0" width="4" height="3" fill="#e8956a" />
-                    <rect x="14" y="1" width="2" height="2" fill="#e8956a" />
-                    <rect x="20" y="1" width="2" height="2" fill="#e8956a" />
-                    <rect x="8" y="3" width="20" height="14" rx="2" fill="#d4845a" />
-                    <rect x="10" y="3" width="16" height="2" fill="#e8956a" />
-                    <rect x="12" y="8" width="4" height="4" rx="1" fill="#282a36" />
-                    <rect x="20" y="8" width="4" height="4" rx="1" fill="#282a36" />
-                    <rect x="13" y="9" width="2" height="2" fill="#f8f8f2" />
-                    <rect x="21" y="9" width="2" height="2" fill="#f8f8f2" />
-                    <rect x="14" y="13" width="8" height="2" rx="1" fill="#282a36" />
-                    <rect x="10" y="19" width="16" height="12" rx="2" fill="#d4845a" />
-                    <rect x="12" y="21" width="12" height="4" rx="1" fill="#e8956a" />
-                    <rect x="6" y="21" width="4" height="8" rx="2" fill="#d4845a" />
-                    <rect x="26" y="21" width="4" height="8" rx="2" fill="#d4845a" />
-                    <rect x="12" y="31" width="4" height="4" rx="1" fill="#d4845a" />
-                    <rect x="20" y="31" width="4" height="4" rx="1" fill="#d4845a" />
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 mt-0.5">
+                    {/* Head */}
+                    <rect x="3" y="2" width="18" height="13" fill="#c4704a" />
+                    {/* Eyes */}
+                    <rect x="7" y="6" width="3" height="3" fill="#282a36" />
+                    <rect x="14" y="6" width="3" height="3" fill="#282a36" />
+                    {/* Legs */}
+                    <rect x="4" y="15" width="3" height="7" fill="#c4704a" />
+                    <rect x="9" y="15" width="3" height="5" fill="#c4704a" />
+                    <rect x="13" y="15" width="3" height="5" fill="#c4704a" />
+                    <rect x="17" y="15" width="3" height="7" fill="#c4704a" />
                   </svg>
                   <div>
                     <div className="flex items-center gap-2">
