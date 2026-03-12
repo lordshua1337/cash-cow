@@ -45,30 +45,24 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import DropInFilesCarousel from '@/components/DropInFilesCarousel'
 
 // Milestone messages — triggered at specific click counts
-const MILESTONE_MSGS: Record<number, string> = {
-  10: "oh yeah we're cooking now.. 10 clicks deep and you haven't even looked at the record yet have you",
-  50: "50 clicks. that's genuinely impressive commitment to something that does absolutely nothing productive",
-  100: "oh yeah you're almost at.. wait you ARE at 100. that's 50% more clicks than it takes to build and deploy your product (probably..)",
-  150: "150.. you're in the top 1% of confetti clickers. we don't have data to back that up but it feels true",
-  200: "200 clicks and you still haven't started building. the cow is judging you. look at his face",
-  250: "250? cmon look at the record.. let's pump it up to the next level",
-  300: "300. at this rate you're gonna need a build spec just for your clicking strategy",
-  350: "fun fact: 350 clicks burns approximately 0.3 calories. you're basically working out right now",
-  400: "400.. you know what would be really unstoppable? if you actually built something. just a thought.. i dunno..",
-  450: "450 and still going. your mouse is gonna file a workers comp claim",
-  500: "FIVE HUNDRED. ok genuinely.. are you ok? do you need water? a snack maybe?",
-  600: "600. this is now officially more clicks than it takes to order food on doordash, check out, and eat it",
-  700: "700. you've spent more time clicking confetti than most people spend on their entire product launch strategy",
-  800: "800 and counting.. the record is starting to sweat. you can feel it",
-  900: "900?? oh no.. oh no no no.. the record.. it's.. it's moving. WHAT",
-  1000: "ONE THOUSAND CLICKS. you are actually unhinged and i mean that as a compliment",
-  1200: "1,200. you've been here a while huh. the confetti factory is running overtime",
-  1500: "1,500. halfway to the record (which keeps moving because it's CHEATING). unfair honestly",
-  1800: "1,800.. the cow believes in you. i believe in you. the confetti believes in you. we're all here for this",
-  2000: "TWO THOUSAND. ok you need to go outside. touch grass. look at the sky. then come back and keep clicking obviously",
-  2500: "2,500.. the record is approaching 3,000. so are you. this is gonna be a photo finish",
-  3000: "3,000. you did it. you caught the record. it's over. go build something now. seriously. please. the cow is begging you",
-}
+// Ordered milestone list — [clickCount, message, force]
+// force=true means it always shows even if too close to last message
+const MILESTONES: [number, string, boolean][] = [
+  [100, "oh yeah you're almost at.. wait you ARE at 100. that's 50% more clicks than it takes to build and deploy your product (probably..)", true],
+  [200, "200 clicks and you still haven't started building. the cow is judging you. look at his face", false],
+  [300, "300. at this rate you're gonna need a build spec just for your clicking strategy", false],
+  [400, "400.. you know what would be really unstoppable? if you actually built something. just a thought.. i dunno..", false],
+  [500, "FIVE HUNDRED. ok genuinely.. are you ok? do you need water? a snack maybe?", true],
+  [700, "700. you've spent more time clicking confetti than most people spend on their entire product launch strategy", false],
+  [900, "900?? oh no.. oh no no no.. the record.. it's.. it's moving. WHAT", true],
+  [1000, "ONE THOUSAND CLICKS. you are actually unhinged and i mean that as a compliment", true],
+  [1500, "1,500. halfway to the record (which keeps moving because it's CHEATING). unfair honestly", false],
+  [2000, "TWO THOUSAND. ok you need to go outside. touch grass. look at the sky. then come back and keep clicking obviously", true],
+  [2500, "2,500.. the record is approaching 3,000. so are you. this is gonna be a photo finish", false],
+  [3000, "3,000. you did it. you caught the record. it's over. go build something now. seriously. please. the cow is begging you", true],
+]
+
+const MILESTONE_MAP = new Map(MILESTONES.map(([count, msg, force]) => [count, { msg, force }]))
 
 // Rotating tips that show between milestones
 const ROTATING_TIPS = [
@@ -130,24 +124,33 @@ export default function LandingPage() {
 
   useEffect(() => {
     if (confettiClicks < 5) return
-    if (nextTipAt.current === 0) {
-      nextTipAt.current = confettiClicks + 25 + Math.floor(Math.random() * 11)
-    }
 
-    // Check for milestone message first
-    if (MILESTONE_MSGS[confettiClicks]) {
-      setMotivation(MILESTONE_MSGS[confettiClicks])
-      lastMotivationAt.current = confettiClicks
-      nextTipAt.current = confettiClicks + 25 + Math.floor(Math.random() * 11)
+    const MIN_GAP = 25
+    const sinceLast = confettiClicks - lastMotivationAt.current
+
+    // Check for milestone
+    const milestone = MILESTONE_MAP.get(confettiClicks)
+    if (milestone) {
+      // Force milestones always show, others respect min gap
+      if (milestone.force || sinceLast >= MIN_GAP) {
+        setMotivation(milestone.msg)
+        lastMotivationAt.current = confettiClicks
+        nextTipAt.current = confettiClicks + MIN_GAP + Math.floor(Math.random() * 11)
+      }
       return
     }
 
-    // Show a rotating tip at the pre-calculated next threshold
-    if (confettiClicks >= nextTipAt.current && nextTipAt.current > 0) {
+    // Initialize nextTipAt on first activation
+    if (nextTipAt.current === 0) {
+      nextTipAt.current = confettiClicks + MIN_GAP + Math.floor(Math.random() * 11)
+    }
+
+    // Show rotating tip only at the pre-calculated threshold
+    if (confettiClicks >= nextTipAt.current) {
       setMotivation(ROTATING_TIPS[lastTipIndex.current % ROTATING_TIPS.length])
       lastTipIndex.current += 1
       lastMotivationAt.current = confettiClicks
-      nextTipAt.current = confettiClicks + 25 + Math.floor(Math.random() * 11)
+      nextTipAt.current = confettiClicks + MIN_GAP + Math.floor(Math.random() * 11)
     }
   }, [confettiClicks])
 
