@@ -115,6 +115,8 @@ const ROTATING_TIPS = [
 export default function LandingPage() {
   const [showHowItWorks, setShowHowItWorks] = useState(false)
   const [confettiClicks, setConfettiClicks] = useState(0)
+  const [gameMode, setGameMode] = useState(false)
+  const [exitedGame, setExitedGame] = useState(false)
   const [fakeRecord, setFakeRecord] = useState(957)
   const [motivation, setMotivation] = useState('')
   const fakeRecordStarted = useRef(false)
@@ -124,6 +126,7 @@ export default function LandingPage() {
 
   useEffect(() => {
     if (confettiClicks < 5) return
+    if (!gameMode && !exitedGame) setGameMode(true)
 
     const MIN_GAP = 25
     const sinceLast = confettiClicks - lastMotivationAt.current
@@ -508,7 +511,12 @@ export default function LandingPage() {
                 ].map((item) => (
                   <div
                     key={item.title}
-                    className="card rounded-2xl p-6 cursor-pointer transition-transform active:scale-[0.98]"
+                    className="rounded-2xl p-6 cursor-pointer transition-all active:scale-[0.98]"
+                    style={{
+                      background: gameMode ? '#fff' : 'var(--white)',
+                      boxShadow: gameMode ? '0 2px 12px rgba(0,0,0,0.06)' : 'var(--shadow)',
+                      border: gameMode ? '2px solid rgba(232, 103, 107, 0.2)' : '1px solid rgba(45, 35, 25, 0.06)',
+                    }}
                     onClick={(e: MouseEvent<HTMLDivElement>) => {
                       const x = e.clientX / window.innerWidth
                       const y = e.clientY / window.innerHeight
@@ -524,26 +532,70 @@ export default function LandingPage() {
                       })
                     }}
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 flex flex-col gap-1 mt-0.5">
-                        <Image src="/rainbow-pdf.svg" alt="" width={28} height={28} />
-                        <Image src="/rainbow-webpage.svg" alt="" width={28} height={28} />
+                    {gameMode ? (
+                      <p
+                        className="text-center text-lg font-black py-2"
+                        style={{
+                          fontFamily: 'var(--font-fredoka), sans-serif',
+                          color: '#E8676B',
+                        }}
+                      >
+                        Click Me
+                      </p>
+                    ) : (
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 flex flex-col gap-1 mt-0.5">
+                          <Image src="/rainbow-pdf.svg" alt="" width={28} height={28} />
+                          <Image src="/rainbow-webpage.svg" alt="" width={28} height={28} />
+                        </div>
+                        <div>
+                          <h3
+                            className="text-base font-black mb-1"
+                            style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                          >
+                            {item.title}
+                          </h3>
+                          <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                            {item.desc}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3
-                          className="text-base font-black mb-1"
-                          style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
-                        >
-                          {item.title}
-                        </h3>
-                        <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
+                    )}
                   </div>
                 ))}
 
+                {/* Exit game / Start building */}
+                {gameMode && (
+                  <motion.button
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="mx-auto mt-2 px-5 py-2.5 rounded-xl text-sm font-bold"
+                    style={{ background: 'var(--cream-dark)', color: 'var(--brown-muted)' }}
+                    onClick={() => { setGameMode(false); setExitedGame(true) }}
+                  >
+                    Exit Game Mode
+                  </motion.button>
+                )}
+                {exitedGame && !gameMode && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center mt-2"
+                  >
+                    <Link
+                      href="/workflow"
+                      className="btn-hover inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-lg font-bold"
+                      style={{
+                        background: 'var(--cash)',
+                        color: '#fff',
+                        boxShadow: '0 4px 20px rgba(34, 197, 94, 0.35)',
+                      }}
+                    >
+                      Start Building
+                      <ArrowRight size={20} strokeWidth={2.5} />
+                    </Link>
+                  </motion.div>
+                )}
               </div>
             </div>
           </div>
