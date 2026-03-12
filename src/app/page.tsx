@@ -846,27 +846,31 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="card rounded-2xl p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: 'var(--cream-dark)', color: 'var(--brown-muted)' }}
-                  >
-                    <Check size={20} strokeWidth={3} />
-                  </div>
-                  <h3
-                    className="text-base font-black"
-                    style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
-                  >
-                    Also works with
-                  </h3>
+                <h3
+                  className="text-lg font-black mb-1"
+                  style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                >
+                  Also tested with
+                </h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--brown-muted)' }}>
+                  The spec is a Markdown file. It works anywhere that reads Markdown.
+                </p>
+
+                <div className="space-y-2.5">
+                  {[
+                    { name: 'Cursor', note: 'Full spec support' },
+                    { name: 'Windsurf', note: 'Full spec support' },
+                    { name: 'Copilot Workspace', note: 'Partial (no multi-file)' },
+                    { name: 'Bolt / Lovable', note: 'Paste sections individually' },
+                    { name: 'Any Markdown editor', note: 'Read + build manually' },
+                  ].map((tool) => (
+                    <div key={tool.name} className="flex items-center gap-2.5">
+                      <Check size={15} strokeWidth={3} style={{ color: 'var(--cash)', flexShrink: 0 }} />
+                      <span className="text-sm font-bold" style={{ color: 'var(--brown)' }}>{tool.name}</span>
+                      <span className="text-xs" style={{ color: 'var(--brown-muted)' }}>&mdash; {tool.note}</span>
+                    </div>
+                  ))}
                 </div>
-                <p className="text-lg font-black mb-1" style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}>
-                  Cursor, Windsurf, etc.
-                </p>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
-                  Any AI builder that accepts Markdown files. Results may vary, but the spec still
-                  gives you everything you need.
-                </p>
               </div>
             </div>
           </div>
