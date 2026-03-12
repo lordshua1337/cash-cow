@@ -647,9 +647,9 @@ export default function LandingPage() {
               <span style={{ color: 'var(--cash)' }}>other people love.</span>
             </h2>
             <p className="text-base max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
-              Start with something people already pay for. Add your twist. Get a 12-section spec
-              that turns your vision into a real product&mdash;pricing, revenue model, build plan, everything.
-              Drop it into Claude Code and watch it come to life. No guessing what to build. No building something nobody wants.
+              Why guess what to build when people are already paying for it? Take what works,
+              remix it with your vision, and get a full build spec that Claude Code can ship in a day.
+              Market-validated from minute one.
             </p>
             <Image
               src="/step-4.png"
