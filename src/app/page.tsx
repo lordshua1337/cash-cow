@@ -642,13 +642,12 @@ export default function LandingPage() {
               className="text-3xl sm:text-4xl font-black mb-3 tracking-tight"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
             >
-              Not a vague outline.
+              Build something you AND
               <br />
-              A <span style={{ color: 'var(--cash)' }}>real build plan.</span>
+              <span style={{ color: 'var(--cash)' }}>other people love.</span>
             </h2>
             <p className="text-base max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
-              Build something you AND other people love, so you can create while getting paid for it.
-              12 sections. Pricing, revenue, acquisition, the whole thing.
+              Create while getting paid for it. 12 sections. Pricing, revenue, acquisition, the whole thing.
               Heck, add it to your portfolio to show you&apos;re a pro. (we won&apos;t say anything.)
             </p>
             <Image
