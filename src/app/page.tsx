@@ -47,11 +47,11 @@ export default function LandingPage() {
           }}
         />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-0 relative z-10 w-full">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-8 sm:py-0 relative z-10 w-full">
           <div className="flex flex-col lg:flex-row items-center gap-0">
 
-            {/* Left: text content */}
-            <div className="flex-1 text-center lg:text-left lg:pr-0">
+            {/* Left: text content -- takes ~65% of width */}
+            <div className="lg:w-[62%] text-center lg:text-left">
               <div
                 className="animate-in inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-5"
                 style={{
@@ -64,7 +64,7 @@ export default function LandingPage() {
               </div>
 
               <h1
-                className="animate-in text-4xl sm:text-5xl lg:text-[3.5rem] font-black mb-4 leading-[1.1] tracking-tight"
+                className="animate-in text-4xl sm:text-5xl lg:text-6xl font-black mb-4 leading-[1.08] tracking-tight"
                 style={{ fontFamily: 'var(--font-fredoka), sans-serif', animationDelay: '0.05s' }}
               >
                 Don&apos;t start
@@ -86,7 +86,7 @@ export default function LandingPage() {
               </h1>
 
               <p
-                className="animate-in text-base max-w-md mx-auto lg:mx-0 mb-6 leading-relaxed"
+                className="animate-in text-base sm:text-lg max-w-xl mx-auto lg:mx-0 mb-6 leading-relaxed"
                 style={{ color: 'var(--brown-muted)', animationDelay: '0.1s' }}
               >
                 Pick a product people already pay for. Make it yours.
@@ -140,8 +140,8 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Right: Lottie cow animation -- BIG */}
-            <div className="flex-shrink-0 w-72 h-72 sm:w-[360px] sm:h-[360px] lg:w-[520px] lg:h-[520px] lg:-mr-12 relative">
+            {/* Right: Lottie cow animation */}
+            <div className="lg:w-[38%] flex-shrink-0 w-72 h-72 sm:w-[360px] sm:h-[360px] lg:w-auto lg:h-[480px] lg:-mr-6 relative">
               <div
                 className="absolute inset-[-15%] rounded-full"
                 style={{
