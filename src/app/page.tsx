@@ -1023,7 +1023,7 @@ export default function LandingPage() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-              className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-3xl p-8 sm:p-10"
+              className="relative w-full max-w-lg rounded-3xl p-6 sm:p-8"
               style={{ background: 'var(--white)', boxShadow: '0 25px 60px rgba(0,0,0,0.2)' }}
               onClick={(e) => e.stopPropagation()}
             >
@@ -1037,83 +1037,71 @@ export default function LandingPage() {
               </button>
 
               <h2
-                className="text-2xl sm:text-3xl font-black mb-2 tracking-tight"
+                className="text-xl sm:text-2xl font-black mb-1 tracking-tight"
                 style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
               >
                 How it works
               </h2>
-              <p className="text-base mb-8" style={{ color: 'var(--brown-muted)' }}>
+              <p className="text-sm mb-5" style={{ color: 'var(--brown-muted)' }}>
                 Five steps from &ldquo;I have no idea what to build&rdquo; to &ldquo;it&apos;s live and making money.&rdquo;
               </p>
 
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {[
                   {
                     num: '1',
-                    icon: <Compass size={22} />,
+                    icon: <Compass size={18} />,
                     title: 'Discover',
-                    desc: 'Browse trending products that real people already pay for\u2014sourced from Product Hunt. Filter by category (SaaS, AI, Marketplace, Mobile). Pick one as your inspiration. Not to clone it. To ride the same market wave with your own twist.',
-                    color: 'var(--cash)',
-                    bg: 'var(--cash-soft)',
+                    desc: 'Browse trending products people already pay for. Pick one as inspiration\u2014not to clone, but to ride the same wave.',
                   },
                   {
                     num: '2',
-                    icon: <SlidersHorizontal size={22} />,
+                    icon: <SlidersHorizontal size={18} />,
                     title: 'Customize',
-                    desc: 'A 4-step wizard walks you through it: Who are you building this for? What makes yours different? What features matter most? Any tech preferences? Each answer shapes your spec into something original\u2014not a template.',
-                    color: 'var(--cash)',
-                    bg: 'var(--cash-soft)',
+                    desc: 'Answer 4 quick questions: audience, differentiator, features, tech. Each answer shapes your spec into something original.',
                   },
                   {
                     num: '3',
-                    icon: <Sparkles size={22} />,
+                    icon: <Sparkles size={18} />,
                     title: 'Generate your spec',
-                    desc: 'Our AI takes your answers and the inspiration product, then generates a 12-section build spec. Monetization model, pricing tiers, revenue projections, customer acquisition plan, full tech stack, database schema, build steps\u2014everything.',
-                    color: 'var(--cash)',
-                    bg: 'var(--cash-soft)',
+                    desc: '12-section build spec: monetization, pricing, revenue projections, acquisition plan, tech stack, database schema, build steps.',
                   },
                   {
                     num: '4',
-                    icon: <RefreshCw size={22} />,
+                    icon: <RefreshCw size={18} />,
                     title: 'Remix until it\u2019s perfect',
-                    desc: 'Don\u2019t like the pricing? Click the section and remix it. Want a different tech stack? Remix it. Every section is individually tweakable with AI\u2014or edit it yourself. The spec is yours to shape until it feels right.',
-                    color: 'var(--cash)',
-                    bg: 'var(--cash-soft)',
+                    desc: 'Click any section to remix it with AI. Change the pricing, swap the tech stack, rewrite the copy. It\u2019s yours to shape.',
                   },
                   {
                     num: '5',
-                    icon: <Download size={22} />,
+                    icon: <Download size={18} />,
                     title: 'Export and build',
-                    desc: 'Download your spec as Markdown. Drop the file into Claude Code (recommended), Cursor, Windsurf, or any AI code builder. It reads the spec, builds the entire product, and you launch. Setup instructions included for every tool.',
-                    color: 'var(--cash)',
-                    bg: 'var(--cash-soft)',
+                    desc: 'Download as Markdown. Drop into Claude Code, Cursor, or any AI builder. It reads the spec, builds the product. You launch.',
                   },
                 ].map((step) => (
-                  <div key={step.num} className="flex gap-4">
-                    <div className="flex-shrink-0">
-                      <div
-                        className="w-11 h-11 rounded-2xl flex items-center justify-center"
-                        style={{ background: step.bg, color: step.color }}
-                      >
-                        {step.icon}
-                      </div>
+                  <div key={step.num} className="flex gap-3 items-start">
+                    <div
+                      className="flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center"
+                      style={{ background: 'var(--cash-soft)', color: 'var(--cash)' }}
+                    >
+                      {step.icon}
                     </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 mb-0.5">
                         <span
-                          className="text-xs font-black px-2 py-0.5 rounded-full"
-                          style={{ background: step.bg, color: step.color }}
+                          className="text-[10px] font-black px-1.5 py-0.5 rounded-full"
+                          style={{ background: 'var(--cash-soft)', color: 'var(--cash)' }}
                         >
                           Step {step.num}
                         </span>
                         <h3
-                          className="text-base font-black"
+                          className="text-sm font-black"
                           style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
                         >
                           {step.title}
                         </h3>
                       </div>
-                      <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
                         {step.desc}
                       </p>
                     </div>
@@ -1122,10 +1110,10 @@ export default function LandingPage() {
               </div>
 
               {/* CTA at bottom of modal */}
-              <div className="mt-8 text-center">
+              <div className="mt-5 text-center">
                 <Link
                   href="/workflow"
-                  className="btn-hover inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-lg font-bold"
+                  className="btn-hover inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold"
                   style={{
                     background: 'var(--cash)',
                     color: '#fff',
