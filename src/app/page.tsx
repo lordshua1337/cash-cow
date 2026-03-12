@@ -739,88 +739,77 @@ export default function LandingPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
               <div
-                className="rounded-2xl overflow-hidden"
-                style={{ border: '2px solid var(--cash)', background: 'var(--cash-soft)' }}
+                className="rounded-2xl p-6 relative overflow-hidden"
+                style={{ background: '#1e1e2e', border: '2px solid rgba(203,166,247,0.25)' }}
               >
-                {/* Green recommended header */}
-                <div className="p-6 pb-4">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center"
-                      style={{ background: 'var(--cash)', color: '#fff' }}
-                    >
-                      <Check size={20} strokeWidth={3} />
-                    </div>
-                    <h3
-                      className="text-base font-black"
-                      style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
-                    >
-                      Recommended
-                    </h3>
-                  </div>
-                  <p className="text-lg font-black mb-1" style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}>
-                    Claude Code
-                  </p>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
-                    Best results. Reads the entire spec, builds every file, handles deployment.
-                    Setup instructions are included with your spec.
-                  </p>
-                </div>
-
-                {/* Mini terminal preview */}
+                {/* Subtle gradient glow */}
                 <div
-                  className="mx-3 mb-3 rounded-xl overflow-hidden"
-                  style={{ background: '#1e1e2e', border: '1px solid rgba(255,255,255,0.06)' }}
-                >
-                  {/* Terminal title bar */}
-                  <div className="px-3 py-2 flex items-center gap-2" style={{ background: '#181825' }}>
-                    <div className="flex gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#f38ba8' }} />
-                      <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#f9e2af' }} />
-                      <div className="w-2.5 h-2.5 rounded-full" style={{ background: '#a6e3a1' }} />
-                    </div>
-                    <span className="text-[10px] ml-1" style={{ color: 'rgba(205,214,244,0.35)' }}>Terminal</span>
+                  className="absolute inset-0 opacity-[0.07] pointer-events-none"
+                  style={{ background: 'radial-gradient(ellipse at top right, #cba6f7, transparent 60%)' }}
+                />
+
+                {/* Recommended pill */}
+                <div className="relative flex items-center gap-2 mb-4">
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center"
+                    style={{ background: 'rgba(166,227,161,0.15)' }}
+                  >
+                    <Check size={16} strokeWidth={3} style={{ color: '#a6e3a1' }} />
                   </div>
+                  <span
+                    className="text-xs font-bold tracking-wide uppercase"
+                    style={{ color: '#a6e3a1' }}
+                  >
+                    Recommended
+                  </span>
+                </div>
 
-                  {/* Terminal content */}
-                  <div className="px-3 py-3" style={{ fontFamily: 'monospace', fontSize: '11px', lineHeight: '1.6' }}>
-                    {/* Header line */}
-                    <div className="flex items-center gap-2 mb-1">
-                      <span style={{ color: '#cba6f7' }}>Claude Code</span>
-                      <span style={{ color: 'rgba(205,214,244,0.3)' }}>v2.1</span>
-                    </div>
-                    <div className="mb-2" style={{ color: 'rgba(205,214,244,0.3)' }}>~/projects/your-app</div>
-
-                    {/* Simulated activity */}
-                    <div className="space-y-1">
-                      <div style={{ color: 'rgba(205,214,244,0.5)' }}>
-                        <span style={{ color: 'rgba(205,214,244,0.25)' }}>{'\u2517'} </span>
-                        Read <span style={{ color: '#a6e3a1' }}>build-spec.md</span>
-                        <span style={{ color: 'rgba(205,214,244,0.3)' }}> (48 sections)</span>
-                      </div>
-                      <div style={{ color: 'rgba(205,214,244,0.5)' }}>
-                        <span style={{ color: 'rgba(205,214,244,0.25)' }}>{'\u2517'} </span>
-                        Created <span style={{ color: '#89b4fa' }}>src/app/dashboard/page.tsx</span>
-                      </div>
-                      <div style={{ color: 'rgba(205,214,244,0.5)' }}>
-                        <span style={{ color: 'rgba(205,214,244,0.25)' }}>{'\u2517'} </span>
-                        Created <span style={{ color: '#89b4fa' }}>src/lib/stripe.ts</span>
-                      </div>
-                      <div style={{ color: 'rgba(205,214,244,0.5)' }}>
-                        <span style={{ color: 'rgba(205,214,244,0.25)' }}>{'\u2517'} </span>
-                        Created <span style={{ color: '#89b4fa' }}>src/app/api/checkout/route.ts</span>
-                      </div>
-                      <div className="flex items-center gap-1.5 mt-1.5">
-                        <span
-                          className="inline-block w-1.5 h-1.5 rounded-full"
-                          style={{ background: '#a6e3a1' }}
-                        />
-                        <span style={{ color: '#a6e3a1' }}>Deployed to Vercel</span>
-                        <span style={{ color: 'rgba(205,214,244,0.3)' }}>&mdash; your-app.vercel.app</span>
-                      </div>
-                    </div>
+                {/* Robot mascot + title */}
+                <div className="relative flex items-center gap-3 mb-3">
+                  {/* Pixel robot mascot */}
+                  <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Antenna */}
+                    <rect x="16" y="0" width="4" height="4" fill="#f9e2af" />
+                    <rect x="14" y="2" width="2" height="2" fill="#f9e2af" />
+                    <rect x="20" y="2" width="2" height="2" fill="#f9e2af" />
+                    {/* Head */}
+                    <rect x="8" y="4" width="20" height="14" rx="2" fill="#fab387" />
+                    <rect x="10" y="4" width="16" height="2" fill="#f9c68b" />
+                    {/* Eyes */}
+                    <rect x="12" y="9" width="4" height="4" rx="1" fill="#1e1e2e" />
+                    <rect x="20" y="9" width="4" height="4" rx="1" fill="#1e1e2e" />
+                    <rect x="13" y="10" width="2" height="2" fill="#cdd6f4" />
+                    <rect x="21" y="10" width="2" height="2" fill="#cdd6f4" />
+                    {/* Mouth */}
+                    <rect x="14" y="14" width="8" height="2" rx="1" fill="#1e1e2e" />
+                    {/* Body */}
+                    <rect x="10" y="20" width="16" height="12" rx="2" fill="#fab387" />
+                    <rect x="12" y="22" width="12" height="4" rx="1" fill="#f9c68b" />
+                    {/* Arms */}
+                    <rect x="6" y="22" width="4" height="8" rx="2" fill="#fab387" />
+                    <rect x="26" y="22" width="4" height="8" rx="2" fill="#fab387" />
+                    {/* Feet */}
+                    <rect x="12" y="32" width="4" height="4" rx="1" fill="#fab387" />
+                    <rect x="20" y="32" width="4" height="4" rx="1" fill="#fab387" />
+                  </svg>
+                  <div>
+                    <p
+                      className="text-lg font-black"
+                      style={{ fontFamily: 'var(--font-fredoka), sans-serif', color: '#cdd6f4' }}
+                    >
+                      Claude Code
+                    </p>
+                    <p className="text-xs" style={{ color: 'rgba(205,214,244,0.35)' }}>
+                      by Anthropic
+                    </p>
                   </div>
                 </div>
+
+                {/* Description */}
+                <p className="relative text-sm leading-relaxed" style={{ color: 'rgba(205,214,244,0.6)' }}>
+                  Best results. Reads the entire spec, builds every file, handles deployment.
+                  Setup instructions are included with your spec.
+                </p>
               </div>
               <div className="card rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-3">
