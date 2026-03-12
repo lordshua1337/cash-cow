@@ -31,17 +31,7 @@ export default function LandingPage() {
           }}
         />
 
-        {/* Cow -- centered background layer */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[550px] lg:h-[550px] pointer-events-none" style={{ zIndex: 1 }}>
-          <DotLottieReact
-            src="/cow-remix.lottie"
-            loop
-            autoplay
-            style={{ width: '100%', height: '100%', transform: 'scale(1.4)', opacity: 0.18 }}
-          />
-        </div>
-
-        {/* Content -- on top of cow */}
+        {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
           <div
             className="animate-in inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-6"
@@ -118,13 +108,13 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Cow -- foreground layer peeking from bottom */}
-        <div className="relative z-20 mt-auto w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] lg:w-[400px] lg:h-[400px] -mb-4">
+        {/* Cow -- centered at bottom */}
+        <div className="relative z-20 mt-auto w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] lg:w-[440px] lg:h-[440px] -mb-6">
           <DotLottieReact
-            src="/cow-remix.lottie"
+            src="https://lottie.host/39245563-54fa-48b9-869f-19e7bdb8e4c6/uWgIgDE5u8.lottie"
             loop
             autoplay
-            style={{ width: '100%', height: '100%', transform: 'scale(1.4)' }}
+            style={{ width: '100%', height: '100%' }}
           />
         </div>
 
