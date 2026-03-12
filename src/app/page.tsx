@@ -208,7 +208,7 @@ export default function LandingPage() {
             className="card rounded-2xl p-8 sm:p-10 text-center mb-10"
             style={{ border: '2px solid var(--cash)', background: 'var(--cash-soft)' }}
           >
-            <FileDown size={48} style={{ color: 'var(--cash)', margin: '0 auto 16px' }} strokeWidth={1.5} />
+            <Image src="/file-system-cow.svg" alt="Launch kit" width={80} height={80} className="mx-auto mb-4" />
             <h3
               className="text-2xl sm:text-3xl font-black mb-3"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
