@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type MouseEvent } from 'react'
+import { useState, useEffect, useRef, type MouseEvent } from 'react'
 import confetti from 'canvas-confetti'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -47,6 +47,24 @@ import DropInFilesCarousel from '@/components/DropInFilesCarousel'
 export default function LandingPage() {
   const [showHowItWorks, setShowHowItWorks] = useState(false)
   const [confettiClicks, setConfettiClicks] = useState(0)
+  const [fakeRecord, setFakeRecord] = useState(900)
+  const fakeRecordStarted = useRef(false)
+
+  useEffect(() => {
+    if (confettiClicks < 5 || fakeRecordStarted.current) return
+    fakeRecordStarted.current = true
+
+    const tick = () => {
+      setFakeRecord((prev) => {
+        if (prev >= 3000) return 3000
+        const jump = Math.floor(Math.random() * 4) + 1
+        return Math.min(prev + jump, 3000)
+      })
+      const nextDelay = Math.floor(Math.random() * 2000) + 500
+      setTimeout(tick, nextDelay)
+    }
+    setTimeout(tick, 1000)
+  }, [confettiClicks])
 
   return (
     <div>
@@ -315,20 +333,42 @@ export default function LandingPage() {
 
             {/* Robocow + stacked cards side by side */}
             <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
-              {/* Robocow + counter */}
+              {/* Robocow + fun fact */}
               <div className="flex-shrink-0 flex flex-col items-center">
+                <Image
+                  src="/robocow-unstoppable.png"
+                  alt="Unstoppable robocow"
+                  width={240}
+                  height={240}
+                />
                 {confettiClicks >= 5 && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-3 py-2.5 px-5 rounded-xl"
+                    className="text-center mt-4 py-2 px-4 rounded-xl"
                     style={{ background: 'var(--cream-dark)' }}
                   >
                     <p className="text-xs font-bold" style={{ color: 'var(--brown-muted)' }}>
-                      The most anyone has ever clicked this is 957 times.
+                      Current record: <span style={{ color: 'var(--brown)' }}>{fakeRecord.toLocaleString()}</span>
+                    </p>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Vertical stacked cards + score */}
+              <div className="flex flex-col gap-5 flex-1 w-full">
+                {confettiClicks >= 5 && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="card rounded-2xl p-5 text-center"
+                    style={{ border: '2px solid transparent', background: 'linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF) border-box' }}
+                  >
+                    <p className="text-xs font-bold mb-1" style={{ color: 'var(--brown-muted)' }}>
+                      YOUR SCORE
                     </p>
                     <p
-                      className="text-sm font-black mt-0.5"
+                      className="text-4xl sm:text-5xl font-black"
                       style={{
                         fontFamily: 'var(--font-fredoka), sans-serif',
                         background: 'linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)',
@@ -337,20 +377,10 @@ export default function LandingPage() {
                         backgroundClip: 'text',
                       }}
                     >
-                      You: {confettiClicks}
+                      {confettiClicks}
                     </p>
                   </motion.div>
                 )}
-                <Image
-                  src="/robocow-unstoppable.png"
-                  alt="Unstoppable robocow"
-                  width={240}
-                  height={240}
-                />
-              </div>
-
-              {/* Vertical stacked cards */}
-              <div className="flex flex-col gap-5 flex-1 w-full">
                 {[
                   { title: 'Competitive intel brief', desc: 'Who you\u2019re up against, what they charge, their weak spots, and your unfair advantage. Know the battlefield before you build.' },
                   { title: 'Launch day playbook', desc: 'Where to post, what to say, when to post it. Product Hunt, Reddit, Indie Hackers, Twitter\u2014a timed launch sequence so day one actually counts.' },
