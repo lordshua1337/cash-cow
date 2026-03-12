@@ -320,24 +320,22 @@ export default function LandingPage() {
               className="text-2xl sm:text-3xl font-black mb-3 text-center tracking-tight"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
             >
-              Make it <span style={{ color: 'var(--cash)' }}>unstoppable</span>
+              Make it <span style={{ color: '#8B6250' }}>unstoppable</span>
             </h3>
             <p className="text-base text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
               Strategic extras that close the gap between &ldquo;I have code&rdquo; and &ldquo;I have a business.&rdquo;
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
-                { icon: Swords, title: 'Competitive intel brief', desc: 'Who you\u2019re up against, what they charge, their weak spots, and your unfair advantage. Know the battlefield before you build.' },
-                { icon: CalendarCheck, title: 'Launch day playbook', desc: 'Where to post, what to say, when to post it. Product Hunt, Reddit, Indie Hackers, Twitter\u2014a timed launch sequence so day one actually counts.' },
-                { icon: Filter, title: 'Funnel blueprint', desc: 'Email capture, onboarding flow, upgrade triggers, retention loops. The full conversion funnel mapped out so you\u2019re not launching into the void.' },
+                { title: 'Competitive intel brief', desc: 'Who you\u2019re up against, what they charge, their weak spots, and your unfair advantage. Know the battlefield before you build.' },
+                { title: 'Launch day playbook', desc: 'Where to post, what to say, when to post it. Product Hunt, Reddit, Indie Hackers, Twitter\u2014a timed launch sequence so day one actually counts.' },
+                { title: 'Funnel blueprint', desc: 'Email capture, onboarding flow, upgrade triggers, retention loops. The full conversion funnel mapped out so you\u2019re not launching into the void.' },
               ].map((item) => (
                 <div key={item.title} className="card rounded-2xl p-6">
                   <div className="flex items-start gap-4">
-                    <div
-                      className="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl mt-0.5"
-                      style={{ background: 'var(--blue-soft)' }}
-                    >
-                      <item.icon size={20} style={{ color: 'var(--blue)' }} strokeWidth={2} />
+                    <div className="flex-shrink-0 flex flex-col gap-1 mt-0.5">
+                      <Image src="/brown-pdf.svg" alt="" width={18} height={18} />
+                      <Image src="/brown-webpage.svg" alt="" width={18} height={18} />
                     </div>
                     <div>
                       <h3
