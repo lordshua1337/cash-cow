@@ -27,6 +27,14 @@ import {
   Filter,
   TrendingUp,
   FileText,
+  Check,
+  X,
+  Monitor,
+  Code,
+  Megaphone,
+  Briefcase,
+  BookOpen,
+  MousePointer,
 } from 'lucide-react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import DropInFilesCarousel from '@/components/DropInFilesCarousel'
@@ -419,6 +427,205 @@ export default function LandingPage() {
                   Copy as Markdown
                 </span>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ====== THE PROCESS / WHAT YOU NEED / WHAT YOU DON'T ====== */}
+      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: 'var(--cream)' }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+
+          {/* Here's the process */}
+          <div className="text-center mb-16">
+            <h2
+              className="text-3xl sm:text-4xl font-black mb-3 tracking-tight"
+              style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+            >
+              Here&apos;s the <span style={{ color: 'var(--cash)' }}>process.</span>
+            </h2>
+            <p className="text-base sm:text-lg max-w-xl mx-auto mb-10" style={{ color: 'var(--brown-muted)' }}>
+              Three steps. No account. No credit card. No existential crisis about your tech stack.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+              {[
+                {
+                  num: '1',
+                  icon: <Compass size={28} style={{ color: 'var(--cash)' }} />,
+                  title: 'Pick a winner',
+                  desc: 'Browse products people already pay for. Tap one that sparks something. That\u2019s your starting point.',
+                },
+                {
+                  num: '2',
+                  icon: <SlidersHorizontal size={28} style={{ color: 'var(--cash)' }} />,
+                  title: 'Make it yours',
+                  desc: 'Answer 4 quick questions. Our AI generates an original product with your twist, your audience, your pricing.',
+                },
+                {
+                  num: '3',
+                  icon: <FileDown size={28} style={{ color: 'var(--cash)' }} />,
+                  title: 'Download and build',
+                  desc: 'Get your spec as a Markdown file. Drop it into an AI code builder. Watch your product materialize.',
+                },
+              ].map((step) => (
+                <div key={step.num} className="card rounded-2xl p-7 text-center">
+                  <div className="flex justify-center mb-4">
+                    <div
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                      style={{ background: 'var(--cash-soft)' }}
+                    >
+                      {step.icon}
+                    </div>
+                  </div>
+                  <h3
+                    className="text-lg font-black mb-2"
+                    style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                    {step.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Here's what you need */}
+          <div className="mb-16">
+            <div className="text-center mb-8">
+              <h2
+                className="text-3xl sm:text-4xl font-black mb-3 tracking-tight"
+                style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+              >
+                Here&apos;s what you <span style={{ color: 'var(--cash)' }}>need.</span>
+              </h2>
+              <p className="text-base sm:text-lg max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
+                The spec file works with any AI code builder. We recommend Claude Code because
+                it handles the full file best&mdash;but it&apos;s not required.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
+              <div
+                className="card rounded-2xl p-6"
+                style={{ border: '2px solid var(--cash)', background: 'var(--cash-soft)' }}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: 'var(--cash)', color: '#fff' }}
+                  >
+                    <Check size={20} strokeWidth={3} />
+                  </div>
+                  <h3
+                    className="text-base font-black"
+                    style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                  >
+                    Recommended
+                  </h3>
+                </div>
+                <p className="text-lg font-black mb-1" style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}>
+                  Claude Code
+                </p>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                  Best results. Reads the entire spec, builds every file, handles deployment.
+                  Setup instructions are included with your spec.
+                </p>
+              </div>
+              <div className="card rounded-2xl p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: 'var(--cream-dark)', color: 'var(--brown-muted)' }}
+                  >
+                    <Check size={20} strokeWidth={3} />
+                  </div>
+                  <h3
+                    className="text-base font-black"
+                    style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                  >
+                    Also works with
+                  </h3>
+                </div>
+                <p className="text-lg font-black mb-1" style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}>
+                  Cursor, Windsurf, etc.
+                </p>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                  Any AI builder that accepts Markdown files. Results may vary, but the spec still
+                  gives you everything you need.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Here's what you DON'T need */}
+          <div>
+            <div className="text-center mb-8">
+              <h2
+                className="text-3xl sm:text-4xl font-black mb-3 tracking-tight"
+                style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+              >
+                Here&apos;s what you <span style={{ color: '#E8676B' }}>don&apos;t</span> need.
+              </h2>
+              <p className="text-base sm:text-lg max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
+                Seriously. If you can open a browser and drag a file, you&apos;re overqualified.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl mx-auto">
+              {[
+                {
+                  icon: <Code size={24} />,
+                  title: 'Coding skills',
+                  desc: 'Zero lines of code required. The AI builder writes it all. You just approve.',
+                },
+                {
+                  icon: <Megaphone size={24} />,
+                  title: 'Marketing skills',
+                  desc: 'Your spec includes a launch playbook, funnel blueprint, and customer acquisition plan. Done.',
+                },
+                {
+                  icon: <Briefcase size={24} />,
+                  title: 'Business skills',
+                  desc: 'Pricing tiers, revenue projections, monetization model\u2014all generated. You just pick the product.',
+                },
+              ].map((item) => (
+                <div key={item.title} className="card rounded-2xl p-6 text-center">
+                  <div className="flex justify-center mb-4">
+                    <div
+                      className="w-12 h-12 rounded-full flex items-center justify-center"
+                      style={{ background: 'rgba(232, 103, 107, 0.12)', color: '#E8676B' }}
+                    >
+                      {item.icon}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <X size={16} strokeWidth={3} style={{ color: '#E8676B' }} />
+                    <h3
+                      className="text-base font-black"
+                      style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                    >
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-8">
+              <div
+                className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl"
+                style={{ background: 'var(--white)', border: '1px solid rgba(45, 35, 25, 0.08)' }}
+              >
+                <MousePointer size={20} style={{ color: 'var(--cash)' }} />
+                <p className="text-base font-bold" style={{ color: 'var(--brown)' }}>
+                  You just need to know how to use a computer. That&apos;s it.
+                </p>
+              </div>
+              <p className="text-sm mt-3" style={{ color: 'var(--brown-muted)' }}>
+                Setup instructions are included with every spec. We walk you through everything.
+              </p>
             </div>
           </div>
         </div>
