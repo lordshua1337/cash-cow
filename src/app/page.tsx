@@ -133,7 +133,7 @@ export default function LandingPage() {
             >
               Discover. Customize. Build.
             </h2>
-            <p className="text-sm max-w-md mx-auto" style={{ color: 'var(--brown-muted)' }}>
+            <p className="text-base max-w-md mx-auto" style={{ color: 'var(--brown-muted)' }}>
               Four steps from &quot;what should I build?&quot; to a monetizable spec.
             </p>
           </div>
@@ -176,7 +176,7 @@ export default function LandingPage() {
                 >
                   {step.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                <p className="text-base leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
                   {step.desc}
                 </p>
               </div>
@@ -215,7 +215,7 @@ export default function LandingPage() {
             >
               Your end-to-end product launch kit
             </h3>
-            <p className="text-sm sm:text-base max-w-lg mx-auto leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+            <p className="text-base sm:text-lg max-w-lg mx-auto leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
               Not a vague idea doc. Not a &ldquo;TODO: figure out pricing later&rdquo; situation.
               This is the whole playbook&mdash;from database schema to customer acquisition strategy&mdash;in
               one copy-pasteable file that your AI code builder actually understands.
@@ -225,12 +225,12 @@ export default function LandingPage() {
           {/* Part 1: What's in the spec */}
           <div className="mb-10">
             <h3
-              className="text-xl sm:text-2xl font-black mb-2 text-center tracking-tight"
+              className="text-2xl sm:text-3xl font-black mb-3 text-center tracking-tight"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
             >
               What&apos;s in the spec
             </h3>
-            <p className="text-sm text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
+            <p className="text-base text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
               Every section is built to make your AI builder do the heavy lifting. You just click &ldquo;generate.&rdquo;
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -242,22 +242,22 @@ export default function LandingPage() {
                 { icon: Target, title: 'Customer acquisition plan', desc: 'Where your first 100 paying users come from. Specific channels, specific tactics. No \u201Cpost and pray.\u201D' },
                 { icon: Hammer, title: 'Step-by-step build plan', desc: 'File paths, database schemas, component names, tech stack. Your AI builder reads this and just\u2026 builds it.' },
               ].map((item) => (
-                <div key={item.title} className="card rounded-2xl p-5">
-                  <div className="flex items-start gap-3">
+                <div key={item.title} className="card rounded-2xl p-6">
+                  <div className="flex items-start gap-4">
                     <div
-                      className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl mt-0.5"
+                      className="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl mt-0.5"
                       style={{ background: 'var(--cash-soft)' }}
                     >
                       <item.icon size={20} style={{ color: 'var(--cash)' }} strokeWidth={2} />
                     </div>
                     <div>
                       <h3
-                        className="text-sm font-black mb-1"
+                        className="text-base font-black mb-1"
                         style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
                       >
                         {item.title}
                       </h3>
-                      <p className="text-xs leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                      <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
                         {item.desc}
                       </p>
                     </div>
@@ -270,12 +270,12 @@ export default function LandingPage() {
           {/* Part 2: The supporting files */}
           <div className="mb-10">
             <h3
-              className="text-xl sm:text-2xl font-black mb-2 text-center tracking-tight"
+              className="text-2xl sm:text-3xl font-black mb-3 text-center tracking-tight"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
             >
               The <span style={{ color: 'var(--cash)' }}>drop-in files</span>
             </h3>
-            <p className="text-sm text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
+            <p className="text-base text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
               Six additional files that turn your spec from &ldquo;cool plan&rdquo; into &ldquo;running business.&rdquo;
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -287,22 +287,22 @@ export default function LandingPage() {
                 { icon: Mail, title: 'Auto-email system file', desc: 'Custom AI-powered email setup with Fastmail. Welcome sequences, onboarding drips, upgrade nudges, churn recovery\u2014all automated. Never read or reply to an email again.' },
                 { icon: Palette, title: 'Brand identity file', desc: 'App name, color palette, typography, tone of voice, logo direction, and component styling tokens. Everything looks like one cohesive product from day one.' },
               ].map((item) => (
-                <div key={item.title} className="card rounded-2xl p-5">
-                  <div className="flex items-start gap-3">
+                <div key={item.title} className="card rounded-2xl p-6">
+                  <div className="flex items-start gap-4">
                     <div
-                      className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl mt-0.5"
+                      className="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl mt-0.5"
                       style={{ background: 'var(--gold-soft)' }}
                     >
                       <item.icon size={20} style={{ color: 'var(--gold)' }} strokeWidth={2} />
                     </div>
                     <div>
                       <h3
-                        className="text-sm font-black mb-1"
+                        className="text-base font-black mb-1"
                         style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
                       >
                         {item.title}
                       </h3>
-                      <p className="text-xs leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                      <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
                         {item.desc}
                       </p>
                     </div>
@@ -315,12 +315,12 @@ export default function LandingPage() {
           {/* Part 3: The strategic extras */}
           <div>
             <h3
-              className="text-xl sm:text-2xl font-black mb-2 text-center tracking-tight"
+              className="text-2xl sm:text-3xl font-black mb-3 text-center tracking-tight"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
             >
               Make it <span style={{ color: 'var(--cash)' }}>unstoppable</span>
             </h3>
-            <p className="text-sm text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
+            <p className="text-base text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
               Strategic extras that close the gap between &ldquo;I have code&rdquo; and &ldquo;I have a business.&rdquo;
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -329,22 +329,22 @@ export default function LandingPage() {
                 { icon: CalendarCheck, title: 'Launch day playbook', desc: 'Where to post, what to say, when to post it. Product Hunt, Reddit, Indie Hackers, Twitter\u2014a timed launch sequence so day one actually counts.' },
                 { icon: Filter, title: 'Funnel blueprint', desc: 'Email capture, onboarding flow, upgrade triggers, retention loops. The full conversion funnel mapped out so you\u2019re not launching into the void.' },
               ].map((item) => (
-                <div key={item.title} className="card rounded-2xl p-5">
-                  <div className="flex items-start gap-3">
+                <div key={item.title} className="card rounded-2xl p-6">
+                  <div className="flex items-start gap-4">
                     <div
-                      className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl mt-0.5"
+                      className="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl mt-0.5"
                       style={{ background: 'var(--blue-soft)' }}
                     >
                       <item.icon size={20} style={{ color: 'var(--blue)' }} strokeWidth={2} />
                     </div>
                     <div>
                       <h3
-                        className="text-sm font-black mb-1"
+                        className="text-base font-black mb-1"
                         style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
                       >
                         {item.title}
                       </h3>
-                      <p className="text-xs leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                      <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
                         {item.desc}
                       </p>
                     </div>
@@ -368,7 +368,7 @@ export default function LandingPage() {
               <br />
               A <span style={{ color: 'var(--cash)' }}>real build plan.</span>
             </h2>
-            <p className="text-sm max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
+            <p className="text-base max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
               12 sections including pricing, revenue timeline, and customer acquisition.
               File paths, schemas, and step-by-step instructions.
             </p>
@@ -426,14 +426,14 @@ export default function LandingPage() {
               </div>
               <div className="flex items-center gap-2 pt-2 flex-wrap">
                 <span
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold"
                   style={{ background: 'var(--cash)', color: '#fff' }}
                 >
                   <RefreshCw size={12} />
                   Click any section to remix
                 </span>
                 <span
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold"
                   style={{ background: 'var(--cream-dark)', color: 'var(--brown-muted)' }}
                 >
                   <Copy size={12} />
@@ -456,7 +456,7 @@ export default function LandingPage() {
             <br />
             <span style={{ color: 'var(--cash)' }}>Start building.</span>
           </h2>
-          <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: 'var(--brown-muted)' }}>
+          <p className="text-base mb-8 max-w-md mx-auto" style={{ color: 'var(--brown-muted)' }}>
             Every spec includes pricing, revenue projections, and a customer acquisition plan.
             Your weekend project starts right now.
           </p>
