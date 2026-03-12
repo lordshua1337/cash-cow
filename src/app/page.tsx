@@ -299,67 +299,75 @@ export default function LandingPage() {
 
           {/* Part 3: The strategic extras */}
           <div>
-            {/* Robocow + heading */}
-            <div className="text-center mb-10">
-              <Image
-                src="/robocow-unstoppable.png"
-                alt="Unstoppable robocow"
-                width={180}
-                height={180}
-                className="mx-auto mb-6"
-              />
+            {/* Headline */}
+            <div className="text-center mb-14">
               <h3
-                className="text-2xl sm:text-3xl font-black mb-3 tracking-tight"
+                className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 tracking-tight"
                 style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
               >
                 Make it <span style={{ background: 'linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>unstoppable</span>
               </h3>
-              <p className="text-base" style={{ color: 'var(--brown-muted)' }}>
+              <p className="text-base sm:text-lg" style={{ color: 'var(--brown-muted)' }}>
                 Strategic extras that close the gap between &ldquo;I have code&rdquo; and &ldquo;I have a business.&rdquo;
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-              {[
-                { title: 'Competitive intel brief', desc: 'Who you\u2019re up against, what they charge, their weak spots, and your unfair advantage. Know the battlefield before you build.' },
-                { title: 'Launch day playbook', desc: 'Where to post, what to say, when to post it. Product Hunt, Reddit, Indie Hackers, Twitter\u2014a timed launch sequence so day one actually counts.' },
-                { title: 'Funnel blueprint', desc: 'Email capture, onboarding flow, upgrade triggers, retention loops. The full conversion funnel mapped out so you\u2019re not launching into the void.' },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="card rounded-2xl p-6 cursor-pointer transition-transform active:scale-95"
-                  onClick={(e: MouseEvent<HTMLDivElement>) => {
-                    const x = e.clientX / window.innerWidth
-                    const y = e.clientY / window.innerHeight
-                    confetti({
-                      particleCount: 80,
-                      spread: 70,
-                      origin: { x, y },
-                      colors: ['#FF0000', '#FF8000', '#FFD700', '#22C55E', '#0099FF', '#6633FF', '#CC33FF'],
-                      ticks: 120,
-                      gravity: 1.2,
-                      scalar: 0.9,
-                    })
-                  }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 flex flex-col gap-1 mt-0.5">
-                      <Image src="/rainbow-pdf.svg" alt="" width={28} height={28} />
-                      <Image src="/rainbow-webpage.svg" alt="" width={28} height={28} />
-                    </div>
-                    <div>
-                      <h3
-                        className="text-base font-black mb-1"
-                        style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
-                      >
-                        {item.title}
-                      </h3>
-                      <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
-                        {item.desc}
-                      </p>
+
+            {/* Robocow + stacked cards side by side */}
+            <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+              {/* Robocow */}
+              <div className="flex-shrink-0">
+                <Image
+                  src="/robocow-unstoppable.png"
+                  alt="Unstoppable robocow"
+                  width={240}
+                  height={240}
+                />
+              </div>
+
+              {/* Vertical stacked cards */}
+              <div className="flex flex-col gap-5 flex-1 w-full">
+                {[
+                  { title: 'Competitive intel brief', desc: 'Who you\u2019re up against, what they charge, their weak spots, and your unfair advantage. Know the battlefield before you build.' },
+                  { title: 'Launch day playbook', desc: 'Where to post, what to say, when to post it. Product Hunt, Reddit, Indie Hackers, Twitter\u2014a timed launch sequence so day one actually counts.' },
+                  { title: 'Funnel blueprint', desc: 'Email capture, onboarding flow, upgrade triggers, retention loops. The full conversion funnel mapped out so you\u2019re not launching into the void.' },
+                ].map((item) => (
+                  <div
+                    key={item.title}
+                    className="card rounded-2xl p-6 cursor-pointer transition-transform active:scale-[0.98]"
+                    onClick={(e: MouseEvent<HTMLDivElement>) => {
+                      const x = e.clientX / window.innerWidth
+                      const y = e.clientY / window.innerHeight
+                      confetti({
+                        particleCount: 80,
+                        spread: 70,
+                        origin: { x, y },
+                        colors: ['#FF0000', '#FF8000', '#FFD700', '#22C55E', '#0099FF', '#6633FF', '#CC33FF'],
+                        ticks: 120,
+                        gravity: 1.2,
+                        scalar: 0.9,
+                      })
+                    }}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 flex flex-col gap-1 mt-0.5">
+                        <Image src="/rainbow-pdf.svg" alt="" width={28} height={28} />
+                        <Image src="/rainbow-webpage.svg" alt="" width={28} height={28} />
+                      </div>
+                      <div>
+                        <h3
+                          className="text-base font-black mb-1"
+                          style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                        >
+                          {item.title}
+                        </h3>
+                        <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                          {item.desc}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
