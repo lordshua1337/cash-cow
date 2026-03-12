@@ -306,6 +306,13 @@ export default function LandingPage() {
           <p className="text-xs mt-6 font-semibold" style={{ color: 'var(--brown-faint)' }}>
             Free. No signup. Trending products refresh daily.
           </p>
+          <Image
+            src="/step-5.png"
+            alt="Cash cow with money"
+            width={200}
+            height={200}
+            className="mx-auto mt-8"
+          />
         </div>
       </section>
 
