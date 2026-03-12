@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Hammer, Bookmark } from 'lucide-react'
@@ -23,15 +24,13 @@ export default function Nav() {
       }}
     >
       <Link href="/" className="flex items-center gap-2.5 group">
-        <div
-          className="flex items-center justify-center w-9 h-9 rounded-xl"
-          style={{
-            background: 'var(--cash)',
-            boxShadow: '0 2px 8px rgba(34, 197, 94, 0.25)',
-          }}
-        >
-          <span className="text-base">&#x1F404;</span>
-        </div>
+        <Image
+          src="/cc-logo-menu.png"
+          alt="Cash Cow"
+          width={36}
+          height={36}
+          className="rounded-lg"
+        />
         <span
           className="text-lg font-bold tracking-tight hidden sm:inline"
           style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}

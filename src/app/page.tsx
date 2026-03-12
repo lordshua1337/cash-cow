@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import {
   ArrowRight,
@@ -324,12 +325,7 @@ export default function LandingPage() {
         }}
       >
         <div className="flex items-center justify-center gap-2.5 mb-2">
-          <div
-            className="flex items-center justify-center w-7 h-7 rounded-lg"
-            style={{ background: 'var(--cash)' }}
-          >
-            <span className="text-xs">&#x1F404;</span>
-          </div>
+          <Image src="/cc-logo-menu.png" alt="Cash Cow" width={28} height={28} className="rounded-md" />
           <span className="text-sm font-bold" style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}>Cash Cow</span>
         </div>
         <p className="text-xs" style={{ color: 'var(--brown-faint)' }}>
