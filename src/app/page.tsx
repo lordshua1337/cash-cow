@@ -647,9 +647,9 @@ export default function LandingPage() {
               <span style={{ color: 'var(--cash)' }}>other people love.</span>
             </h2>
             <p className="text-base max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
-              Why guess what to build when people are already paying for it? Take what works,
-              remix it with your vision, and get a full build spec that Claude Code can ship in a day.
-              Market-validated from minute one.
+              Why guess what to build when people are already paying for it? Grab what&apos;s working,
+              put your spin on it, and get a spec that Claude Code turns into a live product.
+              No theory. No hope. Just proof it sells.
             </p>
             <Image
               src="/step-4.png"
