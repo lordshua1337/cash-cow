@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState, type ReactNode } from 'react'
+import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { motion } from 'framer-motion'
@@ -16,7 +17,8 @@ import {
 interface FileItem {
   title: string
   desc: string
-  icon: ReactNode
+  icon?: ReactNode
+  image?: string
 }
 
 const COW_RED = '#E8676B'
@@ -25,12 +27,12 @@ const FILES: FileItem[] = [
   {
     title: 'Customer persona file',
     desc: 'A detailed persona doc your AI builder uses to make every decision for a real human\u2014not a generic \u201Cuser.\u201D Every UI choice, every line of copy, informed by who\u2019s actually paying.',
-    icon: <Fingerprint size={56} strokeWidth={1.5} color={COW_RED} />,
+    image: '/cow-persona.png',
   },
   {
     title: 'Landing page design file',
     desc: 'Full page structure, copy blocks, CTA placement, SEO meta tags, Open Graph cards. Your marketing site builds itself the same day your product does.',
-    icon: <MousePointerClick size={56} strokeWidth={1.5} color={COW_RED} />,
+    image: '/cow-landing-page.png',
   },
   {
     title: 'One-click deploy template',
@@ -120,13 +122,23 @@ export default function DropInFilesCarousel() {
                     border: isActive ? '2px solid #E8676B' : '2px solid transparent',
                   }}
                 >
-                  {/* Unique icon per card */}
+                  {/* Unique icon or cow image per card */}
                   <motion.div
                     animate={{ scale: isActive ? 1 : 0.7 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                     className="mb-6 flex justify-center"
                   >
-                    {file.icon}
+                    {file.image ? (
+                      <Image
+                        src={file.image}
+                        alt={file.title}
+                        width={120}
+                        height={120}
+                        className="object-contain"
+                      />
+                    ) : (
+                      file.icon
+                    )}
                   </motion.div>
 
                   {/* Title */}
