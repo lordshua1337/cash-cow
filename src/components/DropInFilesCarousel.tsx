@@ -62,20 +62,33 @@ export default function DropInFilesCarousel() {
     [emblaApi]
   )
 
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
+
   return (
     <div>
-      {/* Carousel viewport */}
-      <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
-        <div className="flex">
-          {FILES.map((file, i) => {
-            const isActive = i === selectedIndex
+      {/* Carousel viewport with edge fades */}
+      <div className="relative">
+        <div
+          className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 z-10 pointer-events-none"
+          style={{ background: 'linear-gradient(to right, var(--white), transparent)' }}
+        />
+        <div
+          className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 z-10 pointer-events-none"
+          style={{ background: 'linear-gradient(to left, var(--white), transparent)' }}
+        />
 
-            return (
-              <div
-                key={file.title}
-                className="flex-[0_0_85%] sm:flex-[0_0_65%] lg:flex-[0_0_50%] min-w-0 px-3"
-              >
-                <motion.div
+        <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
+          <div className="flex">
+            {FILES.map((file, i) => {
+              const isActive = i === selectedIndex
+
+              return (
+                <div
+                  key={file.title}
+                  className="flex-[0_0_85%] sm:flex-[0_0_65%] lg:flex-[0_0_50%] min-w-0 px-3"
+                  onClick={scrollNext}
+                >
+                  <motion.div
                   animate={{
                     scale: isActive ? 1 : 0.88,
                     opacity: isActive ? 1 : 0.4,
@@ -130,7 +143,8 @@ export default function DropInFilesCarousel() {
                 </motion.div>
               </div>
             )
-          })}
+            })}
+          </div>
         </div>
       </div>
 
