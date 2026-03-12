@@ -39,6 +39,7 @@ import {
   MousePointer,
   Sparkles,
   Download,
+  Copy,
 } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
@@ -817,6 +818,32 @@ export default function LandingPage() {
                   Best results. Reads the entire spec, builds every file, handles deployment.
                   Setup instructions included with your spec.
                 </p>
+
+                {/* One-click install */}
+                <div className="mt-4">
+                  <p className="text-[10px] font-bold uppercase tracking-wider mb-1.5" style={{ color: '#6272a4' }}>
+                    Install free
+                  </p>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText('npm install -g @anthropic-ai/claude-code')
+                      const btn = document.getElementById('cc-copy-btn')
+                      if (btn) {
+                        btn.textContent = 'Copied!'
+                        setTimeout(() => { btn.textContent = '' }, 1500)
+                      }
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 text-left group transition-colors"
+                    style={{ background: '#21222c', border: '1px solid #3a3d4a', fontFamily: 'monospace', fontSize: '12px' }}
+                  >
+                    <span style={{ color: '#6272a4' }}>$</span>
+                    <span className="flex-1 truncate" style={{ color: '#f8f8f2' }}>
+                      npm install -g @anthropic-ai/claude-code
+                    </span>
+                    <span id="cc-copy-btn" className="text-[10px] font-bold" style={{ color: '#50fa7b' }} />
+                    <Copy size={14} className="flex-shrink-0 opacity-40 group-hover:opacity-100 transition-opacity" style={{ color: '#f8f8f2' }} />
+                  </button>
+                </div>
               </div>
               <div className="card rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-3">
