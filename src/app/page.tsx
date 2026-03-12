@@ -29,6 +29,7 @@ import {
   FileText,
 } from 'lucide-react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
+import DropInFilesCarousel from '@/components/DropInFilesCarousel'
 
 export default function LandingPage() {
 
@@ -276,42 +277,10 @@ export default function LandingPage() {
             >
               The <span style={{ color: '#E8676B' }}>drop-in files</span>
             </h3>
-            <p className="text-base text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
+            <p className="text-base text-center mb-10" style={{ color: 'var(--brown-muted)' }}>
               Six additional files that turn your spec from &ldquo;cool plan&rdquo; into &ldquo;running business.&rdquo;
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { title: 'Customer persona file', desc: 'A detailed persona doc your AI builder uses to make every decision for a real human\u2014not a generic \u201Cuser.\u201D Every UI choice, every line of copy, informed by who\u2019s actually paying.' },
-                { title: 'Landing page design file', desc: 'Full page structure, copy blocks, CTA placement, SEO meta tags, Open Graph cards. Your marketing site builds itself the same day your product does.' },
-                { title: 'One-click deploy template', desc: 'Pre-configured repo scaffold matching your spec\u2019s tech stack. Clone it, drop your files in, ship. The gap between \u201Cplan\u201D and \u201Crunning code\u201D shrinks to minutes.' },
-                { title: 'Database schema file', desc: 'Complete SQL migrations, table relationships, and RLS policies. Your entire backend structure, ready to paste into Supabase.' },
-                { title: 'Auto-email system file', desc: 'Custom AI-powered email setup with Fastmail. Welcome sequences, onboarding drips, upgrade nudges, churn recovery\u2014all automated. Never read or reply to an email again.' },
-                { title: 'Brand identity file', desc: 'App name, color palette, typography, tone of voice, logo direction, and component styling tokens. Everything looks like one cohesive product from day one.' },
-              ].map((item) => (
-                <div key={item.title} className="card rounded-2xl p-6">
-                  <div className="flex items-start gap-4">
-                    <Image
-                      src="/icon-file-plus-cow-red.svg"
-                      alt=""
-                      width={36}
-                      height={36}
-                      className="flex-shrink-0 mt-0.5"
-                    />
-                    <div>
-                      <h3
-                        className="text-base font-black mb-1"
-                        style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
-                      >
-                        {item.title}
-                      </h3>
-                      <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <DropInFilesCarousel />
           </div>
 
           {/* Part 3: The strategic extras */}
