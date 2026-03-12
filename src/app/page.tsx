@@ -372,7 +372,7 @@ export default function LandingPage() {
                         className="text-2xl sm:text-3xl font-black"
                         style={{
                           fontFamily: 'var(--font-fredoka), sans-serif',
-                          background: 'linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)',
+                          background: 'linear-gradient(135deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)',
                           WebkitBackgroundClip: 'text',
                           WebkitTextFillColor: 'transparent',
                           backgroundClip: 'text',
