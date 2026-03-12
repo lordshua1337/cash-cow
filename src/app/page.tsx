@@ -139,8 +139,9 @@ export default function LandingPage() {
       return
     }
 
-    // Show a rotating tip every 20 clicks between milestones
-    if (confettiClicks - lastMotivationAt.current >= 20) {
+    // Show a rotating tip every 25-35 clicks between milestones
+    const gap = 25 + Math.floor(Math.random() * 11)
+    if (confettiClicks - lastMotivationAt.current >= gap) {
       setMotivation(ROTATING_TIPS[lastTipIndex.current % ROTATING_TIPS.length])
       lastTipIndex.current += 1
       lastMotivationAt.current = confettiClicks
