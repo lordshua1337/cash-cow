@@ -47,11 +47,11 @@ import DropInFilesCarousel from '@/components/DropInFilesCarousel'
 export default function LandingPage() {
   const [showHowItWorks, setShowHowItWorks] = useState(false)
   const [confettiClicks, setConfettiClicks] = useState(0)
-  const [fakeRecord, setFakeRecord] = useState(900)
+  const [fakeRecord, setFakeRecord] = useState(957)
   const fakeRecordStarted = useRef(false)
 
   useEffect(() => {
-    if (confettiClicks < 5 || fakeRecordStarted.current) return
+    if (confettiClicks < 900 || fakeRecordStarted.current) return
     fakeRecordStarted.current = true
 
     const tick = () => {
@@ -341,46 +341,48 @@ export default function LandingPage() {
                   width={240}
                   height={240}
                 />
-                {confettiClicks >= 5 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center mt-4 py-2 px-4 rounded-xl"
-                    style={{ background: 'var(--cream-dark)' }}
-                  >
-                    <p className="text-xs font-bold" style={{ color: 'var(--brown-muted)' }}>
-                      Current record: <span style={{ color: 'var(--brown)' }}>{fakeRecord.toLocaleString()}</span>
-                    </p>
-                  </motion.div>
-                )}
+                <div className="text-center mt-4 py-2 px-4 rounded-xl" style={{ background: 'var(--cream-dark)', opacity: confettiClicks >= 5 ? 1 : 0, transition: 'opacity 0.4s ease' }}>
+                  <p className="text-xs font-bold" style={{ color: 'var(--brown-muted)' }}>
+                    The most anyone has ever clicked this is{' '}
+                    <span style={{ color: 'var(--brown)', fontFamily: 'var(--font-fredoka), sans-serif' }}>{fakeRecord.toLocaleString()}</span>{' '}
+                    times.
+                  </p>
+                </div>
               </div>
 
-              {/* Vertical stacked cards + score */}
-              <div className="flex flex-col gap-5 flex-1 w-full">
-                {confettiClicks >= 5 && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="card rounded-2xl p-5 text-center"
-                    style={{ border: '2px solid transparent', background: 'linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF) border-box' }}
-                  >
-                    <p className="text-xs font-bold mb-1" style={{ color: 'var(--brown-muted)' }}>
-                      YOUR SCORE
-                    </p>
-                    <p
-                      className="text-4xl sm:text-5xl font-black"
+              {/* Vertical stacked cards with score overlay */}
+              <div className="relative flex flex-col gap-5 flex-1 w-full">
+                {/* Score overlay — no layout shift, sits on top */}
+                <AnimatePresence>
+                  {confettiClicks >= 5 && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute -top-2 right-0 z-20 py-2 px-4 rounded-xl"
                       style={{
-                        fontFamily: 'var(--font-fredoka), sans-serif',
-                        background: 'linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
+                        background: 'rgba(255,255,255,0.92)',
+                        backdropFilter: 'blur(8px)',
+                        border: '2px solid transparent',
+                        backgroundClip: 'padding-box',
+                        boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
                       }}
                     >
-                      {confettiClicks}
-                    </p>
-                  </motion.div>
-                )}
+                      <p
+                        className="text-2xl sm:text-3xl font-black"
+                        style={{
+                          fontFamily: 'var(--font-fredoka), sans-serif',
+                          background: 'linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                        }}
+                      >
+                        {confettiClicks}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 {[
                   { title: 'Competitive intel brief', desc: 'Who you\u2019re up against, what they charge, their weak spots, and your unfair advantage. Know the battlefield before you build.' },
                   { title: 'Launch day playbook', desc: 'Where to post, what to say, when to post it. Product Hunt, Reddit, Indie Hackers, Twitter\u2014a timed launch sequence so day one actually counts.' },
