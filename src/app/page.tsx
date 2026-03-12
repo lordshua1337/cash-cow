@@ -46,6 +46,7 @@ import DropInFilesCarousel from '@/components/DropInFilesCarousel'
 
 export default function LandingPage() {
   const [showHowItWorks, setShowHowItWorks] = useState(false)
+  const [confettiClicks, setConfettiClicks] = useState(0)
 
   return (
     <div>
@@ -337,6 +338,7 @@ export default function LandingPage() {
                     onClick={(e: MouseEvent<HTMLDivElement>) => {
                       const x = e.clientX / window.innerWidth
                       const y = e.clientY / window.innerHeight
+                      setConfettiClicks((c) => c + 1)
                       confetti({
                         particleCount: 80,
                         spread: 70,
@@ -367,6 +369,32 @@ export default function LandingPage() {
                     </div>
                   </div>
                 ))}
+
+                {/* Easter egg counter after 5 clicks */}
+                {confettiClicks >= 5 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center mt-4 py-2.5 px-5 rounded-xl mx-auto w-fit"
+                    style={{ background: 'var(--cream-dark)' }}
+                  >
+                    <p className="text-xs font-bold" style={{ color: 'var(--brown-muted)' }}>
+                      The most anyone has ever clicked this is 957 times.
+                    </p>
+                    <p
+                      className="text-sm font-black mt-0.5"
+                      style={{
+                        fontFamily: 'var(--font-fredoka), sans-serif',
+                        background: 'linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
+                    >
+                      You: {confettiClicks}
+                    </p>
+                  </motion.div>
+                )}
               </div>
             </div>
           </div>
