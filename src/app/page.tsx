@@ -59,7 +59,7 @@ export default function LandingPage() {
             }}
           >
             <CircleDollarSign size={14} />
-            Monetizable specs in 60 seconds
+            Bring Your Dream to Life in Minutes
           </div>
 
           <h1
