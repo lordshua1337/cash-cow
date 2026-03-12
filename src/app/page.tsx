@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, type MouseEvent } from 'react'
 import confetti from 'canvas-confetti'
 import Image from 'next/image'
 import Link from 'next/link'
+import SpecPreviewCard from '@/components/SpecPreviewCard'
 import {
   ArrowRight,
   Compass,
@@ -11,7 +12,6 @@ import {
   Hammer,
   CircleDollarSign,
   BarChart3,
-  Copy,
   RefreshCw,
   FileDown,
   Rocket,
@@ -660,67 +660,7 @@ export default function LandingPage() {
             />
           </div>
 
-          {/* Terminal mockup */}
-          <div
-            className="rounded-2xl overflow-hidden"
-            style={{
-              boxShadow: 'var(--shadow-lg)',
-              border: '1px solid rgba(45, 35, 25, 0.08)',
-            }}
-          >
-            <div
-              className="px-5 py-3 flex items-center gap-3"
-              style={{ background: 'var(--brown)' }}
-            >
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full" style={{ background: '#EF4444' }} />
-                <div className="w-3 h-3 rounded-full" style={{ background: '#F59E0B' }} />
-                <div className="w-3 h-3 rounded-full" style={{ background: '#22C55E' }} />
-              </div>
-              <span className="text-xs font-semibold ml-1" style={{ color: 'rgba(255,255,255,0.4)' }}>build-spec.md</span>
-            </div>
-
-            <div className="p-6 sm:p-8 space-y-5" style={{ background: 'var(--cream)', fontFamily: 'monospace', fontSize: '14px', lineHeight: '1.8' }}>
-              <div>
-                <p className="font-bold" style={{ color: 'var(--brown)' }}># InvoicePilot &mdash; Build Spec</p>
-              </div>
-              <div>
-                <p className="font-bold mb-1" style={{ color: 'var(--cash-dark)' }}>## What You&apos;re Building</p>
-                <p style={{ color: 'var(--brown-light)' }}>
-                  A dashboard for freelance designers that tracks unpaid invoices, sends automated payment reminders, and shows monthly revenue at a glance.
-                </p>
-              </div>
-              <div>
-                <p className="font-bold mb-1" style={{ color: 'var(--cash-dark)' }}>## How It Makes Money</p>
-                <p style={{ color: 'var(--brown-light)' }}>
-                  Freemium SaaS. Free for 5 clients, $12/mo Pro (unlimited), $29/mo Team (multi-user). Target 3% free-to-paid conversion.
-                </p>
-              </div>
-              <div>
-                <p className="font-bold mb-1" style={{ color: 'var(--cash-dark)' }}>## Build Plan (step 3 of 10)</p>
-                <p style={{ color: 'var(--brown-light)' }}>
-                  Create Supabase Auth with magic link login. Build <span className="font-bold" style={{ color: 'var(--brown)' }}>/app/login/page.tsx</span> with email input.
-                  Add middleware to protect <span className="font-bold" style={{ color: 'var(--brown)' }}>/dashboard</span> routes.
-                </p>
-              </div>
-              <div className="flex items-center gap-2 pt-2 flex-wrap">
-                <span
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold"
-                  style={{ background: 'var(--cash)', color: '#fff' }}
-                >
-                  <RefreshCw size={12} />
-                  Click any section to remix
-                </span>
-                <span
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold"
-                  style={{ background: 'var(--cream-dark)', color: 'var(--brown-muted)' }}
-                >
-                  <Copy size={12} />
-                  Copy as Markdown
-                </span>
-              </div>
-            </div>
-          </div>
+          <SpecPreviewCard />
         </div>
       </section>
 
