@@ -647,8 +647,9 @@ export default function LandingPage() {
               <span style={{ color: 'var(--cash)' }}>other people love.</span>
             </h2>
             <p className="text-base max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
-              Create while getting paid for it. 12 sections. Pricing, revenue, acquisition, the whole thing.
-              Heck, add it to your portfolio to show you&apos;re a pro. (we won&apos;t say anything.)
+              So you can actually get paid to create.
+              Pricing, revenue projections, customer acquisition&mdash;12 sections that make it real.
+              Put it in your portfolio too. We won&apos;t tell anyone an AI helped. (pinky promise.)
             </p>
             <Image
               src="/step-4.png"
