@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Nunito, Fredoka } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
@@ -18,6 +18,12 @@ const fredoka = Fredoka({
 export const metadata: Metadata = {
   title: 'Cash Cow -- Pick an Idea, Get a Build Spec',
   description: 'Pick a proven product idea. Get a step-by-step build spec you can paste into Claude Code. Start building this weekend.',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 }
 
 export default function RootLayout({
