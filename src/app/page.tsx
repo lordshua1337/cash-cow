@@ -144,59 +144,45 @@ export default function LandingPage() {
             {[
               {
                 num: '1',
-                icon: Compass,
-                iconBg: 'var(--cash-soft)',
-                iconColor: 'var(--cash)',
+                image: '/step-1.png',
                 title: 'Pick inspiration',
                 desc: 'Browse trending products people actually pay for. Pick one as your starting point -- not to clone, but to ride the same wave.',
               },
               {
                 num: '2',
-                icon: SlidersHorizontal,
-                iconBg: 'var(--gold-soft)',
-                iconColor: 'var(--gold)',
+                image: '/step-2.png',
                 title: 'Make it yours',
                 desc: 'Answer 4 quick questions: who, what, features, tech. The AI generates an original product with pricing and revenue strategy.',
               },
               {
                 num: '3',
-                icon: Hammer,
-                iconBg: 'var(--blue-soft)',
-                iconColor: 'var(--blue)',
+                image: '/step-3.png',
                 title: 'Build and ship',
                 desc: 'Get a full spec with monetization model, pricing tiers, customer acquisition plan. Copy into Claude Code and start.',
               },
-            ].map((step) => {
-              const StepIcon = step.icon
-              return (
-                <div
-                  key={step.num}
-                  className="card rounded-2xl p-7 text-center"
+            ].map((step) => (
+              <div
+                key={step.num}
+                className="card rounded-2xl p-7 text-center"
+              >
+                <Image
+                  src={step.image}
+                  alt={step.title}
+                  width={140}
+                  height={140}
+                  className="mx-auto mb-4"
+                />
+                <h3
+                  className="text-lg font-black mb-2"
+                  style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
                 >
-                  <div
-                    className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-3"
-                    style={{ background: step.iconBg }}
-                  >
-                    <StepIcon size={26} style={{ color: step.iconColor }} strokeWidth={2} />
-                  </div>
-                  <div
-                    className="inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-black mb-3"
-                    style={{ background: 'var(--cash)', color: '#fff', fontFamily: 'var(--font-fredoka), sans-serif' }}
-                  >
-                    {step.num}
-                  </div>
-                  <h3
-                    className="text-lg font-black mb-2"
-                    style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
-                    {step.desc}
-                  </p>
-                </div>
-              )
-            })}
+                  {step.title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                  {step.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
