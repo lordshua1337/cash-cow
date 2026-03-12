@@ -647,9 +647,9 @@ export default function LandingPage() {
               <span style={{ color: 'var(--cash)' }}>other people love.</span>
             </h2>
             <p className="text-base max-w-xl mx-auto" style={{ color: 'var(--brown-muted)' }}>
-              So you can actually get paid to create.
-              Pricing, revenue projections, customer acquisition&mdash;12 sections that make it real.
-              Put it in your portfolio too. We won&apos;t tell anyone an AI helped. (pinky promise.)
+              Start with something people already pay for. Add your twist. Get a 12-section spec
+              that turns your vision into a real product&mdash;pricing, revenue model, build plan, everything.
+              Drop it into Claude Code and watch it come to life. No guessing what to build. No building something nobody wants.
             </p>
             <Image
               src="/step-4.png"
