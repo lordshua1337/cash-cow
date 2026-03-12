@@ -11,6 +11,12 @@ import {
   BarChart3,
   Copy,
   RefreshCw,
+  FileDown,
+  Rocket,
+  Wand2,
+  DollarSign,
+  Target,
+  Zap,
 } from 'lucide-react'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 
@@ -172,40 +178,69 @@ export default function LandingPage() {
       {/* ====== WHAT YOU GET ====== */}
       <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: 'var(--white)' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
+          {/* Hero moment */}
+          <div className="text-center mb-14">
             <h2
               className="text-3xl sm:text-4xl font-black mb-3 tracking-tight"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
             >
-              What you <span style={{ color: 'var(--cash)' }}>get</span>
+              One file. <span style={{ color: 'var(--cash)' }}>That&apos;s it.</span>
             </h2>
-            <p className="text-sm max-w-md mx-auto" style={{ color: 'var(--brown-muted)' }}>
-              Every spec is built to make money, not just ship code.
+            <p className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+              You get a single Markdown file. Drag it into Claude Code, Cursor, or whatever AI builder you worship.
+              It does the rest. You do the launch day selfie.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          {/* The big file card */}
+          <div
+            className="card rounded-2xl p-8 sm:p-10 text-center mb-10"
+            style={{ border: '2px solid var(--cash)', background: 'var(--cash-soft)' }}
+          >
+            <FileDown size={48} style={{ color: 'var(--cash)', margin: '0 auto 16px' }} strokeWidth={1.5} />
+            <h3
+              className="text-2xl sm:text-3xl font-black mb-3"
+              style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+            >
+              Your end-to-end product launch kit
+            </h3>
+            <p className="text-sm sm:text-base max-w-lg mx-auto leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+              Not a vague idea doc. Not a &quot;TODO: figure out pricing later&quot; situation.
+              This is the whole playbook -- from database schema to customer acquisition strategy --
+              in one copy-pasteable file that your AI code builder actually understands.
+            </p>
+          </div>
+
+          {/* What's inside */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { icon: BarChart3, title: 'Revenue projections', desc: 'Month-by-month revenue timeline with realistic conversion targets and growth milestones.' },
-              { icon: CircleDollarSign, title: 'Pricing strategy', desc: 'Freemium tiers, price points, and free-to-paid conversion rates based on real market data.' },
-              { icon: Hammer, title: 'Build-ready spec', desc: 'File paths, database schemas, tech stack, and step-by-step build plan you can paste into any AI tool.' },
+              { icon: DollarSign, title: 'Pricing that makes sense', desc: 'Freemium tiers, price points, and conversion math. Not "charge money for it" -- actual strategy.' },
+              { icon: BarChart3, title: 'Revenue projections', desc: 'Month-by-month targets. When you hit ramen profitability. When you quit your job. (Kidding. Mostly.)' },
+              { icon: Target, title: 'Customer acquisition', desc: 'Where your users hang out, how to reach them, and what to say. No "post on Twitter and pray."' },
+              { icon: Hammer, title: 'Full build plan', desc: 'Step-by-step instructions with file paths, schemas, and tech stack. Your AI builder eats this for breakfast.' },
+              { icon: Wand2, title: 'Remix any section', desc: 'Don\'t like the pricing model? Hate the tech stack? Remix individual sections until it feels right.' },
+              { icon: Rocket, title: 'Ship it this weekend', desc: 'Seriously. Drop the file in, follow the plan, tweak what you want, deploy. Your money printer goes brrr.' },
             ].map((item) => (
-              <div key={item.title} className="card rounded-2xl p-6 text-center">
-                <div
-                  className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-4"
-                  style={{ background: 'var(--cash-soft)' }}
-                >
-                  <item.icon size={24} style={{ color: 'var(--cash)' }} strokeWidth={2} />
+              <div key={item.title} className="card rounded-2xl p-5">
+                <div className="flex items-start gap-3">
+                  <div
+                    className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl mt-0.5"
+                    style={{ background: 'var(--cash-soft)' }}
+                  >
+                    <item.icon size={20} style={{ color: 'var(--cash)' }} strokeWidth={2} />
+                  </div>
+                  <div>
+                    <h3
+                      className="text-sm font-black mb-1"
+                      style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p className="text-xs leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
-                <h3
-                  className="text-base font-black mb-2"
-                  style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
-                >
-                  {item.title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
-                  {item.desc}
-                </p>
               </div>
             ))}
           </div>
