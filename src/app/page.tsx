@@ -285,16 +285,26 @@ export default function LandingPage() {
 
           {/* Part 3: The strategic extras */}
           <div>
-            <h3
-              className="text-2xl sm:text-3xl font-black mb-3 text-center tracking-tight"
-              style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
-            >
-              Make it <span style={{ background: 'linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>unstoppable</span>
-            </h3>
-            <p className="text-base text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
-              Strategic extras that close the gap between &ldquo;I have code&rdquo; and &ldquo;I have a business.&rdquo;
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {/* Robocow + heading */}
+            <div className="text-center mb-10">
+              <Image
+                src="/robocow-unstoppable.png"
+                alt="Unstoppable robocow"
+                width={180}
+                height={180}
+                className="mx-auto mb-6"
+              />
+              <h3
+                className="text-2xl sm:text-3xl font-black mb-3 tracking-tight"
+                style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+              >
+                Make it <span style={{ background: 'linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>unstoppable</span>
+              </h3>
+              <p className="text-base" style={{ color: 'var(--brown-muted)' }}>
+                Strategic extras that close the gap between &ldquo;I have code&rdquo; and &ldquo;I have a business.&rdquo;
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {[
                 { title: 'Competitive intel brief', desc: 'Who you\u2019re up against, what they charge, their weak spots, and your unfair advantage. Know the battlefield before you build.' },
                 { title: 'Launch day playbook', desc: 'Where to post, what to say, when to post it. Product Hunt, Reddit, Indie Hackers, Twitter\u2014a timed launch sequence so day one actually counts.' },
