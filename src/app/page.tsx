@@ -203,6 +203,13 @@ export default function LandingPage() {
               12 sections including pricing, revenue timeline, and customer acquisition.
               File paths, schemas, and step-by-step instructions.
             </p>
+            <Image
+              src="/step-4.png"
+              alt="Happy cow with build plan"
+              width={180}
+              height={180}
+              className="mx-auto mt-6"
+            />
           </div>
 
           {/* Terminal mockup */}
