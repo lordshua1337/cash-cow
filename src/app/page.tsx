@@ -44,11 +44,108 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import DropInFilesCarousel from '@/components/DropInFilesCarousel'
 
+// Milestone messages — triggered at specific click counts
+const MILESTONE_MSGS: Record<number, string> = {
+  10: "oh yeah we're cooking now.. 10 clicks deep and you haven't even looked at the record yet have you",
+  25: "25.. not bad. you know it only takes like 60 seconds to generate an actual product spec right? just saying..",
+  50: "50 clicks. that's genuinely impressive commitment to something that does absolutely nothing productive",
+  75: "ok 75.. at this point you could've built a landing page. but this is more fun right? (right??)",
+  100: "oh yeah you're almost at.. wait you ARE at 100. that's 50% more clicks than it takes to build and deploy your product (probably..)",
+  150: "150.. you're in the top 1% of confetti clickers. we don't have data to back that up but it feels true",
+  200: "200 clicks and you still haven't started building. the cow is judging you. look at his face",
+  250: "250? cmon look at the record.. let's pump it up to the next level",
+  300: "300. at this rate you're gonna need a build spec just for your clicking strategy",
+  350: "fun fact: 350 clicks burns approximately 0.3 calories. you're basically working out right now",
+  400: "400.. you know what would be really unstoppable? if you actually built something. just a thought.. i dunno..",
+  450: "450 and still going. your mouse is gonna file a workers comp claim",
+  500: "FIVE HUNDRED. ok genuinely.. are you ok? do you need water? a snack maybe?",
+  550: "550.. we should probably add achievements to this. like a little badge that says 'clicked instead of building'",
+  600: "600. this is now officially more clicks than it takes to order food on doordash, check out, and eat it",
+  650: "650.. at this point the robocow respects you. you can see it in his eyes. probably",
+  700: "700. you've spent more time clicking confetti than most people spend on their entire product launch strategy",
+  750: "750.. honestly if you put this energy into anything else you'd be unstoppable. wait.. that's the section name. coincidence?",
+  800: "800 and counting.. the record is starting to sweat. you can feel it",
+  850: "850. you're so close to the record that the person who set it is getting nervous (they're not real but still)",
+  900: "900?? oh no.. oh no no no.. the record.. it's.. it's moving. WHAT",
+  950: "THE RECORD IS CLIMBING. IT KNOWS. IT'S TRYING TO RUN AWAY FROM YOU",
+  1000: "ONE THOUSAND CLICKS. you are actually unhinged and i mean that as a compliment",
+  1100: "1,100.. the record keeps going up but honestly? it's scared. you can tell",
+  1200: "1,200. you've been here a while huh. the confetti factory is running overtime",
+  1300: "1,300.. at this point you're not clicking. you're performing. this is art",
+  1400: "1,400 and the confetti is starting to look at you different. like.. with respect",
+  1500: "1,500. halfway to the record (which keeps moving because it's CHEATING). unfair honestly",
+  1600: "1,600.. did you know that the average person clicks their mouse about 1,500 times per day? you just did that in one section",
+  1700: "1,700. your fingers are either superhuman or completely numb. no in between",
+  1800: "1,800.. the cow believes in you. i believe in you. the confetti believes in you. we're all here for this",
+  1900: "1,900.. so close to 2k. don't you dare stop now. don't you DARE",
+  2000: "TWO THOUSAND. ok you need to go outside. touch grass. look at the sky. then come back and keep clicking obviously",
+  2200: "2,200.. you're in uncharted territory. no one has ever been this deep. (source: trust me)",
+  2400: "2,400. at this point the spec would've built itself, deployed, gotten users, and made money. but this is fine too",
+  2600: "2,600.. the record is approaching 3,000. so are you. this is gonna be a photo finish",
+  2800: "2,800. NECK AND NECK. this is the endgame. the final boss. the last confetti",
+  3000: "3,000. you did it. you caught the record. it's over. go build something now. seriously. please. the cow is begging you",
+}
+
+// Rotating tips that show between milestones
+const ROTATING_TIPS = [
+  "try rotating between all three cards and get a groove going.. maybe it'll be faster? i dunno..",
+  "pro tip: if you click really fast it makes more confetti. that's not a tip that's just how it works",
+  "the person who set the record reportedly used two fingers. just putting that out there",
+  "did you know you can also click the other cards? variety is the spice of confetti",
+  "some say if you click fast enough the rainbow text starts glowing. that's not true but it would be cool",
+  "fun loading tip: the confetti colors match the unstoppable gradient. you're welcome for that detail nobody asked for",
+  "if each click was a line of code you'd have a full app by now.. just something to think about..",
+  "rumor has it clicking all three cards in order unlocks a secret cow. it doesn't. but wouldn't that be cool?",
+  "your click-to-build ratio is currently infinity to zero. the math checks out and it's not great",
+  "at this pace you'll beat the record by.. *checks notes*.. honestly i lost track. just keep going",
+  "the robocow was programmed to look impressed at exactly this click count. wait no that's a lie he always looks like that",
+  "motivational quote: 'the journey of a thousand clicks begins with a single confetti' — ancient proverb (not real)",
+  "here's a thought.. what if you clicked with your other hand for a bit? switch hitter energy",
+  "the confetti particles are generated fresh every time. no recycled confetti here. only the finest",
+  "you've been clicking for a while now.. your future product is somewhere out there wondering when you'll show up",
+  "breaking: local user clicks confetti instead of building saas. more at 11",
+  "your clicking form is impeccable honestly. great wrist action. very ergonomic (probably not actually)",
+  "this section is called unstoppable and you are literally proving the name right so.. thank you for that",
+  "you know what pairs great with confetti clicking? having a build spec open in another tab. just saying..",
+  "the three cards you're clicking contain actual business strategy btw. not that you're reading them right now",
+  "at this rate you could've learned a new language. not a programming one. like.. french or something",
+  "plot twist: the real product was the confetti we clicked along the way",
+  "your dedication to this is honestly inspiring. misguided but inspiring",
+  "every click brings you closer to the record and further from productivity. balanced as all things should be",
+  "the cow's expression hasn't changed once during all of this. stone cold. respect",
+  "imagine explaining this to someone.. 'yeah i clicked confetti 500 times on a landing page' .. iconic honestly",
+  "hot take: this is more satisfying than most mobile games and it cost you nothing",
+  "the people who built this site spent hours on this easter egg instead of adding features. priorities",
+  "you're clicking so fast the css transitions can barely keep up. slow down champ.. or don't. i'm not your mom",
+  "someone is going to find this easter egg on product hunt and it's going to be the top comment. calling it now",
+]
+
 export default function LandingPage() {
   const [showHowItWorks, setShowHowItWorks] = useState(false)
   const [confettiClicks, setConfettiClicks] = useState(0)
   const [fakeRecord, setFakeRecord] = useState(957)
+  const [motivation, setMotivation] = useState('')
   const fakeRecordStarted = useRef(false)
+  const lastTipIndex = useRef(0)
+  const lastMotivationAt = useRef(0)
+
+  useEffect(() => {
+    if (confettiClicks < 5) return
+
+    // Check for milestone message first
+    if (MILESTONE_MSGS[confettiClicks]) {
+      setMotivation(MILESTONE_MSGS[confettiClicks])
+      lastMotivationAt.current = confettiClicks
+      return
+    }
+
+    // Show a rotating tip every 20 clicks between milestones
+    if (confettiClicks - lastMotivationAt.current >= 20) {
+      setMotivation(ROTATING_TIPS[lastTipIndex.current % ROTATING_TIPS.length])
+      lastTipIndex.current += 1
+      lastMotivationAt.current = confettiClicks
+    }
+  }, [confettiClicks])
 
   useEffect(() => {
     if (confettiClicks < 900 || fakeRecordStarted.current) return
@@ -341,12 +438,26 @@ export default function LandingPage() {
                   width={240}
                   height={240}
                 />
-                <div className="text-center mt-4 py-2 px-4 rounded-xl" style={{ background: 'var(--cream-dark)', opacity: confettiClicks >= 5 ? 1 : 0, transition: 'opacity 0.4s ease' }}>
-                  <p className="text-xs font-bold" style={{ color: 'var(--brown-muted)' }}>
-                    The most anyone has ever clicked this is{' '}
-                    <span style={{ color: 'var(--brown)', fontFamily: 'var(--font-fredoka), sans-serif' }}>{fakeRecord.toLocaleString()}</span>{' '}
-                    times.
-                  </p>
+                <div className="text-center mt-4" style={{ opacity: confettiClicks >= 5 ? 1 : 0, transition: 'opacity 0.4s ease', maxWidth: 260 }}>
+                  <div className="py-2 px-4 rounded-xl mb-3" style={{ background: 'var(--cream-dark)' }}>
+                    <p className="text-xs font-bold" style={{ color: 'var(--brown-muted)' }}>
+                      The most anyone has ever clicked this is{' '}
+                      <span style={{ color: 'var(--brown)', fontFamily: 'var(--font-fredoka), sans-serif' }}>{fakeRecord.toLocaleString()}</span>{' '}
+                      times.
+                    </p>
+                  </div>
+                  {motivation && (
+                    <motion.p
+                      key={motivation}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="text-xs leading-relaxed"
+                      style={{ color: 'var(--brown-muted)' }}
+                    >
+                      {motivation}
+                    </motion.p>
+                  )}
                 </div>
               </div>
 
