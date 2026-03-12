@@ -5,8 +5,15 @@ import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { motion, AnimatePresence } from 'framer-motion'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 
-const FILES = [
+interface FileItem {
+  title: string
+  desc: string
+  lottie?: string
+}
+
+const FILES: FileItem[] = [
   {
     title: 'Customer persona file',
     desc: 'A detailed persona doc your AI builder uses to make every decision for a real human\u2014not a generic \u201Cuser.\u201D Every UI choice, every line of copy, informed by who\u2019s actually paying.',
@@ -14,6 +21,7 @@ const FILES = [
   {
     title: 'Landing page design file',
     desc: 'Full page structure, copy blocks, CTA placement, SEO meta tags, Open Graph cards. Your marketing site builds itself the same day your product does.',
+    lottie: 'https://lottie.host/49940132-3c94-4e72-a7a2-efea834ddecd/ItIRGYgEbk.lottie',
   },
   {
     title: 'One-click deploy template',
@@ -99,18 +107,29 @@ export default function DropInFilesCarousel() {
                     border: isActive ? '2px solid #E8676B' : '2px solid transparent',
                   }}
                 >
-                  {/* Big SVG icon */}
+                  {/* Icon or Lottie */}
                   <motion.div
                     animate={{ scale: isActive ? 1 : 0.7 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                   >
-                    <Image
-                      src="/icon-file-plus-cow-red.svg"
-                      alt=""
-                      width={100}
-                      height={100}
-                      className="mx-auto mb-6"
-                    />
+                    {file.lottie ? (
+                      <div className="mx-auto mb-6 w-[100px] h-[100px]">
+                        <DotLottieReact
+                          src={file.lottie}
+                          autoplay
+                          loop={false}
+                          style={{ width: '100%', height: '100%' }}
+                        />
+                      </div>
+                    ) : (
+                      <Image
+                        src="/icon-file-plus-cow-red.svg"
+                        alt=""
+                        width={100}
+                        height={100}
+                        className="mx-auto mb-6"
+                      />
+                    )}
                   </motion.div>
 
                   {/* Title */}
