@@ -48,17 +48,16 @@ export default function LandingPage() {
             className="animate-in text-5xl sm:text-6xl lg:text-7xl font-black mb-5 leading-[1.05] tracking-tight"
             style={{ fontFamily: 'var(--font-fredoka), sans-serif', animationDelay: '0.05s' }}
           >
-            Don&apos;t start from scratch.
+            Work Smarter.
             <br />
-            <span style={{ color: 'var(--cash)' }}>Rebuild</span> it.
+            <span style={{ color: 'var(--cash)' }}>Not Harder.</span>
           </h1>
 
           <p
             className="animate-in text-base sm:text-lg max-w-lg mx-auto mb-8 leading-relaxed"
             style={{ color: 'var(--brown-muted)', animationDelay: '0.1s' }}
           >
-            Pick a product people already pay for. Make it yours.
-            Get a spec with pricing, revenue timeline, and a real build plan.
+            Graze profitable &amp; popular products, remix and rebuild them, and finally launch your idea - today.
           </p>
 
           <div className="animate-in flex items-center justify-center gap-3 flex-wrap mb-6" style={{ animationDelay: '0.15s' }}>
