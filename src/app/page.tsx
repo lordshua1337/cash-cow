@@ -86,26 +86,8 @@ export default function LandingPage() {
             </a>
           </div>
 
-          {/* Trust signals */}
-          <div
-            className="animate-in flex items-center justify-center gap-6"
-            style={{ animationDelay: '0.2s' }}
-          >
-            {[
-              { icon: BarChart3, text: 'Revenue projections' },
-              { icon: CircleDollarSign, text: 'Pricing strategy' },
-              { icon: Hammer, text: 'Build-ready spec' },
-            ].map((item) => (
-              <div
-                key={item.text}
-                className="flex items-center gap-1.5 text-xs font-bold"
-                style={{ color: 'var(--brown-faint)' }}
-              >
-                <item.icon size={12} style={{ color: 'var(--cash)' }} />
-                {item.text}
-              </div>
-            ))}
-          </div>
+          {/* Spacer to keep cow from floating into buttons */}
+          <div className="h-6" />
         </div>
 
         {/* Cow -- centered at bottom */}
@@ -180,6 +162,49 @@ export default function LandingPage() {
                 </h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
                   {step.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====== WHAT YOU GET ====== */}
+      <section className="relative overflow-hidden py-16 sm:py-20" style={{ background: 'var(--white)' }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2
+              className="text-3xl sm:text-4xl font-black mb-3 tracking-tight"
+              style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+            >
+              What you <span style={{ color: 'var(--cash)' }}>get</span>
+            </h2>
+            <p className="text-sm max-w-md mx-auto" style={{ color: 'var(--brown-muted)' }}>
+              Every spec is built to make money, not just ship code.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {[
+              { icon: BarChart3, title: 'Revenue projections', desc: 'Month-by-month revenue timeline with realistic conversion targets and growth milestones.' },
+              { icon: CircleDollarSign, title: 'Pricing strategy', desc: 'Freemium tiers, price points, and free-to-paid conversion rates based on real market data.' },
+              { icon: Hammer, title: 'Build-ready spec', desc: 'File paths, database schemas, tech stack, and step-by-step build plan you can paste into any AI tool.' },
+            ].map((item) => (
+              <div key={item.title} className="card rounded-2xl p-6 text-center">
+                <div
+                  className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-4"
+                  style={{ background: 'var(--cash-soft)' }}
+                >
+                  <item.icon size={24} style={{ color: 'var(--cash)' }} strokeWidth={2} />
+                </div>
+                <h3
+                  className="text-base font-black mb-2"
+                  style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
+                >
+                  {item.title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--brown-muted)' }}>
+                  {item.desc}
                 </p>
               </div>
             ))}
