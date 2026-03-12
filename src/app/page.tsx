@@ -320,7 +320,7 @@ export default function LandingPage() {
               className="text-2xl sm:text-3xl font-black mb-3 text-center tracking-tight"
               style={{ fontFamily: 'var(--font-fredoka), sans-serif' }}
             >
-              Make it <span style={{ color: '#8B6250' }}>unstoppable</span>
+              Make it <span style={{ background: 'linear-gradient(90deg, #FF0000, #FF8000, #FFD700, #22C55E, #0099FF, #6633FF, #CC33FF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>unstoppable</span>
             </h3>
             <p className="text-base text-center mb-6" style={{ color: 'var(--brown-muted)' }}>
               Strategic extras that close the gap between &ldquo;I have code&rdquo; and &ldquo;I have a business.&rdquo;
@@ -334,8 +334,8 @@ export default function LandingPage() {
                 <div key={item.title} className="card rounded-2xl p-6">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 flex flex-col gap-1 mt-0.5">
-                      <Image src="/brown-pdf.svg" alt="" width={28} height={28} />
-                      <Image src="/brown-webpage.svg" alt="" width={28} height={28} />
+                      <Image src="/rainbow-pdf.svg" alt="" width={28} height={28} />
+                      <Image src="/rainbow-webpage.svg" alt="" width={28} height={28} />
                     </div>
                     <div>
                       <h3
