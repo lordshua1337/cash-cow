@@ -35,19 +35,19 @@ export default function LandingPage() {
 
       {/* ====== HERO ====== */}
       <section
-        className="relative overflow-hidden"
+        className="relative overflow-hidden min-h-[calc(100vh-60px)] flex items-center"
         style={{ background: 'var(--white)' }}
       >
         {/* Soft radial glow behind the lottie */}
         <div
-          className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none hidden lg:block"
+          className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none hidden lg:block"
           style={{
             background: 'radial-gradient(circle, rgba(34, 197, 94, 0.08) 0%, transparent 70%)',
             right: '2%',
           }}
         />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-0 sm:pb-0 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-0 relative z-10 w-full">
           <div className="flex flex-col lg:flex-row items-center gap-0">
 
             {/* Left: text content */}
@@ -141,9 +141,9 @@ export default function LandingPage() {
             </div>
 
             {/* Right: Lottie cow animation -- BIG */}
-            <div className="flex-shrink-0 w-80 h-80 sm:w-[400px] sm:h-[400px] lg:w-[580px] lg:h-[580px] lg:-mr-16 lg:-my-10 relative">
+            <div className="flex-shrink-0 w-72 h-72 sm:w-[360px] sm:h-[360px] lg:w-[520px] lg:h-[520px] lg:-mr-12 relative">
               <div
-                className="absolute inset-0 rounded-full"
+                className="absolute inset-[-15%] rounded-full"
                 style={{
                   background: 'radial-gradient(circle, rgba(34, 197, 94, 0.07) 0%, transparent 65%)',
                 }}
@@ -152,7 +152,7 @@ export default function LandingPage() {
                 src="/cow-remix.lottie"
                 loop
                 autoplay
-                style={{ width: '100%', height: '100%', position: 'relative', zIndex: 1, transform: 'scale(1.25)' }}
+                style={{ width: '100%', height: '100%', position: 'relative', zIndex: 1, transform: 'scale(1.35)' }}
               />
             </div>
           </div>
@@ -166,7 +166,7 @@ export default function LandingPage() {
       </section>
 
       {/* ====== HOW IT WORKS ====== */}
-      <section id="how" className="relative overflow-hidden py-20 sm:py-28" style={{ background: 'var(--cream)' }}>
+      <section id="how" className="relative overflow-hidden py-16 sm:py-20" style={{ background: 'var(--cream)' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-14">
             <h2
